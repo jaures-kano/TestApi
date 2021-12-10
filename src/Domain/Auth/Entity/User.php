@@ -2,11 +2,13 @@
 
 namespace App\Domain\Auth\Entity;
 
+use App\Application\Traits\BaseTimTrait;
 use App\Domain\Auth\Traits\AuthSystems;
 use App\Domain\Auth\Traits\IdentityVerified;
-use App\Domain\Auth\Traits\PersonnalUserInformations;
 use App\Domain\Auth\Traits\ProccessorInfo;
 use App\Domain\Auth\Traits\SystemsInformations;
+use App\Domain\Auth\Traits\UserLocationInformation;
+use App\Domain\Auth\Traits\UserPersonnalInformation;
 use Doctrine\ORM\Mapping as ORM;
 use Serializable;
 use Symfony\Bridge\Doctrine\IdGenerator\UlidGenerator;
@@ -23,8 +25,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, Seriali
     use AuthSystems;
     use IdentityVerified;
     use ProccessorInfo;
-    use PersonnalUserInformations;
+    use UserPersonnalInformation;
+    use UserLocationInformation;
     use SystemsInformations;
+    use BaseTimTrait;
 
     /**
      * @ORM\Id

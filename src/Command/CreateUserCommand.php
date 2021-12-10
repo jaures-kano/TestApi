@@ -3,6 +3,7 @@
 namespace App\Command;
 
 use App\Domain\Auth\Entity\User;
+use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
@@ -55,6 +56,7 @@ class CreateUserCommand extends Command
         if ($email) {
             $user = new User();
             $user->setEmail($email);
+            $user->setCreatedAt(new DateTime());
             $user->setPassword($this->hasher->hashPassword($user, '0000'));
             $this->em->persist($user);
             $this->em->flush();

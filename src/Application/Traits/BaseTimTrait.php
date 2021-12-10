@@ -1,0 +1,59 @@
+<?php
+
+namespace App\Application\Traits;
+
+
+use DateTimeInterface;
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
+
+/**
+ * Class BaseTimTrait
+ * @package App\Application\Traits
+ * @author jaures kano <ruddyjaures@mail.com>
+ */
+trait BaseTimTrait
+{
+
+    /**
+     * @ORM\Column(type="datetime")
+     * @Groups({"read:user"})
+     */
+    private DateTimeInterface $createdAt;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     * @Groups({"read:user"})
+     */
+    private ?DateTimeInterface $updatedAt = null;
+
+    /**
+     * @return DateTimeInterface
+     */
+    public function getCreatedAt(): DateTimeInterface
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(DateTimeInterface $createdAt): self
+    {
+        $this->createdAt = $createdAt;
+        return $this;
+    }
+
+    /**
+     * @return DateTimeInterface|null
+     */
+    public function getUpdatedAt(): ?DateTimeInterface
+    {
+        return $this->updatedAt;
+    }
+
+    public function setUpdatedAt(?DateTimeInterface $updatedAt): self
+    {
+        $this->updatedAt = $updatedAt;
+        return $this;
+    }
+
+
+}
