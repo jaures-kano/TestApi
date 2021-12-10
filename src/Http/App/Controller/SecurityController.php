@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Http\App\Controller;
 
 use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
 use LogicException;
@@ -15,16 +15,16 @@ class SecurityController extends AbstractController
     /**
      * @Route("/api/login", name="api_route_login")
      */
-    public function indexApiLogin(JWTTokenManagerInterface $jwt)
+    public function indexApiLogin(JWTTokenManagerInterface $jwt): JsonResponse
     {
         $user = $this->getUser();
         if ($user !== null) {
             $token = $jwt->create($user);
             return $this->json([
-                'message' => 'success!',
+                'message' => 'successfull login!',
                 'user' => $user,
-                'token' => sprintf('Bearer %s', $token),
-            ]);
+                'token' => $token,
+            ], 201);
         }
 
         return new JsonResponse([
@@ -37,10 +37,6 @@ class SecurityController extends AbstractController
      */
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
-        // if ($this->getUser()) {
-        //     return $this->redirectToRoute('target_path');
-        // }
-
         // get the login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();
         // last username entered by the user

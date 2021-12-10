@@ -2,7 +2,7 @@
 
 namespace App\Command;
 
-use App\Entity\User;
+use App\Domain\Auth\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
@@ -38,7 +38,7 @@ class CreateUserCommand extends Command
     protected function configure(): void
     {
         $this
-            ->addArgument('name', InputArgument::OPTIONAL, 'Argument description')
+            ->addArgument('email', InputArgument::OPTIONAL, 'Argument description')
             ->addOption('option1', null, InputOption::VALUE_NONE, 'Option description');
     }
 
@@ -50,11 +50,11 @@ class CreateUserCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = new SymfonyStyle($input, $output);
-        $name = $input->getArgument('name');
+        $email = $input->getArgument('email');
 
-        if ($name) {
+        if ($email) {
             $user = new User();
-            $user->setEmail('admin@admin.com');
+            $user->setEmail($email);
             $user->setPassword($this->hasher->hashPassword($user, '0000'));
             $this->em->persist($user);
             $this->em->flush();
