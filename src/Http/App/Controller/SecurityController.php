@@ -24,7 +24,7 @@ class SecurityController extends AbstractController
                 'message' => 'successfull login!',
                 'user' => $user,
                 'token' => $token,
-            ], 201);
+            ], 201, [], ['groups' => 'read:user']);
         }
 
         return new JsonResponse([

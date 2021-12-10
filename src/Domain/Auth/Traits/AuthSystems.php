@@ -6,6 +6,7 @@ namespace App\Domain\Auth\Traits;
 
 use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * Class AuthSystems
@@ -16,16 +17,19 @@ trait AuthSystems
 {
     /**
      * @ORM\Column(type="datetime", nullable=true)
+     * @Groups({"read:user"})
      */
     private ?DateTimeInterface $phoneVerfiedAt = null;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
+     * @Groups({"read:user"})
      */
     private ?DateTimeInterface $emailVerfiedAt = null;
 
     /**
      * @ORM\Column(type="datetime", options={"default": null}, nullable=true)
+     * @Groups({"read:user"})
      */
     private ?DateTimeInterface $lastLoginAt = null;
 

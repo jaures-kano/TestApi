@@ -12,6 +12,7 @@ use Serializable;
 use Symfony\Bridge\Doctrine\IdGenerator\UlidGenerator;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Uid\Ulid;
 
 /**
@@ -30,16 +31,19 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, Seriali
      * @ORM\Column(type="ulid", unique=true)
      * @ORM\GeneratedValue(strategy="CUSTOM")
      * @ORM\CustomIdGenerator(class=UlidGenerator::class)
+     * @Groups({"read:user"})
      */
     private ?Ulid $id = null;
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
+     * @Groups({"read:user"})
      */
     private string $email;
 
     /**
      * @ORM\Column(type="json")
+     * @Groups({"read:user"})
      */
     private array $roles = [];
 

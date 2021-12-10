@@ -5,6 +5,7 @@ namespace App\Domain\Auth\Traits;
 
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * Class IdentityVerified
@@ -16,6 +17,7 @@ trait IdentityVerified
 
     /**
      * @ORM\Column(type="boolean", options={"default": false})
+     * @Groups({"read:user"})
      */
     private bool $identityVerified = false;
 
