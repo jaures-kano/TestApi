@@ -17,12 +17,22 @@ security:
     dev:
       pattern: ^/(_(profiler|wdt)|css|images|js)/
       security: false
-    main:
-      lazy: true
-      provider: app_user_provider
-      custom_authenticator: App\Security\UserAuthenticator
-      logout:
-        path: app_logout
+
+
+    login:
+      pattern: ^/api/login
+      stateless:
+      custom_authenticators:
+        - App\Security\ApiAuthentificator
+      json_login:
+        check_path: /api/login
+
+    api:
+      pattern: ^/api
+      stateless: true
+      jwt:
+        authenticator: lexik_jwt_authentication.jwt_token_authenticator
+
         # where to redirect after logout
         # target: app_any_route
 
