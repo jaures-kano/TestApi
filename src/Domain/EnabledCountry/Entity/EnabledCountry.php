@@ -2,14 +2,8 @@
 
 namespace App\Domain\EnabledCountry\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use App\Application\Traits\BaseTimeTrait;
 use Doctrine\ORM\Mapping as ORM;
-
-
-
-
 
 /**
  * Class EnabledCountry
@@ -63,7 +57,7 @@ class EnabledCountry {
      * @ORM\Column( type="boolean", options={"default":true})
      */
     private bool $isEnabled;
-    
+
     /**
      * Undocumented function
      *
@@ -78,7 +72,7 @@ class EnabledCountry {
     *
     * @return string
     */
-    public function getName(): ?string
+    public function getName(): string
     {
        return $this->name;
     }
@@ -141,7 +135,7 @@ class EnabledCountry {
      *
      * @return string|null
      */
-    public function getSubRegion(): ?string
+    public function getSubRegion(): string
     {
        return $this->subRegion;
     }
@@ -161,22 +155,22 @@ class EnabledCountry {
     /**
      * Undocumented function
      *
-     * @return string
+     * @return array
      */
-    public function getTranslation(): ?string
+    public function getTranslations(): array
     {
-       return $this->translation;
+       return $this->translations;
     }
 
     /**
      * Undocumented function
      *
-     * @param string $translation
+     * @param array $translations
      * @return self
      */
-    public function setTranslation(string $translation): self
+    public function setTranslations(array $translations): self
     {
-         $this->translation = $translation;
+         $this->translations = $translations;
          return $this;
     }
       
@@ -185,7 +179,7 @@ class EnabledCountry {
      *
      * @return string
      */
-    public function getRegexCode(): ?string
+    public function getRegexCode(): string
     {
        return $this->regexCode;
     }
@@ -208,7 +202,7 @@ class EnabledCountry {
      *
      * @return bool
      */
-    public function getIsEnabled(): ?bool
+    public function getIsEnabled(): bool
     {
        return $this->isEnabled;
     }
