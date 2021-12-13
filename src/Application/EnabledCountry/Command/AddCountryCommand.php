@@ -5,6 +5,7 @@ namespace App\Application\EnabledCountry\Command;
 
 use App\Adapter\Response\CaseResponse;
 use App\Application\EnabledCountry\Dto\EnabledCountryDto;
+use App\Domain\EnabledCountry\Entity\EnabledCountry;
 use Doctrine\ORM\EntityManagerInterface;
 
 /**
@@ -23,6 +24,19 @@ class AddCountryCommand
 
     public function addEnableCountrie(EnabledCountryDto $enabledCountryDto) : CaseResponse
     {
+        $country = new EnabledCountry();
 
+        $country->setName($enabledCountryDto->name)
+            ->setCallingCode($enabledCountryDto->callingCode)
+            ->setRegion($enabledCountryDto->region)
+            ->setSubRegion($enabledCountryDto->subRegion)
+            ->setTranslations($enabledCountryDto->translation)
+            ->setRegexCode($enabledCountryDto->regexCode)
+            ->setIsEnabled($enabledCountryDto->isEnable)
+            ;
+        $this->manager->persist($country);
+        $this->manager->flush();
+
+        return new caseResponse(true, "Le pays a bien été ajouter", [$country]);
     }
 }
