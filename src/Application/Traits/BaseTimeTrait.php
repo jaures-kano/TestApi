@@ -12,7 +12,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
  * @package App\Application\Traits
  * @author jaures kano <ruddyjaures@mail.com>
  */
-trait BaseTimTrait
+trait BaseTimeTrait
 {
 
     /**
