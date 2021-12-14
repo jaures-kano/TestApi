@@ -9,7 +9,9 @@ use App\Domain\Auth\Traits\ProccessorInfo;
 use App\Domain\Auth\Traits\SystemsInformations;
 use App\Domain\Auth\Traits\UserLocationInformation;
 use App\Domain\Auth\Traits\UserPersonnalInformation;
+use App\Domain\QrCode\Entity\QrCode;
 use Doctrine\ORM\Mapping as ORM;
+use phpDocumentor\Reflection\Types\Collection;
 use Serializable;
 use Symfony\Bridge\Doctrine\IdGenerator\UlidGenerator;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -64,6 +66,19 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, Seriali
      * @ORM\JoinColumn(nullable=false)
      */
     private string $enabledCountry;
+
+    /**
+     * @ORM\OneToMany(targetEntity=QrCode::class,mappedBy="qrCodes" )
+     */
+    private Collection $qrCodes;
+
+    /**
+     * @return Collection|User[]
+     */
+    public function getQrCodes(): Collection
+    {
+        return $this->qrCodes;
+    }
 
     /**
      * @return string
