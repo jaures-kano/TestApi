@@ -4,6 +4,7 @@
 namespace App\Application\EnabledCountry\Dto;
 
 use App\Domain\EnabledCountry\Entity\EnabledCountry;
+use DateTime;
 
 /**
  * Class EnabledCountryDto
@@ -19,6 +20,8 @@ class EnabledCountryDto
     public ?array $translation;
     public ?string $regexCode;
     public ?bool $isEnable;
+    public ?DateTime $createdAt;
+    public ?DateTime $updatedAt;
 
     /**
      * EnabledCountryDto constructor.
@@ -26,12 +29,14 @@ class EnabledCountryDto
      */
     public function __construct(?EnabledCountry $enabledCountry = null)
     {
-        $this->name = $enabledCountry === null? null : $enabledCountry->getName();
-        $this->callingCode = $enabledCountry === null? null : $enabledCountry->getCallingCode();
-        $this->region = $enabledCountry === null? null : $enabledCountry->getRegion();
-        $this->subRegion = $enabledCountry === null? null : $enabledCountry->getSubRegion();
-        $this->translation = $enabledCountry === null? null : $enabledCountry->getTranslations();
-        $this->regexCode = $enabledCountry === null? null : $enabledCountry->getRegexCode();
-        $this->isEnable = $enabledCountry === null? null : $enabledCountry->getIsEnabled();
+        $this->name = $enabledCountry === null ? null : $enabledCountry->getName();
+        $this->callingCode = $enabledCountry === null ? null : $enabledCountry->getCallingCode();
+        $this->region = $enabledCountry === null ? null : $enabledCountry->getRegion();
+        $this->subRegion = $enabledCountry === null ? null : $enabledCountry->getSubRegion();
+        $this->translation = $enabledCountry === null ? null : $enabledCountry->getTranslations();
+        $this->regexCode = $enabledCountry === null ? null : $enabledCountry->getRegexCode();
+        $this->isEnable = $enabledCountry === null ? null : $enabledCountry->getIsEnabled();
+        $this->createdAt = $enabledCountry === null ? null : $enabledCountry->getCreatedAt();
+        $this->updatedAt = $enabledCountry === null ? null : $enabledCountry->getUpdatedAt();
     }
 }

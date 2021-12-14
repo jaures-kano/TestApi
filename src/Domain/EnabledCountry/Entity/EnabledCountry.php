@@ -3,6 +3,9 @@
 namespace App\Domain\EnabledCountry\Entity;
 
 use App\Application\Traits\BaseTimeTrait;
+use App\Domain\Auth\Entity\User;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -11,14 +14,15 @@ use Doctrine\ORM\Mapping as ORM;
  * @author Catherine Mani<crescencegracemani@gmail.com>
  * @ORM\Entity
  */
-class EnabledCountry {
+class EnabledCountry
+{
 
     use BaseTimeTrait;
-   
+
     /**
      * @ORM\ID
      * @ORM\GeneratedValue
-     *@ORM\Column(type="integer")
+     * @ORM\Column(type="integer")
      */
     private int $id;
 
@@ -47,7 +51,7 @@ class EnabledCountry {
      * @ORM\Column(type="json")
      */
     private array $translations = [];
-    
+
     /**
      * @ORM\Column(type="string", length="255",nullable=false)
      */
@@ -59,13 +63,31 @@ class EnabledCountry {
     private bool $isEnabled;
 
     /**
+     * @ORM\OneToMany(targetEntity=User::class,mappedBy="enabledCountry" )
+     */
+    private Collection $users;
+
+    /**
+     * @return Collection|User[]
+     */
+    public function getUsers(): Collection
+    {
+        return $this->users;
+    }
+
+    public function __construct()
+    {
+        $this->users = new ArrayCollection();
+    }
+
+    /**
      * Undocumented function
      *
      * @return integer
      */
     public function getId(): ?int
     {
-       return $this->id;
+        return $this->id;
     }
     /**
     * Undocumented function

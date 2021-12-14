@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Command;
+namespace App\Command\TestCommand;
 
 use App\Domain\Auth\Entity\User;
+use App\Domain\EnabledCountry\Entity\EnabledCountry;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Command\Command;
@@ -54,9 +55,25 @@ class CreateUserCommand extends Command
         $email = $input->getArgument('email');
 
         if ($email) {
+            $pays = $this->em->getRepository(EnabledCountry::class)->findOneBy([], ['id' => 'asc']);
+            if ($pays === null) {
+                $newPay = new EnabledCountry();
+                $newPay->setCreatedAt(new DateTime());
+                $newPay->setCallingCode('+237');
+                $newPay->setName('Cameroun');
+                $newPay->setIsEnabled(true);
+                $newPay->setRegexCode('/+');
+                $newPay->setRegion('');
+                $newPay->setTranslations([]);
+                $this->em->persist($newPay);
+                $this->em->flush();
+
+                $pays = $newPay;
+            }
             $user = new User();
             $user->setEmail($email);
             $user->setCreatedAt(new DateTime());
+            $user->setEnabledCountry($pays);
             $user->setPassword($this->hasher->hashPassword($user, '0000'));
             $this->em->persist($user);
             $this->em->flush();

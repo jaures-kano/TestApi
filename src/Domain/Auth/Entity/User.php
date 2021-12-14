@@ -2,6 +2,7 @@
 
 namespace App\Domain\Auth\Entity;
 
+
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Application\Traits\BaseTimeTrait;
 use App\Domain\Auth\Traits\AuthSystems;
@@ -10,6 +11,10 @@ use App\Domain\Auth\Traits\ProccessorInfo;
 use App\Domain\Auth\Traits\SystemsInformations;
 use App\Domain\Auth\Traits\UserLocationInformation;
 use App\Domain\Auth\Traits\UserPersonnalInformation;
+use App\Domain\EnabledCountry\Entity\EnabledCountry;
+use App\Domain\QrCode\Entity\QrCode;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Serializable;
 use Symfony\Bridge\Doctrine\IdGenerator\UlidGenerator;
@@ -59,6 +64,22 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, Seriali
      */
     private string $password;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=EnabledCountry::class, inversedBy="users")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private EnabledCountry $enabledCountry;
+
+    /**
+     * @ORM\OneToMany(targetEntity=QrCode::class,mappedBy="qrCodes" )
+     */
+    private Collection $qrCodes;
+
+    public function __construct()
+    {
+        $this->qrCodes = new ArrayCollection();
+    }
+
     public function getId(): ?Ulid
     {
         return $this->id;
@@ -83,7 +104,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, Seriali
      */
     public function getUserIdentifier(): string
     {
-        return (string)$this->email;
+        return $this->email;
     }
 
     /**
@@ -91,7 +112,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, Seriali
      */
     public function getUsername(): string
     {
-        return (string)$this->email;
+        return $this->email;
     }
 
     /**
@@ -124,6 +145,28 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, Seriali
     {
         $this->password = $password;
 
+        return $this;
+    }
+
+    /**
+     * @return Collection|User[]
+     */
+    public function getQrCodes(): Collection
+    {
+        return $this->qrCodes;
+    }
+
+    /**
+     * @return EnabledCountry
+     */
+    public function getEnabledCountry(): EnabledCountry
+    {
+        return $this->enabledCountry;
+    }
+
+    public function setEnabledCountry(EnabledCountry $enabledCountry): self
+    {
+        $this->enabledCountry = $enabledCountry;
         return $this;
     }
 
