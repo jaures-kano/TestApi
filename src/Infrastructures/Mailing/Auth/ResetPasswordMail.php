@@ -10,6 +10,11 @@ use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Address;
 
+/**
+ * Class ResetPasswordMail
+ * @package App\Infrastructures\Mailing\Auth
+ * @author Elessa Maxime <elessamaxime@icloud.com>
+ */
 class ResetPasswordMail
 {
     private MailerInterface $mailer;

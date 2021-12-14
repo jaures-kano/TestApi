@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Infrastructures\Mailing\Auth;
+namespace App\Infrastructures\Mailing\Transaction;
 
 
 use App\Domain\Auth\Entity\User;
@@ -11,13 +11,12 @@ use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Address;
 
 /**
- * Class ConfirmationMail
- * @package App\Infrastructures\Mailing\Auth
+ * Class DetailTransactionMail
+ * @package App\Infrastructures\Mailing\Transaction
  * @author Elessa Maxime <elessamaxime@icloud.com>
  */
-class ConfirmationMail
+class DetailTransactionMail
 {
-
     private MailerInterface $mailer;
 
     public function __construct(MailerInterface $mailer)
@@ -27,20 +26,16 @@ class ConfirmationMail
 
     /**
      * @param User $user
-     * @param $registrationToken
      * @throws TransportExceptionInterface
      */
-    public function send(User $user, $registrationToken)
+    public function send(User $user)
     {
         $email = (new TemplatedEmail())
             ->from('noreply@eis.com')
             ->to(new Address($user->getEmail()))
-            ->subject("confirmer votre adresse email Paie Cash")
-            ->htmlTemplate("email/Auth/confirmation.html.twig")
-            ->context([
-                "user" => $user->getFirstName(),
-                "registration_token" => $registrationToken
-            ]);
+            ->subject("Detail de votre transaction")
+            ->htmlTemplate("email/Transaction/detail.html.twig")
+            ->context([]);
 
         try {
             $this->mailer->send($email);
