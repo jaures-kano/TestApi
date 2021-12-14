@@ -34,7 +34,7 @@ class AddCountryCommand
             ->setTranslations($enabledCountryDto->translation)
             ->setRegexCode($enabledCountryDto->regexCode)
             ->setIsEnabled($enabledCountryDto->isEnable)
-            ->setCreatedAt(new DateTime())
+            ->setCreatedAt(new DateTime('now'))
             ;
         $this->manager->persist($country);
         $this->manager->flush();
