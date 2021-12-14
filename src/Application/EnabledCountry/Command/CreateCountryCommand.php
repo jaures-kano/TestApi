@@ -10,11 +10,11 @@ use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 
 /**
- * Class AddCountryCommand
+ * Class CreateCountryCommand
  * @package App\Application\EnabledCountry\Command
  * @author Elessa Maxime <elessamaxime@icloud.com>
  */
-class AddCountryCommand
+class CreateCountryCommand
 {
     private EntityManagerInterface $manager;
 
