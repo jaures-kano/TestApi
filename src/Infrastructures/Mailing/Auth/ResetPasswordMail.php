@@ -28,7 +28,7 @@ class ResetPasswordMail
      * @param User $user
      * @throws TransportExceptionInterface
      */
-    public function send(User $user)
+    public function send(User $user): void
     {
         $email = (new TemplatedEmail())
             ->from('noreply@eis.com')
@@ -37,10 +37,6 @@ class ResetPasswordMail
             ->htmlTemplate("email/Auth/resetPassword.html.twig")
             ->context([]);
 
-        try {
-            $this->mailer->send($email);
-        } catch (TransportExceptionInterface $mailExecption) {
-            throw $mailExecption;
-        }
+        $this->mailer->send($email);
     }
 }

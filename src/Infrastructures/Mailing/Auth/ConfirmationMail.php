@@ -30,7 +30,7 @@ class ConfirmationMail
      * @param $registrationToken
      * @throws TransportExceptionInterface
      */
-    public function send(User $user, $registrationToken)
+    public function send(User $user, $registrationToken): void
     {
         $email = (new TemplatedEmail())
             ->from('noreply@eis.com')
