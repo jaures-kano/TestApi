@@ -2,7 +2,7 @@
 
 namespace App\Domain\Auth\Entity;
 
-use App\Application\Traits\BaseTimTrait;
+use App\Application\Traits\BaseTimeTrait;
 use App\Domain\Auth\Traits\AuthSystems;
 use App\Domain\Auth\Traits\IdentityVerified;
 use App\Domain\Auth\Traits\ProccessorInfo;
@@ -28,7 +28,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, Seriali
     use UserPersonnalInformation;
     use UserLocationInformation;
     use SystemsInformations;
-    use BaseTimTrait;
+    use BaseTimeTrait;
 
     /**
      * @ORM\Id
