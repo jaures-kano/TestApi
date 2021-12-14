@@ -2,21 +2,25 @@
 
 namespace App\Domain\Auth\Entity;
 
+
 use ApiPlatform\Core\Annotation\ApiResource;
-use App\Application\Traits\BaseTimTrait;
+use App\Application\Traits\BaseTimeTrait;
 use App\Domain\Auth\Traits\AuthSystems;
 use App\Domain\Auth\Traits\IdentityVerified;
 use App\Domain\Auth\Traits\ProccessorInfo;
 use App\Domain\Auth\Traits\SystemsInformations;
 use App\Domain\Auth\Traits\UserLocationInformation;
 use App\Domain\Auth\Traits\UserPersonnalInformation;
+use App\Domain\QrCode\Entity\QrCode;
 use Doctrine\ORM\Mapping as ORM;
+use phpDocumentor\Reflection\Types\Collection;
 use Serializable;
 use Symfony\Bridge\Doctrine\IdGenerator\UlidGenerator;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Uid\Ulid;
+use App\Domain\EnabledCountry\Entity\EnabledCountry;
 
 /**
  * @ApiResource()
@@ -30,7 +34,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, Seriali
     use UserPersonnalInformation;
     use UserLocationInformation;
     use SystemsInformations;
-    use BaseTimTrait;
+    use BaseTimeTrait;
+
 
     /**
      * @ORM\Id
@@ -58,6 +63,33 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, Seriali
      * @ORM\Column(type="string")
      */
     private string $password;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=EnabledCountry::class, inversedBy="users")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private string $enabledCountry;
+
+    /**
+     * @ORM\OneToMany(targetEntity=QrCode::class,mappedBy="qrCodes" )
+     */
+    private Collection $qrCodes;
+
+    /**
+     * @return Collection|User[]
+     */
+    public function getQrCodes(): Collection
+    {
+        return $this->qrCodes;
+    }
+
+    /**
+     * @return string
+     */
+    public function getEnabledCountry(): string
+    {
+        return $this->enabledCountry;
+    }
 
     public function getId(): ?Ulid
     {
