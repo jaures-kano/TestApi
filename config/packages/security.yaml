@@ -26,12 +26,12 @@ security:
         - App\Domain\Auth\Authentificators\ApiAuthentificator
       json_login:
         check_path: /api/login
-
-    api:
-      pattern: ^/api
-      stateless: true
-      jwt:
-        authenticator: lexik_jwt_authentication.jwt_token_authenticator
+        #
+        #    api:
+        #      pattern: ^/api
+        #      stateless: true
+        #      jwt:
+        #        authenticator: lexik_jwt_authentication.jwt_token_authenticator
 
         # where to redirect after logout
         # target: app_any_route

@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
- * Class BaseTimTrait
+ * Class BaseTimeTrait
  * @package App\Application\Traits
  * @author jaures kano <ruddyjaures@mail.com>
  */

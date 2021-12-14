@@ -6,6 +6,7 @@ namespace App\Application\QrCode\Command;
 
 use App\Adapter\Response\CaseResponse;
 use App\Application\QrCode\Dto\QrCodeDto;
+use App\Domain\QrCode\Entity\QrCode;
 use Doctrine\ORM\EntityManagerInterface;
 
 /**
@@ -31,11 +32,11 @@ class UnableOrDisableQrCodeCommand
     {
         if($qrCodeDto->isEnabled)
         {
-            $qrCode->setIsEnable(false);
+            $qrCode->setIsEnabled(false);
             $this->manager->flush();
             return new CaseResponse(true, "Le QrCode a bien été desactivé", [$qrCode]);
         }
-        $qrCode->setIsEnable(true);
+        $qrCode->setIsEnabled(true);
         $this->manager->flush();
         return new CaseResponse(true, "Le QrCode à bien été activé", [$qrCode]);
     }

@@ -32,12 +32,13 @@ class ApiAuthentificator extends AbstractAuthenticator
     public function authenticate(Request $request): Passport
     {
         $email = $request->request->get('email', '');
+        $password = $request->request->get('password', '');
 
         $request->getSession()->set(Security::LAST_USERNAME, $email);
 
         return new Passport(
             new UserBadge($email),
-            new PasswordCredentials($request->request->get('password', ''))
+            new PasswordCredentials($password)
         );
     }
 
@@ -49,6 +50,7 @@ class ApiAuthentificator extends AbstractAuthenticator
      */
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $firewallName): ?Response
     {
+
         // on success, let the request continue
         return null;
     }
