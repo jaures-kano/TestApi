@@ -12,7 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Class QrCode
  * @package App\Domain\QrCode\Entity
  * @author Catherine Mani<crescencegracemani@gmail.com>
- * @ORM\Entity
+ * @ORM\Entity()
  */
 
 class QrCode
@@ -42,13 +42,6 @@ class QrCode
      */
   private User $user;
 
-    /**
-     * @return User
-     */
-    public function getUser(): User
-    {
-        return $this->user;
-    }
 
     /**
      * @return int
@@ -56,14 +49,6 @@ class QrCode
     public function getId(): int
     {
         return $this->id;
-    }
-
-    /**
-     * @param int $id
-     */
-    public function setId(int $id): void
-    {
-        $this->id = $id;
     }
 
     /**
@@ -76,31 +61,48 @@ class QrCode
 
     /**
      * @param string $qrCode
+     * @return QrCode
      */
-    public function setQrCode(string $qrCode): void
+    public function setQrCode(string $qrCode): self
     {
         $this->qrCode = $qrCode;
+        return $this;
     }
 
     /**
      * @return bool
      */
-    public function isEnabled(): bool
+    public function getIsEnabled(): bool
     {
         return $this->isEnabled;
     }
 
     /**
      * @param bool $isEnabled
+     * @return QrCode
      */
-    public function setIsEnabled(bool $isEnabled): void
+    public function setIsEnabled(bool $isEnabled): self
     {
         $this->isEnabled = $isEnabled;
+        return $this;
     }
 
+    /**
+     * @return User
+     */
+    public function getUser(): User
+    {
+        return $this->user;
+    }
 
-
-
-
+    /**
+     * @param User $user
+     * @return QrCode
+     */
+    public function setUser(User $user): self
+    {
+        $this->user = $user;
+        return $this;
+    }
 
 }
