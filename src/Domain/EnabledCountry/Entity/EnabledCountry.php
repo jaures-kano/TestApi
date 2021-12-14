@@ -3,7 +3,10 @@
 namespace App\Domain\EnabledCountry\Entity;
 
 use App\Application\Traits\BaseTimeTrait;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use App\Domain\Auth\Entity\User;
 
 /**
  * Class EnabledCountry
@@ -57,6 +60,24 @@ class EnabledCountry {
      * @ORM\Column( type="boolean", options={"default":true})
      */
     private bool $isEnabled;
+
+    /**
+     * @ORM\OneToMany(targetEntity=User::class,mappedBy="enabledCountry" )
+     */
+    private Collection $users;
+
+    /**
+     * @return Collection|User[]
+     */
+    public function getUsers() : Collection
+    {
+        return $this->users;
+    }
+
+    public function __construct()
+    {
+        $this->users = new ArrayCollection();
+    }
 
     /**
      * Undocumented function
