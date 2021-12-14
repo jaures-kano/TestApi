@@ -6,6 +6,7 @@ namespace App\Application\EnabledCountry\Command;
 use App\Adapter\Response\CaseResponse;
 use App\Application\EnabledCountry\Dto\EnabledCountryDto;
 use App\Domain\EnabledCountry\Entity\EnabledCountry;
+use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 
 /**
@@ -33,6 +34,7 @@ class AddCountryCommand
             ->setTranslations($enabledCountryDto->translation)
             ->setRegexCode($enabledCountryDto->regexCode)
             ->setIsEnabled($enabledCountryDto->isEnable)
+            ->setCreatedAt(new DateTime())
             ;
         $this->manager->persist($country);
         $this->manager->flush();

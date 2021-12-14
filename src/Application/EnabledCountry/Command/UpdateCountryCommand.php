@@ -5,6 +5,7 @@ namespace App\Application\EnabledCountry\Command;
 
 use App\Adapter\Response\CaseResponse;
 use App\Application\EnabledCountry\Dto\EnabledCountryDto;
+use App\Domain\EnabledCountry\Entity\EnabledCountry;
 use Doctrine\ORM\EntityManagerInterface;
 
 /**
@@ -21,8 +22,8 @@ class UpdateCountryCommand
         $this->manager = $manager;
     }
 
-    public function updateEnableCountrie(EnabledCountryDto $enabledCountryDto) : caseResponse
+    public function updateEnableCountrie(EnabledCountryDto $enabledCountryDto,EnabledCountry $country) : caseResponse
     {
-
+        return new caseResponse(true, "", []);
     }
 }
