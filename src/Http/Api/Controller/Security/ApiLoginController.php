@@ -2,11 +2,10 @@
 
 namespace App\Http\Api\Controller\Security;
 
+use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Core\Exception\AuthenticationException;
 
 class ApiLoginController extends AbstractController
 {
@@ -14,17 +13,19 @@ class ApiLoginController extends AbstractController
     /**
      * @Route("/api/login", name="api_route_login")
      */
-    public function indexApiLogin(AuthenticationException $exception): JsonResponse
+    public function indexApiLogin(JWTTokenManagerInterface $jwt): JsonResponse
     {
         $user = $this->getUser();
         if ($user !== null) {
-            return new JsonResponse([
-                'message' => $exception->getMessage()
-            ], Response::HTTP_UNAUTHORIZED);
+            return $this->json([
+                'message' => 'successfull login!',
+                'user' => $user,
+                'token' => $jwt->create($user),
+            ], 201, [], ['groups' => 'read:user']);
         }
 
         return new JsonResponse([
-            'message' => 'bad request'
+            'message' => 'bad requests, verify your content-type or json format'
         ], 401);
     }
 }
