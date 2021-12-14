@@ -25,7 +25,7 @@ services:
     resource: '../src/Http/App/Controller'
     tags: [ 'controller.service_arguments' ]
 
-  App\Domain\Auth\Listenners\LoginListenner:
+  App\Application\Auth\Listenners\LoginListenner:
     tags:
       - { name: 'kernel.event_listener' , event: 'security.authentication.success' }
   # add more service definitions when explicit configuration is needed

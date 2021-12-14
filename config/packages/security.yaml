@@ -23,7 +23,7 @@ security:
       pattern: ^/api/login
       stateless:
       custom_authenticators:
-        - App\Domain\Auth\Authentificators\ApiAuthentificator
+        - App\Application\Auth\Authentificators\ApiAuthentificator
       json_login:
         check_path: /api/login
         #

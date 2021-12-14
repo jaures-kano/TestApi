@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Domain\Auth\Listenners;
+namespace App\Application\Auth\Listenners;
 
 use App\Domain\Auth\Entity\User;
 use DateTime;
