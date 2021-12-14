@@ -16,6 +16,7 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Uid\Ulid;
+use App\Domain\EnabledCountry\Entity\EnabledCountry;
 
 /**
  * @ORM\Entity(repositoryClass="App\Domain\Auth\Repository\UserRepository")
@@ -29,6 +30,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, Seriali
     use UserLocationInformation;
     use SystemsInformations;
     use BaseTimeTrait;
+
 
     /**
      * @ORM\Id
@@ -56,6 +58,20 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, Seriali
      * @ORM\Column(type="string")
      */
     private string $password;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=EnabledCountry::class, inversedBy="users")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private string $enabledCountry;
+
+    /**
+     * @return string
+     */
+    public function getEnabledCountry(): string
+    {
+        return $this->enabledCountry;
+    }
 
     public function getId(): ?Ulid
     {
