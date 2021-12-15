@@ -3,7 +3,6 @@
 namespace App\Domain\Auth\Entity;
 
 
-use ApiPlatform\Core\Annotation\ApiResource;
 use App\Application\Traits\BaseTimeTrait;
 use App\Domain\Auth\Traits\AuthSystems;
 use App\Domain\Auth\Traits\IdentityVerified;
@@ -24,7 +23,6 @@ use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Uid\Ulid;
 
 /**
- * @ApiResource()
  * @ORM\Entity(repositoryClass="App\Domain\Auth\Repository\UserRepository")
  */
 class User implements UserInterface, PasswordAuthenticatedUserInterface, Serializable

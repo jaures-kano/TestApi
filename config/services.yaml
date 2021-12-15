@@ -30,3 +30,8 @@ services:
       - { name: 'kernel.event_listener' , event: 'security.authentication.success' }
   # add more service definitions when explicit configuration is needed
   # please note that last definitions always *replace* previous ones
+
+  App\Http\Api\OpenApi\Registration\OpenRegistrationApiFactory:
+    decorates: 'api_platform.openapi.factory'
+    arguments: [ '@App\Http\Api\OpenApi\Registration\OpenRegistrationApiFactory.inner' ]
+    autoconfigure: false
