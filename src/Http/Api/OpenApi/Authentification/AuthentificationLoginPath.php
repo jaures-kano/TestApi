@@ -43,6 +43,7 @@ class AuthentificationLoginPath
                                                 'email' => 'admin@admin.com',
                                                 'firstName' => 'shaka',
                                                 'lastName' => 'zulu',
+                                                'roles' => ['ROLE_USER'],
                                                 'cni' => 'zulu',
                                                 'nui' => '000022000220',
                                                 'lastLoginAt' => '2021-12-14T17:06:25+00:00',
