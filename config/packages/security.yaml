@@ -13,6 +13,8 @@ security:
       entity:
         class: App\Domain\Auth\Entity\User
         property: email
+
+
   firewalls:
     dev:
       pattern: ^/(_(profiler|wdt)|css|images|js)/
@@ -20,12 +22,20 @@ security:
 
 
     login:
-      pattern: ^/api/login
+      pattern: ^/api/auth/login
       stateless:
       custom_authenticators:
         - App\Application\Auth\Authentificators\ApiAuthentificator
       json_login:
-        check_path: /api/login
+        check_path: /api/auth/login
+
+
+    api_token_refresh:
+      pattern: ^/api/auth/token/refresh
+      stateless: true
+
+
+
         #
         #    api:
         #      pattern: ^/api
@@ -34,7 +44,7 @@ security:
         #        authenticator: lexik_jwt_authentication.jwt_token_authenticator
 
         # where to redirect after logout
-        # target: app_any_route
+      # target: app_any_route
 
       # activate different ways to authenticate
       # https://symfony.com/doc/current/security.html#the-firewall
@@ -45,5 +55,5 @@ security:
   # Easy way to control access for large sections of your site
   # Note: Only the *first* access control that matches will be used
   access_control:
-  # - { path: ^/admin, roles: ROLE_ADMIN }
+    - { path: ^/api/auth/token/refresh, roles: PUBLIC_ACCESS }
   # - { path: ^/profile, roles: ROLE_USER }
