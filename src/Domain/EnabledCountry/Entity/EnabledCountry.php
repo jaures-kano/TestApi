@@ -2,14 +2,22 @@
 
 namespace App\Domain\EnabledCountry\Entity;
 
+use ApiPlatform\Core\Annotation\ApiResource;
 use App\Application\Traits\BaseTimeTrait;
 use App\Domain\Auth\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * Class EnabledCountry
+ * @ApiResource(
+ *     normalizationContext={"groups"={"read:country"}},
+ *     denormalizationContext={"groups"={"read:country"}},
+ *     itemOperations={"get"},
+ *     collectionOperations={"get"}
+ * )
  * @package App\Domain\EnabledCountry\Entity
  * @author Catherine Mani<crescencegracemani@gmail.com>
  * @ORM\Entity
@@ -20,45 +28,53 @@ class EnabledCountry
     use BaseTimeTrait;
 
     /**
-     * @ORM\ID
+     * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"read:country"})
      */
     private int $id;
 
     /**
      * @ORM\Column(type="string",length="255", nullable=false)
+     * @Groups({"read:country"})
      */
     private string $name;
 
 
     /**
      * @ORM\Column(type="string",length="255",nullable=false)
+     * @Groups({"read:country"})
      */
     private string $callingCode;
 
     /**
      * @ORM\Column(type="string",length="255",nullable=true)
+     * @Groups({"read:country"})
      */
     private string $region;
 
-     /**
+    /**
      * @ORM\Column(type="string",length="255",nullable=true)
+     * @Groups({"read:country"})
      */
     private string $subRegion;
-    
+
     /**
      * @ORM\Column(type="json")
+     * @Groups({"read:country"})
      */
     private array $translations = [];
 
     /**
      * @ORM\Column(type="string", length="255",nullable=false)
+     * @Groups({"read:country"})
      */
     private string $regexCode;
 
     /**
      * @ORM\Column( type="boolean", options={"default":true})
+     * @Groups({"read:country"})
      */
     private bool $isEnabled;
 
@@ -89,25 +105,27 @@ class EnabledCountry
     {
         return $this->id;
     }
+
     /**
-    * Undocumented function
-    *
-    * @return string
-    */
+     * Undocumented function
+     *
+     * @return string
+     */
     public function getName(): string
     {
-       return $this->name;
+        return $this->name;
     }
-    
+
     /**
      * @param string $name
      * @return self
      */
     public function setName(string $name): self
     {
-       $this->name = $name;
+        $this->name = $name;
         return $this;
     }
+
     /**
      * Undocumented function
      *
@@ -115,7 +133,7 @@ class EnabledCountry
      */
     public function getCallingCode(): ?string
     {
-       return $this->callingCode;
+        return $this->callingCode;
     }
 
     /**
@@ -126,8 +144,8 @@ class EnabledCountry
      */
     public function setCallingCode(string $callingCode): self
     {
-         $this->callingCode = $callingCode;
-         return $this;
+        $this->callingCode = $callingCode;
+        return $this;
     }
 
     /**
@@ -137,21 +155,21 @@ class EnabledCountry
      */
     public function getRegion(): ?string
     {
-       return $this->region;
+        return $this->region;
     }
-    
+
     /**
      * Undocumented function
      *
      * @param string $region
      * @return self
      */
-     public function setRegion(string $region): self
+    public function setRegion(string $region): self
     {
-         $this->region = $region;
-         return $this;
+        $this->region = $region;
+        return $this;
     }
-    
+
     /**
      * Undocumented function
      *
@@ -159,19 +177,19 @@ class EnabledCountry
      */
     public function getSubRegion(): string
     {
-       return $this->subRegion;
+        return $this->subRegion;
     }
 
-     /**
-      * Undocumented function
-      *
-      * @param string $subRegion
-      * @return self
-      */
-     public function setSubRegion(string $subRegion): self
+    /**
+     * Undocumented function
+     *
+     * @param string $subRegion
+     * @return self
+     */
+    public function setSubRegion(string $subRegion): self
     {
-         $this->subRegion = $subRegion;
-         return $this;
+        $this->subRegion = $subRegion;
+        return $this;
     }
 
     /**
@@ -181,7 +199,7 @@ class EnabledCountry
      */
     public function getTranslations(): array
     {
-       return $this->translations;
+        return $this->translations;
     }
 
     /**
@@ -192,10 +210,10 @@ class EnabledCountry
      */
     public function setTranslations(array $translations): self
     {
-         $this->translations = $translations;
-         return $this;
+        $this->translations = $translations;
+        return $this;
     }
-      
+
     /**
      * Undocumented function
      *
@@ -203,7 +221,7 @@ class EnabledCountry
      */
     public function getRegexCode(): string
     {
-       return $this->regexCode;
+        return $this->regexCode;
     }
 
 
@@ -213,10 +231,10 @@ class EnabledCountry
      * @param string $regexCode
      * @return self
      */
-      public function setRegexCode(string $regexCode): self
+    public function setRegexCode(string $regexCode): self
     {
-         $this->regexCode = $regexCode;
-         return $this;
+        $this->regexCode = $regexCode;
+        return $this;
     }
 
     /**
@@ -226,7 +244,7 @@ class EnabledCountry
      */
     public function getIsEnabled(): bool
     {
-       return $this->isEnabled;
+        return $this->isEnabled;
     }
 
     /**
@@ -235,9 +253,9 @@ class EnabledCountry
      * @param bool $isEnabled
      * @return self
      */
-      public function setIsEnabled(bool $isEnabled): self
+    public function setIsEnabled(bool $isEnabled): self
     {
-         $this->isEnabled = $isEnabled;
-         return $this;
+        $this->isEnabled = $isEnabled;
+        return $this;
     }
 }

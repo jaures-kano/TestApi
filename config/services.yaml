@@ -35,3 +35,8 @@ services:
     decorates: 'api_platform.openapi.factory'
     arguments: [ '@App\Http\Api\OpenApi\Registration\OpenRegistrationApiFactory.inner' ]
     autoconfigure: false
+
+  App\Http\Api\OpenApi\Authentification\OpenAuthentificationApiFactory:
+    decorates: 'api_platform.openapi.factory'
+    arguments: [ '@App\Http\Api\OpenApi\Authentification\OpenAuthentificationApiFactory.inner' ]
+    autoconfigure: false
