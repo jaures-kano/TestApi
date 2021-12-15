@@ -10,14 +10,14 @@ use ArrayObject;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
- * Class FirstRegistrationPath
+ * Class CompeletRegistrationInformationPath
  * @package App\Http\Api\OpenApi\Registration
  * @author jaures kano <ruddyjaures@mail.com>
  */
-class FirstRegistrationPath
+class CompeletRegistrationPath
 {
 
-    public function addRegistrationPath($operationId = 'default'): PathItem
+    public function addCompletRegistrationPath($operationId = 'default'): PathItem
     {
         return new PathItem(
             null, null, null, null, null,
