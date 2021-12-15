@@ -17,13 +17,13 @@ use Symfony\Component\HttpFoundation\Response;
 class FirstRegistrationPath
 {
 
-    public function addRegistrationPath($operationId = 'default'): PathItem
+    public function addRegistrationPath($tag = 'tag', $operationId = 'default'): PathItem
     {
         return new PathItem(
             null, null, null, null, null,
             new Operation(
                 $operationId,
-                ['Stats'],
+                [$tag],
                 [
                     Response::HTTP_OK => [
                         'content' => [
@@ -31,13 +31,9 @@ class FirstRegistrationPath
                                 'schema' => [
                                     'type' => 'object',
                                     'properties' => [
-                                        'books_count' => [
-                                            'type' => 'integer',
-                                            'example' => 997,
-                                        ],
-                                        'topbooks_count' => [
-                                            'type' => 'integer',
-                                            'example' => 101,
+                                        'message' => [
+                                            'type' => 'string',
+                                            'example' => 'Message send to { choice methode } user',
                                         ],
                                     ],
                                 ],
@@ -45,7 +41,7 @@ class FirstRegistrationPath
                         ],
                     ],
                 ],
-                'Retrieves the number of books and top books (legacy endpoint).',
+                'Add first information of user who want to create an account.',
                 '', null, [],
                 new RequestBody(
                     $operationId,
@@ -54,13 +50,21 @@ class FirstRegistrationPath
                             'schema' => [
                                 'type' => 'object',
                                 'properties' => [
-                                    'books_count' => [
-                                        'type' => 'integer',
-                                        'example' => 997,
+                                    'phone' => [
+                                        'type' => 'string',
+                                        'example' => '699 999 999',
                                     ],
-                                    'topbooks_count' => [
+                                    'email' => [
+                                        'type' => 'shaka@paiecash.com',
+                                        'example' => 'shaka@paiecash.com',
+                                    ],
+                                    'country' => [
                                         'type' => 'integer',
-                                        'example' => 101,
+                                        'example' => 1
+                                    ],
+                                    'confirmation' => [
+                                        'type' => 'boolean',
+                                        'example' => true
                                     ],
                                 ],
                             ],

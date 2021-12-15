@@ -17,13 +17,13 @@ use Symfony\Component\HttpFoundation\Response;
 class CompeletRegistrationPath
 {
 
-    public function addCompletRegistrationPath($operationId = 'default'): PathItem
+    public function addCompletRegistrationPath($tag, $operationId = 'default'): PathItem
     {
         return new PathItem(
             null, null, null, null, null,
             new Operation(
                 $operationId,
-                ['Stats'],
+                [$tag],
                 [
                     Response::HTTP_OK => [
                         'content' => [
@@ -31,21 +31,29 @@ class CompeletRegistrationPath
                                 'schema' => [
                                     'type' => 'object',
                                     'properties' => [
-                                        'books_count' => [
-                                            'type' => 'integer',
-                                            'example' => 997,
+                                        'phone' => [
+                                            'type' => 'string',
+                                            'example' => '699 999 999',
                                         ],
-                                        'topbooks_count' => [
-                                            'type' => 'integer',
-                                            'example' => 101,
+                                        'email' => [
+                                            'type' => 'shaka@paiecash.com',
+                                            'example' => 'shaka@paiecash.com',
                                         ],
+                                        'country' => [
+                                            'type' => 'integer',
+                                            'example' => 1
+                                        ],
+                                        'confirmation' => [
+                                            'type' => 'boolean',
+                                            'example' => true
+                                        ]
                                     ],
                                 ],
                             ],
                         ],
                     ],
                 ],
-                'Retrieves the number of books and top books (legacy endpoint).',
+                'Complete user information after use first registration path',
                 '', null, [],
                 new RequestBody(
                     $operationId,

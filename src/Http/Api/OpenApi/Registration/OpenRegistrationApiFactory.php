@@ -34,9 +34,11 @@ class OpenRegistrationApiFactory implements OpenApiFactoryInterface
         $openApi = ($this->decorated)($context);
 
         $openApi->getPaths()->addPath('/registration/first',
-            $this->firstRegistrationPath->addRegistrationPath());
+            $this->firstRegistrationPath->addRegistrationPath(
+                'Registration proccess', 'registration-complete'));
         $openApi->getPaths()->addPath('/registration/complete/info',
-            $this->completeRegistrationPath->addCompletRegistrationPath());
+            $this->completeRegistrationPath->addCompletRegistrationPath(
+                'Registration proccess', 'registration-first'));
         return $openApi;
     }
 }
