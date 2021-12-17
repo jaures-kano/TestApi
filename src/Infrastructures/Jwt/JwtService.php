@@ -34,15 +34,20 @@ class JwtService
         $token = $this->tokenManager->create($user);
 
         $datetime = new DateTime();
-        $datetime->modify('+3600 seconds');
+        $datetime->modify('+86400 seconds');
 
-        $refreshToken = $this->refreshTokenManager->create();
-        $refreshToken->setUsername($user->getUserIdentifier());
-        $refreshToken->setRefreshToken();
-        $refreshToken->setValid($datetime);
+        $lastToken = $this->refreshTokenManager->getLastFromUsername($user->getId());
 
+        if ($lastToken === null) {
+            $refreshToken = $this->refreshTokenManager->create();
+            $refreshToken->setUsername($user->getId());
+            $refreshToken->setRefreshToken();
+            $refreshToken->setValid($datetime);
+        } else {
+            $lastToken->setValid($datetime);
+            $refreshToken = $lastToken;
+        }
         $this->refreshTokenManager->save($refreshToken);
-
         return [
             'token' => $token,
             'refresh_refresh' => $refreshToken->getRefreshToken(),
