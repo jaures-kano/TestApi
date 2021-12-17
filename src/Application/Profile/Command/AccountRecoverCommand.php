@@ -10,6 +10,7 @@ use App\Domain\Profile\Event\PasswordRequestEvent;
 use App\Infrastructures\Generator\PasswordResetGenerator;
 use DateTime;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 /**
  * Class AccountRecoverCommand
@@ -20,13 +21,17 @@ class AccountRecoverCommand extends AbstractCase
 {
 
     private EventDispatcherInterface $eventDispatcher;
+    private UserPasswordHasherInterface $hasher;
+
 
     /**
      * @param EventDispatcherInterface $eventDispatcher
+     * @param UserPasswordHasherInterface $hasher
      */
-    public function __construct(EventDispatcherInterface $eventDispatcher)
+    public function __construct(EventDispatcherInterface $eventDispatcher, UserPasswordHasherInterface $hasher)
     {
         $this->eventDispatcher = $eventDispatcher;
+        $this->hasher = $hasher;
     }
 
 
@@ -47,4 +52,18 @@ class AccountRecoverCommand extends AbstractCase
         return $this->successResponse($message, []);
     }
 
+    public function resetPassword(User $user, string $code, string $password): CaseResponse
+    {
+        if ($user->getResetCode() === (float)$code) {
+            $user->setPassword($this->hasher->hashPassword($user, $password));
+            $user->setUpdatedAt(new DateTime());
+            $user->setResetTime(null);
+            $user->setResetCode(null);
+            $this->em()->persist($user);
+            $this->em()->flush();
+            return $this->successResponse('User password is reset', []);
+        }
+
+        return $this->errorResponse('Reset code is not valid', []);
+    }
 }

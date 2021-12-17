@@ -57,6 +57,10 @@ class ResetPasswordPath
                                     'passwordConfirm' => [
                                         'type' => 'string',
                                         'example' => '@zulu@',
+                                    ],
+                                    'resetCode' => [
+                                        'type' => 'int',
+                                        'example' => '0000',
                                     ]
                                 ],
                             ],
