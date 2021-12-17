@@ -14,7 +14,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
  * Class EnabledCountry
  * @ApiResource(
  *     normalizationContext={"groups"={"read:country"}},
- *     denormalizationContext={"groups"={"read:country"}},
+ *     denormalizationContext={"groups"={"write:country"}},
  *     itemOperations={"get"},
  *     collectionOperations={"get"}
  * )

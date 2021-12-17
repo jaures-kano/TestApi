@@ -17,13 +17,13 @@ trait BaseTimeTrait
 
     /**
      * @ORM\Column(type="datetime")
-     * @Groups({"read:user"})
+     * @Groups({"read:user", "read:qr_code"})
      */
     private DateTimeInterface $createdAt;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
-     * @Groups({"read:user"})
+     * @Groups({"read:user", "read:qr_code"})
      */
     private ?DateTimeInterface $updatedAt = null;
 
