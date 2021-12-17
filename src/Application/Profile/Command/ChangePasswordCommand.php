@@ -13,4 +13,5 @@ use App\Adapter\Abstracts\AbstractCase;
 class ChangePasswordCommand extends AbstractCase
 {
 
+
 }

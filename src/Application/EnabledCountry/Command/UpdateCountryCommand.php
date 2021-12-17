@@ -32,7 +32,7 @@ class UpdateCountryCommand
         $enabledCountryDto->translation !== $country->getTranslations() ? $country->setTranslations($enabledCountryDto->translation) : null;
         $enabledCountryDto->regexCode !== $country->getRegexCode() ? $country->setName($enabledCountryDto->regexCode) : null;
         $enabledCountryDto->isEnable !== $country->getIsEnabled() ? $country->setIsEnabled($enabledCountryDto->isEnable) : null;
-        $enabledCountryDto->updatedAt !== $country->getName() ? $country->setName(new DateTime('now')) : null;
+        $enabledCountryDto->updatedAt !== $country->getName() ? $country->setUpdatedAt(new DateTime('now')) : null;
 
         return new caseResponse(true, "", []);
     }

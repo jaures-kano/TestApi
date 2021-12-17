@@ -3,6 +3,9 @@
 namespace App\Application\Profile\Dto;
 
 
+use App\Domain\Auth\Entity\User;
+use DateTimeInterface;
+
 /**
  * Class ProfileDto
  * @package App\Application\Profile\Dto
@@ -10,5 +13,36 @@ namespace App\Application\Profile\Dto;
  */
 class ProfileDto
 {
+
+    public User $user;
+
+    public string $firstName;
+
+    public string $lastName;
+
+    public DateTimeInterface $birthDay;
+
+    public string $password;
+
+    /**
+     * @param User $user
+     * @param string $firstName
+     * @param string $lastName
+     * @param DateTimeInterface $birthDay
+     * @param string $password
+     */
+    public function __construct(User              $user,
+                                string            $firstName,
+                                string            $lastName,
+                                DateTimeInterface $birthDay,
+                                string            $password)
+    {
+        $this->user = $user;
+        $this->firstName = $firstName;
+        $this->lastName = $lastName;
+        $this->birthDay = $birthDay;
+        $this->password = $password;
+    }
+
 
 }

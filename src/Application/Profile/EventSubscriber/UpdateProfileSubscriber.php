@@ -11,4 +11,5 @@ namespace App\Application\Profile\EventSubscriber;
 class UpdateProfileSubscriber
 {
 
+
 }

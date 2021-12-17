@@ -47,6 +47,7 @@ trait UserPersonnalInformation
 
     /**
      * @ORM\Column(type="date", nullable=true)
+     * @Groups({"read:user"})
      */
     private ?DateTimeInterface $birhday = null;
 

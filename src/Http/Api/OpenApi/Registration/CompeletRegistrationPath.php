@@ -31,22 +31,10 @@ class CompeletRegistrationPath
                                 'schema' => [
                                     'type' => 'object',
                                     'properties' => [
-                                        'phone' => [
+                                        'message' => [
                                             'type' => 'string',
-                                            'example' => '699 999 999',
+                                            'example' => 'success update',
                                         ],
-                                        'email' => [
-                                            'type' => 'shaka@paiecash.com',
-                                            'example' => 'shaka@paiecash.com',
-                                        ],
-                                        'country' => [
-                                            'type' => 'integer',
-                                            'example' => 1
-                                        ],
-                                        'confirmation' => [
-                                            'type' => 'boolean',
-                                            'example' => true
-                                        ]
                                     ],
                                 ],
                             ],
@@ -62,13 +50,33 @@ class CompeletRegistrationPath
                             'schema' => [
                                 'type' => 'object',
                                 'properties' => [
-                                    'books_count' => [
-                                        'type' => 'integer',
-                                        'example' => 997,
+                                    'email' => [
+                                        'type' => 'string',
+                                        'example' => 'Shaka@admin.com',
                                     ],
-                                    'topbooks_count' => [
-                                        'type' => 'integer',
-                                        'example' => 101,
+                                    'firstName' => [
+                                        'type' => 'string',
+                                        'example' => 'Shaka',
+                                    ],
+                                    'lastName' => [
+                                        'type' => 'string',
+                                        'example' => 'Shaka',
+                                    ],
+                                    'birthday' => [
+                                        'type' => 'date',
+                                        'example' => '2020-08-01',
+                                    ],
+                                    'confirmPassword' => [
+                                        'type' => 'string',
+                                        'example' => 'Zulu',
+                                    ],
+                                    'password' => [
+                                        'type' => 'string',
+                                        'example' => 'Zulu',
+                                    ],
+                                    'code' => [
+                                        'type' => 'string',
+                                        'example' => '00225'
                                     ],
                                 ],
                             ],
