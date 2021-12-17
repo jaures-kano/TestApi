@@ -5,13 +5,14 @@ namespace App\Infrastructures\Mailing\Subscriber;
 
 use App\Domain\Registration\Event\FirstRegistrationEvent;
 use App\Infrastructures\Mailing\Auth\CreateProfileCodeMail;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**
  * Class FirstRegistrationSubscriber
  * @package App\Application\Registration\EventSubcriber
  * @author jaures kano <ruddyjaures@mail.com>
  */
-class FirstRegistrationSubscriber
+class FirstRegistrationSubscriber implements EventSubscriberInterface
 {
     private CreateProfileCodeMail $createProfileCodeMail;
 
@@ -33,7 +34,6 @@ class FirstRegistrationSubscriber
     public function sendFirstRegistrationMail(FirstRegistrationEvent $event): void
     {
         if ($event->getMode() === true) {
-            dd('stocp');
             $this->createProfileCodeMail->send($event->getUser());
         }
     }

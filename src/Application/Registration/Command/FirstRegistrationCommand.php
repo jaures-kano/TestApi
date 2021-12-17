@@ -48,7 +48,7 @@ class FirstRegistrationCommand extends AbstractCase
             $user->setCreatedAt(new \DateTime());
             $user->setPassword($this->hasher->hashPassword($user, decbin(random_int(100, 300))));
             $this->em()->persist($user);
-            $this->em()->flush();
+            //$this->em()->flush();
 
             $event = new FirstRegistrationEvent($user, $registrationDto->confirmationMode);
             $this->eventDispatcher->dispatch($event, FirstRegistrationEvent::NAME);
