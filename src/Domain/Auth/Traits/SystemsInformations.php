@@ -20,10 +20,16 @@ trait SystemsInformations
      */
     private ?DateTimeInterface $resetTime;
 
+
     /**
      * @ORM\Column(type="float", nullable=true)
      */
     private ?float $resetCode = null;
+
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private ?float $confirmationCode = null;
 
     /**
      * @return DateTimeInterface|null
@@ -50,6 +56,20 @@ trait SystemsInformations
     public function setResetCode(?float $resetCode): self
     {
         $this->resetCode = $resetCode;
+        return $this;
+    }
+
+    /**
+     * @return float|null
+     */
+    public function getConfirmationCode(): ?float
+    {
+        return $this->confirmationCode;
+    }
+
+    public function setConfirmationCode(?float $confirmationCode): self
+    {
+        $this->confirmationCode = $confirmationCode;
         return $this;
     }
 

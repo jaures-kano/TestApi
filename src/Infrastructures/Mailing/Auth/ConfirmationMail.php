@@ -27,10 +27,9 @@ class ConfirmationMail
 
     /**
      * @param User $user
-     * @param $registrationToken
      * @throws TransportExceptionInterface
      */
-    public function send(User $user, $registrationToken): void
+    public function send(User $user): void
     {
         $email = (new TemplatedEmail())
             ->from('noreply@eis.com')
@@ -38,8 +37,7 @@ class ConfirmationMail
             ->subject("confirmer votre adresse email Paie Cash")
             ->htmlTemplate("email/Auth/confirmation.html.twig")
             ->context([
-                "user" => $user->getFirstName(),
-                "registration_token" => $registrationToken
+                "user" => $user
             ]);
 
         try {

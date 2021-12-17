@@ -4,7 +4,7 @@ namespace App\Infrastructures\Mailing\Subscriber;
 
 
 use App\Domain\Registration\Event\FirstRegistrationEvent;
-use App\Infrastructures\Mailing\Auth\CreateProfileCodeMail;
+use App\Infrastructures\Mailing\Auth\ConfirmationMail;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**
@@ -14,14 +14,14 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
  */
 class FirstRegistrationSubscriber implements EventSubscriberInterface
 {
-    private CreateProfileCodeMail $createProfileCodeMail;
+    private ConfirmationMail $confirmationMail;
 
     /**
-     * @param CreateProfileCodeMail $createProfileCodeMail
+     * @param ConfirmationMail $confirmationMail
      */
-    public function __construct(CreateProfileCodeMail $createProfileCodeMail)
+    public function __construct(ConfirmationMail $confirmationMail)
     {
-        $this->createProfileCodeMail = $createProfileCodeMail;
+        $this->confirmationMail = $confirmationMail;
     }
 
     public static function getSubscribedEvents(): array
@@ -34,7 +34,7 @@ class FirstRegistrationSubscriber implements EventSubscriberInterface
     public function sendFirstRegistrationMail(FirstRegistrationEvent $event): void
     {
         if ($event->getMode() === true) {
-            $this->createProfileCodeMail->send($event->getUser());
+            $this->confirmationMail->send($event->getUser());
         }
     }
 
