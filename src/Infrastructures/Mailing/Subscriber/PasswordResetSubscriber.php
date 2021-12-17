@@ -4,6 +4,7 @@ namespace App\Infrastructures\Mailing\Subscriber;
 
 
 use App\Domain\Profile\Event\PasswordRequestEvent;
+use App\Infrastructures\Mailing\Auth\ResetPasswordMail;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**
@@ -13,6 +14,16 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
  */
 class PasswordResetSubscriber implements EventSubscriberInterface
 {
+    private ResetPasswordMail $resetPasswordMail;
+
+    /**
+     * @param ResetPasswordMail $resetPasswordMail
+     */
+    public function __construct(ResetPasswordMail $resetPasswordMail)
+    {
+        $this->resetPasswordMail = $resetPasswordMail;
+    }
+
 
     public static function getSubscribedEvents(): array
     {
@@ -23,7 +34,9 @@ class PasswordResetSubscriber implements EventSubscriberInterface
 
     public function onRequestResetPassword(PasswordRequestEvent $event): void
     {
-
+        if ($event->getMode() === true) {
+            $this->resetPasswordMail->send($event->getUser());
+        }
     }
 
 

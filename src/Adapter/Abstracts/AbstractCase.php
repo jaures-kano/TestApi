@@ -5,7 +5,6 @@ namespace App\Adapter\Abstracts;
 
 
 use App\Adapter\Response\CaseResponse;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
@@ -16,12 +15,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class AbstractCase extends AbstractController
 {
 
-    private EntityManagerInterface $manager;
-
-    public function __construct(EntityManagerInterface $manager)
-    {
-        $this->manager = $manager;
-    }
 
     public function successResponse(string $message, array $data): CaseResponse
     {
@@ -35,6 +28,6 @@ class AbstractCase extends AbstractController
 
     public function em()
     {
-        return $this->manager;
+        return $this->getDoctrine()->getManager();
     }
 }

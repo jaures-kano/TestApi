@@ -35,7 +35,9 @@ class ResetPasswordMail
             ->to(new Address($user->getEmail()))
             ->subject("Demande de reinitialisation de mot de passe")
             ->htmlTemplate("email/Auth/resetPassword.html.twig")
-            ->context([]);
+            ->context([
+                'user' => $user
+            ]);
 
         $this->mailer->send($email);
     }

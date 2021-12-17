@@ -1,4 +1,4 @@
-<?php
+<?php /** @noinspection PhpUnhandledExceptionInspection */
 
 namespace App\Domain\Auth\Repository;
 
@@ -38,6 +38,31 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         $this->_em->persist($user);
         $this->_em->flush();
     }
+
+
+    public function findUserBy($email = '', $phone = ''): ?User
+    {
+        $query = $this->createQueryBuilder('u');
+
+        if ($email !== '') {
+            $query->andWhere('u.email = :email')
+                ->setParameter('email', $email);
+
+            return $query->setMaxResults(1)
+                ->getQuery()->getOneOrNullResult();
+        }
+
+        if ($phone !== '') {
+            $query->andWhere('u.phone = :phone')
+                ->setParameter('phone', $phone);
+
+            return $query->setMaxResults(1)
+                ->getQuery()->getOneOrNullResult();
+        }
+
+        return null;
+    }
+
 
     // /**
     //  * @return User[] Returns an array of User objects
