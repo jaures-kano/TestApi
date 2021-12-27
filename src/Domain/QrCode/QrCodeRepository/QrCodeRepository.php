@@ -21,7 +21,7 @@ class QrCodeRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, EnabledCountry::class);
+        parent::__construct($registry, QrCode::class);
     }
 
 }

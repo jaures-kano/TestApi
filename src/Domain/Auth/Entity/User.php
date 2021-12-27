@@ -10,8 +10,11 @@ use App\Domain\Auth\Traits\ProccessorInfo;
 use App\Domain\Auth\Traits\SystemsInformations;
 use App\Domain\Auth\Traits\UserLocationInformation;
 use App\Domain\Auth\Traits\UserPersonnalInformation;
+use App\Domain\Card\Entity\Card;
+use App\Domain\CardTransaction\Entity\CardTransaction;
 use App\Domain\EnabledCountry\Entity\EnabledCountry;
 use App\Domain\QrCode\Entity\QrCode;
+use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -69,13 +72,26 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, Seriali
     private EnabledCountry $enabledCountry;
 
     /**
-     * @ORM\OneToMany(targetEntity=QrCode::class,mappedBy="qrCodes" )
+     * @ORM\OneToMany(targetEntity=QrCode::class,mappedBy="user" )
      */
     private Collection $qrCodes;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Card::class,mappedBy="user" )
+     */
+    private Collection $cards;
+
+    /**
+     * @ORM\OneToMany(targetEntity=CardTransaction::class,mappedBy="user" )
+     */
+    private Collection $cardTransactions;
+
 
     public function __construct()
     {
         $this->qrCodes = new ArrayCollection();
+        $this->cards = new ArrayCollection();
+        $this->cardTransactions = new ArrayCollection();
     }
 
     public function getId(): ?Ulid
@@ -206,4 +222,42 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, Seriali
             $this->password,
         ] = unserialize($serialized);
     }
+
+    /**
+     * @return DateTimeInterface|null
+     */
+    public function getPhoneVerfiedAt(): ?DateTimeInterface
+    {
+        return $this->phoneVerfiedAt;
+    }
+
+    /**
+     * @param DateTimeInterface|null $phoneVerfiedAt
+     * @return User
+     */
+    public function setPhoneVerfiedAt(?DateTimeInterface $phoneVerfiedAt): User
+    {
+        $this->phoneVerfiedAt = $phoneVerfiedAt;
+        return $this;
+    }
+
+    /**
+     * @return ArrayCollection|Collection
+     */
+    public function getCards():Collection
+    {
+        return $this->cards;
+    }
+
+
+    /**
+     * @return ArrayCollection|Collection
+     */
+    public function getCardTransactions():Collection
+    {
+        return $this->cardTransactions;
+    }
+
+
+
 }

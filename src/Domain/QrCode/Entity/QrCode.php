@@ -47,7 +47,7 @@ class QrCode
     private bool $isEnabled;
 
     /**
-     * @ORM\ManyToOne (targetEntity=User::class, inversedBy="user")
+     * @ORM\ManyToOne (targetEntity=User::class, inversedBy="qrCodes")
      */
     private User $user;
 
