@@ -32,7 +32,7 @@ class ConfirmationMail
     public function send(User $user): void
     {
         $email = (new TemplatedEmail())
-            ->from('noreply@eis.com')
+            ->from('ruddyjaures@gmail.com')
             ->to(new Address($user->getEmail()))
             ->subject("confirmer votre adresse email Paie Cash")
             ->htmlTemplate("email/Auth/confirmation.html.twig")

@@ -31,7 +31,7 @@ class ResetPasswordMail
     public function send(User $user): void
     {
         $email = (new TemplatedEmail())
-            ->from('noreply@eis.com')
+            ->from('ruddyjaures@gmail.com')
             ->to(new Address($user->getEmail()))
             ->subject("Demande de reinitialisation de mot de passe")
             ->htmlTemplate("email/Auth/resetPassword.html.twig")
