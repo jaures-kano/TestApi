@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Connect Plus</title>
+    <!-- plugins:css -->
+    {% block stylesheets %}
+    {{ encore_entry_link_tags('admin') }}
+    {% endblock %}
+    {% block javascripts %}
+    {{ encore_entry_script_tags('admin') }}
+    {% endblock %}
+
+</head>
+<body>
+<div class="container-scroller">
+    <!-- navbar vertical  -->
+   {% include "admin/base_admin/_admin_header.html.twig" %}
+
+    <div class="container-fluid page-body-wrapper">
+        <!-- partial:partials/_sidebar.html -->
+    {% include "admin/base_admin/_admin_sidebar.html.twig" %}
+        {% block body %}
+
+        {% endblock %}
+    </div>
+</div>
+</body>
+</html>
+
+
+
+
