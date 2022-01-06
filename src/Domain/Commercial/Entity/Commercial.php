@@ -8,6 +8,8 @@ use App\Application\Traits\BaseTimeTrait;
 use App\Domain\Auth\Entity\User;
 use Doctrine\ORM\Mapping as ORM;
 use App\Domain\Commercial\Repository\CommercialRepository;
+use Symfony\Bridge\Doctrine\IdGenerator\UlidGenerator;
+use Symfony\Component\Uid\Ulid;
 
 /**
  * @author Elessa Maxime <elessamaxime@icloud.com>
@@ -20,47 +22,29 @@ class Commercial
 
     /**
      * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="ulid", unique=true)
+     * @ORM\GeneratedValue(strategy="CUSTOM")
+     * @ORM\CustomIdGenerator(class=UlidGenerator::class)
      */
-    private int $id;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=false)
-     */
-    private string $code;
+    private Ulid $id;
 
     /**
      * @ORM\OneToOne(targetEntity="App\Domain\Auth\Entity\User", inversedBy="commercial")
      */
     private User $user;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private bool $isEnabled = false;
+
 
     /**
-     * @return int
+     * @return Ulid
      */
-    public function getId(): int
+    public function getId(): Ulid
     {
         return $this->id;
-    }
-
-    /**
-     * @return string
-     */
-    public function getCode(): string
-    {
-        return $this->code;
-    }
-
-    /**
-     * @param string $code
-     * @return self
-     */
-    public function setCode(string $code): self
-    {
-        $this->code = $code;
-
-        return $this;
     }
 
     /**
@@ -81,5 +65,25 @@ class Commercial
 
         return $this;
     }
+
+    /**
+     * @return bool
+     */
+    public function getIsEnabled(): bool
+    {
+        return $this->isEnabled;
+    }
+
+    /**
+     * @param bool $isEnabled
+     * @return self
+     */
+    public function setIsEnabled(bool $isEnabled): self
+    {
+        $this->isEnabled = $isEnabled;
+
+        return $this;
+    }
+
 
 }
