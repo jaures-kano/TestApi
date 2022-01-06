@@ -32,4 +32,55 @@ class Trader
      */
     private User $user;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private bool $isEnabled = false;
+
+    /**
+     * @return Ulid
+     */
+    public function getId(): Ulid
+    {
+        return $this->id;
+    }
+
+    /**
+     * @return User
+     */
+    public function getUser(): User
+    {
+        return $this->user;
+    }
+
+    /**
+     * @param User $user
+     * @return Trader
+     */
+    public function setUser(User $user): Trader
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getIsEnabled(): bool
+    {
+        return $this->isEnabled;
+    }
+
+    /**
+     * @param bool $isEnabled
+     * @return self
+     */
+    public function setIsEnabled(bool $isEnabled): self
+    {
+        $this->isEnabled = $isEnabled;
+
+        return $this;
+    }
+
 }

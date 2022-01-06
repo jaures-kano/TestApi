@@ -91,7 +91,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, Seriali
     /**
      * @ORM\OneToOne(targetEntity=Commercial::class mappedBy="user")
      */
-    private Commercial $commercial;
+    private ?Commercial $commercial;
 
     /**
      * @ORM\OneToMany(targetEntity=Trader::class, mappedBy="user")
@@ -271,9 +271,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, Seriali
     }
 
     /**
-     * @return Commercial
+     * @return Commercial|null
      */
-    public function getCommercial(): Commercial
+    public function getCommercial(): ?Commercial
     {
         return $this->commercial;
     }
