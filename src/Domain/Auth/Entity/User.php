@@ -12,8 +12,10 @@ use App\Domain\Auth\Traits\UserLocationInformation;
 use App\Domain\Auth\Traits\UserPersonnalInformation;
 use App\Domain\Card\Entity\Card;
 use App\Domain\CardTransaction\Entity\CardTransaction;
+use App\Domain\Commercial\Entity\Commercial;
 use App\Domain\EnabledCountry\Entity\EnabledCountry;
 use App\Domain\QrCode\Entity\QrCode;
+use App\Domain\Trader\Entity\Trader;
 use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -86,9 +88,19 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, Seriali
      */
     private Collection $cardTransactions;
 
+    /**
+     * @ORM\OneToOne(targetEntity=Commercial::class mappedBy="user")
+     */
+    private Commercial $commercial;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Trader::class, mappedBy="user")
+     */
+    private Collection $trader;
 
     public function __construct()
     {
+        $this->trader = new ArrayCollection();
         $this->qrCodes = new ArrayCollection();
         $this->cards = new ArrayCollection();
         $this->cardTransactions = new ArrayCollection();
@@ -258,6 +270,21 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, Seriali
         return $this->cardTransactions;
     }
 
+    /**
+     * @return Commercial
+     */
+    public function getCommercial(): Commercial
+    {
+        return $this->commercial;
+    }
+
+    /**
+     * @return ArrayCollection|Collection
+     */
+    public function getTrader() : Collection
+    {
+        return $this->trader;
+    }
 
 
 }
