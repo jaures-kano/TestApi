@@ -90,12 +90,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, Seriali
     private Collection $cardTransactions;
 
     /**
-     * @ORM\OneToOne(targetEntity=Commercial::class mappedBy="user")
+     * @ORM\OneToOne(targetEntity=Commercial::class, mappedBy="user")
      */
     private ?Commercial $commercial;
 
     /**
-     * @ORM\OneToOne(targetEntity=Partner::class mappedBy="user")
+     * @ORM\OneToOne(targetEntity=Partner::class, mappedBy="user")
      */
     private ?Partner $partner;
 
