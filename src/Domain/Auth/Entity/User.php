@@ -14,6 +14,7 @@ use App\Domain\Card\Entity\Card;
 use App\Domain\CardTransaction\Entity\CardTransaction;
 use App\Domain\Commercial\Entity\Commercial;
 use App\Domain\EnabledCountry\Entity\EnabledCountry;
+use App\Domain\Partner\Entity\Partner;
 use App\Domain\QrCode\Entity\QrCode;
 use App\Domain\Trader\Entity\Trader;
 use DateTimeInterface;
@@ -92,6 +93,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, Seriali
      * @ORM\OneToOne(targetEntity=Commercial::class mappedBy="user")
      */
     private ?Commercial $commercial;
+
+    /**
+     * @ORM\OneToOne(targetEntity=Partner::class mappedBy="user")
+     */
+    private ?Partner $partner;
 
     /**
      * @ORM\OneToMany(targetEntity=Trader::class, mappedBy="user")
@@ -284,6 +290,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, Seriali
     public function getTrader() : Collection
     {
         return $this->trader;
+    }
+
+    /**
+     * @return Partner|null
+     */
+    public function getPartner(): ?Partner
+    {
+        return $this->partner;
     }
 
 
