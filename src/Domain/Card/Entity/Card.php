@@ -54,7 +54,7 @@ class Card
     /**
      * @param Collection $cardTransaction
      */
-    public function __construct(Collection $cardTransaction)
+    public function __construct()
     {
         $this->cardTransaction = $cardTransaction;
     }
