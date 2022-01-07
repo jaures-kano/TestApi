@@ -7,6 +7,7 @@ use ApiPlatform\Core\Annotation\ApiResource;
 use App\Domain\Auth\Entity\User;
 use App\Domain\CardTransaction\Entity\CardTransaction;
 use DateTimeInterface;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
@@ -51,14 +52,17 @@ class Card
      */
     private Collection $cardTransaction;
 
+<<<<<<< HEAD
     /**
      * @param Collection $cardTransaction
      */
+=======
+
+>>>>>>> 73e7531d7aabb7161c1e09f2ad8c829f9c41bbb4
     public function __construct()
     {
-        $this->cardTransaction = $cardTransaction;
+        $this->cardTransaction = new ArrayCollection();
     }
-
 
     /**
      * @return int
