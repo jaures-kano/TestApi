@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Class CompeletRegistrationInformationPath
- * @package App\Http\Api\OpenApi\Registration
+ * @package App\Http\Api\OpenApi\AuthRegistration
  * @author jaures kano <ruddyjaures@mail.com>
  */
 class CompeletRegistrationPath

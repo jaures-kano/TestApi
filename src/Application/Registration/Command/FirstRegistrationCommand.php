@@ -15,7 +15,7 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 /**
  * Class FirstRegistrationCommand
- * @package App\Application\Registration\Command
+ * @package App\Application\AuthRegistration\Command
  * @author jaures kano <ruddyjaures@mail.com>
  */
 class FirstRegistrationCommand extends AbstractCase

@@ -12,7 +12,7 @@ use Symfony\Component\Mime\Address;
 
 /**
  * Class ResetPasswordMail
- * @package App\Infrastructures\Mailing\Auth
+ * @package App\Infrastructures\Mailing\AuthDomain
  * @author Elessa Maxime <elessamaxime@icloud.com>
  */
 class ResetPasswordMail
@@ -34,7 +34,7 @@ class ResetPasswordMail
             ->from('ruddyjaures@gmail.com')
             ->to(new Address($user->getEmail()))
             ->subject("Demande de reinitialisation de mot de passe")
-            ->htmlTemplate("email/Auth/resetPassword.html.twig")
+            ->htmlTemplate("email/AuthDomain/resetPassword.html.twig")
             ->context([
                 'user' => $user
             ]);

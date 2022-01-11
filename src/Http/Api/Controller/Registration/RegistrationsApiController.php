@@ -13,7 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * Class RegistrationsApiController
- * @package App\Http\Api\Controller\Registration
+ * @package App\Http\Api\Controller\AuthRegistration
  * @author jaures kano <ruddyjaures@mail.com>
  */
 class RegistrationsApiController extends AbstractController

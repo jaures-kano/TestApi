@@ -9,7 +9,7 @@ use ApiPlatform\Core\OpenApi\OpenApi;
 
 /**
  * Class OpenRegistrationApiFactory
- * @package App\Http\Api\OpenApi\Registration
+ * @package App\Http\Api\OpenApi\AuthRegistration
  * @author jaures kano <ruddyjaures@mail.com>
  */
 class OpenRegistrationApiFactory implements OpenApiFactoryInterface
@@ -35,10 +35,10 @@ class OpenRegistrationApiFactory implements OpenApiFactoryInterface
 
         $openApi->getPaths()->addPath('/registration/first',
             $this->firstRegistrationPath->addRegistrationPath(
-                'Registration proccess', 'registration-complete'));
+                'AuthRegistration proccess', 'registration-complete'));
         $openApi->getPaths()->addPath('/registration/complete/info',
             $this->completeRegistrationPath->addCompletRegistrationPath(
-                'Registration proccess', 'registration-first'));
+                'AuthRegistration proccess', 'registration-first'));
         return $openApi;
     }
 }

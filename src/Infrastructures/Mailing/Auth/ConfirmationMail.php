@@ -12,7 +12,7 @@ use Symfony\Component\Mime\Address;
 
 /**
  * Class ConfirmationMail
- * @package App\Infrastructures\Mailing\Auth
+ * @package App\Infrastructures\Mailing\AuthDomain
  * @author Elessa Maxime <elessamaxime@icloud.com>
  */
 class ConfirmationMail
@@ -35,7 +35,7 @@ class ConfirmationMail
             ->from('ruddyjaures@gmail.com')
             ->to(new Address($user->getEmail()))
             ->subject("confirmer votre adresse email Paie Cash")
-            ->htmlTemplate("email/Auth/confirmation.html.twig")
+            ->htmlTemplate("email/AuthDomain/confirmation.html.twig")
             ->context([
                 "user" => $user
             ]);

@@ -7,7 +7,7 @@ use App\Domain\EnabledCountry\Entity\EnabledCountry;
 
 /**
  * Class RegistrationDto
- * @package App\Application\Registration\Dto
+ * @package App\Application\AuthRegistration\Dto
  * @author jaures kano <ruddyjaures@mail.com>
  */
 class RegistrationDto

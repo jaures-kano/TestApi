@@ -9,7 +9,7 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**
  * Class FirstRegistrationSubscriber
- * @package App\Application\Registration\EventSubcriber
+ * @package App\Application\AuthRegistration\EventSubcriber
  * @author jaures kano <ruddyjaures@mail.com>
  */
 class FirstRegistrationSubscriber implements EventSubscriberInterface
