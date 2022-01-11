@@ -16,8 +16,8 @@ use App\Domain\Commercial\Entity\Commercial;
 use App\Domain\EnabledCountry\Entity\EnabledCountry;
 use App\Domain\Partner\Entity\Partner;
 use App\Domain\QrCode\Entity\QrCode;
-use App\Domain\Trader\Entity\Trader;
 use App\Domain\Subscription\Entity\Subscription;
+use App\Domain\Trader\Entity\Trader;
 use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -105,6 +105,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, Seriali
      */
     private Collection $trader;
 
+    /*
      * @ORM\ManyToOne(targetEntity=EnabledCountry::class, inversedBy="users")
      * @ORM\JoinColumn(nullable=false)
      */
@@ -306,8 +307,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, Seriali
     {
         return $this->partner;
     }
-  
-  
+
+
+    /*
      * @return Subscription
      */
     public function getSubscription(): Subscription

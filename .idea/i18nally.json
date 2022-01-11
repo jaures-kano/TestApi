@@ -1,5 +1,5 @@
 {
-  "version" : "1.1",
+  "version" : "1.2",
   "profiles" : [ {
     "id" : "d0c4f1b7-2ca5-43b4-b919-c3c2de691391",
     "name" : "Symfony (PHP, TWIG)",
@@ -20,7 +20,6 @@
       "type" : "php",
       "scopeName" : "i18n Ally: Symfony/PHP source",
       "scopePattern" : "file[PaiecashApiTest]:src//*&&!file[PaiecashApiTest]:src/DataFixtures//*",
-      "replacementTemplate" : "$this->translator->trans('%key%', %map%, '%namespace%')",
       "defaultReplacementTemplate" : "$this->translator->trans('%key%', %map%, '%namespace%')",
       "recognizedReplacementTemplates" : [ ],
       "skipDefaultNamespace" : true,
@@ -30,9 +29,9 @@
       "type" : "twig",
       "scopeName" : "i18n Ally: Symfony/Twig templates",
       "scopePattern" : "file[PaiecashApiTest]:templates//*",
-      "replacementTemplate" : "trans(%map%, '%namespace%')",
-      "contentReplacementTemplate" : "trans(%map%, '%namespace%')",
+      "defaultReplacementTemplate" : "trans(%map%, '%namespace%')",
       "attributeReplacementTemplate" : "",
+      "inlineTagsReplacementTemplate" : "trans(%map%, '%namespace%')|raw",
       "recognizedReplacementTemplates" : [ ],
       "inlineTagNames" : [ "a", "abbr", "acronym", "b", "bdi", "bdo", "big", "br", "cite", "code", "data", "del", "dfn", "em", "i", "img", "input", "ins", "kbd", "label", "mark", "meter", "output", "progress", "q", "ruby", "s", "samp", "slot", "small", "span", "strong", "sub", "sup", "time", "u", "tt", "var", "wbr" ],
       "translatableAttributeNames" : [ "title", "alt", "placeholder", "label", "aria-label" ],
@@ -45,6 +44,6 @@
     "filesInProject" : [ ],
     "unignoredFunctionNames" : [ ],
     "unignoredFunctionArguments" : { },
-    "ignoredArrayKeys" : [ "class", "selector", "template", "middleware", "layout", "el", "component", "type", "name", "id", "key", "sql", "query", "dateFormat", "date", "condition" ]
+    "ignoredArrayKeys" : [ "template", "date", "dateFormat", "el", "query", "type", "sql", "layout", "component", "condition", "name", "selector", "id", "class", "key", "middleware" ]
   }
 }
