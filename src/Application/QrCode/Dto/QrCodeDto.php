@@ -3,13 +3,13 @@
 
 namespace App\Application\QrCode\Dto;
 
-use App\Domain\Auth\Entity\User;
-use App\Domain\QrCode\Entity\QrCode;
+use App\Domain\AuthDomain\Auth\Entity\User;
+use App\Domain\QrCodeDomain\QrCodeTransaction\Entity\QrCode;
 use DateTime;
 
 /**
  * Class QrCodeDto
- * @package App\Application\QrCode\Dto
+ * @package App\Application\QrCodeDomain\Dto
  * @author Elessa Maxime <elessamaxime@icloud.com>
  */
 class QrCodeDto

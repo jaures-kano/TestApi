@@ -2,7 +2,7 @@
 
 namespace App\Command\TestCommand;
 
-use App\Domain\Auth\Entity\User;
+use App\Domain\AuthDomain\Auth\Entity\User;
 use App\Domain\EnabledCountry\Entity\EnabledCountry;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;

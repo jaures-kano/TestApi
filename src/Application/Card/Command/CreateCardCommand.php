@@ -5,7 +5,7 @@ namespace App\Application\Card\Command;
 
 
 use App\Application\Card\Dto\CardDto;
-use App\Domain\Card\Entity\Card;
+use App\Domain\CardsDomain\Card\Entity\Card;
 use Doctrine\ORM\EntityManagerInterface;
 
 /**

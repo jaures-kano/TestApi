@@ -1,11 +1,11 @@
 <?php
 
 
-namespace App\Domain\Commercial\Entity;
+namespace App\Domain\CommercialDomain\Entity;
 
 
 use App\Application\Traits\BaseTimeTrait;
-use App\Domain\Auth\Entity\User;
+use App\Domain\AuthDomain\Auth\Entity\User;
 use App\Domain\Commercial\Repository\CommercialRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\IdGenerator\UlidGenerator;

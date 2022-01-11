@@ -3,7 +3,7 @@
 namespace App\Infrastructures\Mailing\Subscriber;
 
 
-use App\Domain\Profile\Event\PasswordRequestEvent;
+use App\Domain\ProfileDomain\Event\PasswordRequestEvent;
 use App\Infrastructures\Mailing\Auth\ResetPasswordMail;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 

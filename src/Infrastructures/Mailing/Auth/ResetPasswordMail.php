@@ -4,7 +4,7 @@
 namespace App\Infrastructures\Mailing\Auth;
 
 
-use App\Domain\Auth\Entity\User;
+use App\Domain\AuthDomain\Auth\Entity\User;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 use Symfony\Component\Mailer\MailerInterface;

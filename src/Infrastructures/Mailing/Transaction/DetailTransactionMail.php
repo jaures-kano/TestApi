@@ -4,7 +4,7 @@
 namespace App\Infrastructures\Mailing\Transaction;
 
 
-use App\Domain\Auth\Entity\User;
+use App\Domain\AuthDomain\Auth\Entity\User;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 use Symfony\Component\Mailer\MailerInterface;
@@ -26,7 +26,6 @@ class DetailTransactionMail
 
     /**
      * @param User $user
-     * @throws TransportExceptionInterface
      */
     public function send(User $user)
     {
@@ -40,7 +39,7 @@ class DetailTransactionMail
         try {
             $this->mailer->send($email);
         } catch (TransportExceptionInterface $mailExecption) {
-            throw $mailExecption;
+
         }
     }
 }

@@ -4,7 +4,7 @@
 namespace App\Http\Api\Controller\Profil;
 
 
-use App\Domain\Auth\Repository\UserRepository;
+use App\Domain\AuthDomain\Auth\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;

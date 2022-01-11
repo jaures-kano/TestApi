@@ -4,7 +4,7 @@ namespace App\Domain\SubscriptionPlan\Subscription\Entity;
 
 use App\Application\Traits\BaseTimeTrait;
 use App\Domain\AuthDomain\Auth\Entity\User;
-use App\Domain\SubscriptionType\Entity\SubscriptionType;
+use App\Domain\SubscriptionPlan\SubscriptionType\Entity\SubscriptionType;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;

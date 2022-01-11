@@ -1,10 +1,10 @@
 <?php
 
 
-namespace App\Domain\Partner\Repository;
+namespace App\Domain\PartnerDomain\Repository;
 
 
-use App\Domain\Partner\Entity\Partner;
+use App\Domain\PartnerDomain\Entity\Partner;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 

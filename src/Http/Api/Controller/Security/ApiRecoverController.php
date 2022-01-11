@@ -4,7 +4,7 @@ namespace App\Http\Api\Controller\Security;
 
 
 use App\Application\Profile\Command\AccountRecoverCommand;
-use App\Domain\Auth\Repository\UserRepository;
+use App\Domain\AuthDomain\Auth\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;

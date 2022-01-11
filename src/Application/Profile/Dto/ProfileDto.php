@@ -3,7 +3,7 @@
 namespace App\Application\Profile\Dto;
 
 
-use App\Domain\Auth\Entity\User;
+use App\Domain\AuthDomain\Auth\Entity\User;
 use DateTimeInterface;
 
 /**

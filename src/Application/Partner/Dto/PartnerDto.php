@@ -4,7 +4,7 @@
 namespace App\Application\Partner\Dto;
 
 
-use App\Domain\Auth\Entity\User;
+use App\Domain\AuthDomain\Auth\Entity\User;
 use App\Domain\Partner\Entity\Partner;
 use DateTimeInterface;
 

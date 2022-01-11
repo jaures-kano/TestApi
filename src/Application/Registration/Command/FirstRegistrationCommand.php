@@ -5,9 +5,9 @@ namespace App\Application\Registration\Command;
 
 use App\Adapter\Abstracts\AbstractCase;
 use App\Application\Registration\Dto\RegistrationDto;
-use App\Domain\Auth\Entity\User;
-use App\Domain\Auth\Repository\UserRepository;
-use App\Domain\Registration\Event\FirstRegistrationEvent;
+use App\Domain\AuthDomain\Auth\Entity\User;
+use App\Domain\AuthDomain\Auth\Repository\UserRepository;
+use App\Domain\AuthDomain\Registration\Event\FirstRegistrationEvent;
 use App\Infrastructures\Generator\ConfirmationAccountGenerator;
 use DateTime;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;

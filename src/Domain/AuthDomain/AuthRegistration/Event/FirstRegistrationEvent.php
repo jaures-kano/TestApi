@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Domain\AuthDomain\Registration\Event;
+namespace App\Domain\AuthDomain\AuthRegistration\Event;
 
 
 use App\Domain\AuthDomain\Auth\Entity\User;

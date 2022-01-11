@@ -14,7 +14,7 @@ use Symfony\Contracts\EventDispatcher\Event;
 class PasswordRequestEvent extends Event
 {
 
-    public const NAME = 'onReestPasswordRequest';
+    public const NAME = 'onResetPasswordRequest';
 
     protected User $user;
 

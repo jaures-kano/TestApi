@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Domain\Partner\Entity;
+namespace App\Domain\PartnerDomain\Entity;
 
 
 use App\Application\Traits\BaseTimeTrait;

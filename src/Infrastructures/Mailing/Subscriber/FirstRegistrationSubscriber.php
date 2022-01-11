@@ -3,7 +3,7 @@
 namespace App\Infrastructures\Mailing\Subscriber;
 
 
-use App\Domain\Registration\Event\FirstRegistrationEvent;
+use App\Domain\AuthDomain\AuthRegistration\Event\FirstRegistrationEvent;
 use App\Infrastructures\Mailing\Auth\ConfirmationMail;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 

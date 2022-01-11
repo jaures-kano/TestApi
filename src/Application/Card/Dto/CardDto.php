@@ -4,8 +4,8 @@
 namespace App\Application\Card\Dto;
 
 
-use App\Domain\Auth\Entity\User;
-use App\Domain\Card\Entity\Card;
+use App\Domain\AuthDomain\Auth\Entity\User;
+use App\Domain\CardsDomain\Card\Entity\Card;
 use DateTimeInterface;
 use Doctrine\Common\Collections\Collection;
 

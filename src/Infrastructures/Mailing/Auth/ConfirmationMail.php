@@ -4,7 +4,7 @@
 namespace App\Infrastructures\Mailing\Auth;
 
 
-use App\Domain\Auth\Entity\User;
+use App\Domain\AuthDomain\Auth\Entity\User;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 use Symfony\Component\Mailer\MailerInterface;
@@ -27,7 +27,6 @@ class ConfirmationMail
 
     /**
      * @param User $user
-     * @throws TransportExceptionInterface
      */
     public function send(User $user): void
     {
@@ -39,11 +38,10 @@ class ConfirmationMail
             ->context([
                 "user" => $user
             ]);
-
         try {
             $this->mailer->send($email);
         } catch (TransportExceptionInterface $mailExecption) {
-            throw $mailExecption;
+
         }
     }
 }

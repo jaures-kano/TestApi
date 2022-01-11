@@ -6,7 +6,7 @@ namespace App\Application\QrCode\Command;
 
 use App\Adapter\Response\CaseResponse;
 use App\Application\QrCode\Dto\QrCodeDto;
-use App\Domain\QrCode\Entity\QrCode;
+use App\Domain\QrCodeDomain\QrCodeTransaction\Entity\QrCode;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 
@@ -31,6 +31,6 @@ class CreateQrCodeCommand
         $this->manager->persist($qrCode);
         $this->manager->flush();
 
-        return new CaseResponse(true, "le QrCode à bien été généré", [$qrCode]);
+        return new CaseResponse(true, "le QrCodeDomain à bien été généré", [$qrCode]);
     }
 }

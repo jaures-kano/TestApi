@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Domain\QrCode\QrCodeTransaction\Repository;
+namespace App\Domain\QrCodeDomain\QrCodeTransaction\Repository;
 
 
-use App\Domain\QrCode\QrCodeTransaction\Entity\QrCode;
+use App\Domain\QrCodeDomain\QrCodeTransaction\Entity\QrCode;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 

@@ -3,7 +3,7 @@
 namespace App\Infrastructures\Generator;
 
 
-use App\Domain\Auth\Entity\User;
+use App\Domain\AuthDomain\Auth\Entity\User;
 use DateTime;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 

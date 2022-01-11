@@ -5,8 +5,8 @@ namespace App\Application\Profile\Command;
 
 use App\Adapter\Abstracts\AbstractCase;
 use App\Adapter\Response\CaseResponse;
-use App\Domain\Auth\Entity\User;
-use App\Domain\Profile\Event\PasswordRequestEvent;
+use App\Domain\AuthDomain\Auth\Entity\User;
+use App\Domain\ProfileDomain\Event\PasswordRequestEvent;
 use App\Infrastructures\Generator\PasswordResetGenerator;
 use DateTime;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;

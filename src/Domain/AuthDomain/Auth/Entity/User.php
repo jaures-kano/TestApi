@@ -10,13 +10,10 @@ use App\Domain\AuthDomain\Auth\Traits\ProccessorInfo;
 use App\Domain\AuthDomain\Auth\Traits\SystemsInformations;
 use App\Domain\AuthDomain\Auth\Traits\UserLocationInformation;
 use App\Domain\AuthDomain\Auth\Traits\UserPersonnalInformation;
-use App\Domain\Card\Entity\Card;
-use App\Domain\CardTransaction\Entity\CardTransaction;
-use App\Domain\Commercial\Entity\Commercial;
+use App\Domain\CommercialDomain\Entity\Commercial;
 use App\Domain\EnabledCountry\Entity\EnabledCountry;
-use App\Domain\Partner\Entity\Partner;
-use App\Domain\QrCode\Entity\QrCode;
-use App\Domain\Subscription\Entity\Subscription;
+use App\Domain\PartnerDomain\Entity\Partner;
+use App\Domain\SubscriptionPlan\Subscription\Entity\Subscription;
 use App\Domain\Trader\Entity\Trader;
 use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -326,8 +323,5 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, Seriali
         $this->subscription = $subscription;
         return $this;
     }
-
-
-
 
 }

@@ -4,7 +4,7 @@ namespace App\Http\Api\Controller\Registration;
 
 use App\Application\Profile\Command\UpdateProfileCommand;
 use App\Application\Profile\Dto\ProfileDto;
-use App\Domain\Auth\Repository\UserRepository;
+use App\Domain\AuthDomain\Auth\Repository\UserRepository;
 use DateTime;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;

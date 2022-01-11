@@ -2,10 +2,9 @@
 
 namespace App\Domain\EnabledCountry\Entity;
 
-use ApiPlatform\Core\Annotation\ApiResource;
 use App\Application\Traits\BaseTimeTrait;
-use App\Domain\Auth\Entity\User;
-use App\Domain\SubscriptionCountryFees\Entity\SubscriptionCountryFees;
+use App\Domain\AuthDomain\Auth\Entity\User;
+use App\Domain\SubscriptionPlan\SubscriptionCountryFees\Entity\SubscriptionCountryFees;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -13,12 +12,6 @@ use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * Class EnabledCountry
- * @ApiResource(
- *     normalizationContext={"groups"={"read:country"}},
- *     denormalizationContext={"groups"={"write:country"}},
- *     itemOperations={"get"},
- *     collectionOperations={"get"}
- * )
  * @package App\Domain\EnabledCountry\Entity
  * @author Catherine Mani<crescencegracemani@gmail.com>
  * @ORM\Entity

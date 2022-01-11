@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Domain\QrCode\QrCodeTransaction\Entity;
+namespace App\Domain\QrCodeDomain\QrCodeTransaction\Entity;
 
 use App\Application\Traits\BaseTimeTrait;
 use App\Domain\AuthDomain\Auth\Entity\User;
@@ -9,8 +9,8 @@ use Symfony\Component\Serializer\Annotation\Groups;
 
 
 /**
- * Class QrCode
- * @package App\Domain\QrCode\Entity
+ * Class QrCodeDomain
+ * @package App\Domain\QrCodeDomain\Entity
  * @author Catherine Mani<crescencegracemani@gmail.com>
  * @ORM\Entity()
  */
