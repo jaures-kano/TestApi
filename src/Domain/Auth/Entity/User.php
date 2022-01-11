@@ -12,8 +12,11 @@ use App\Domain\Auth\Traits\UserLocationInformation;
 use App\Domain\Auth\Traits\UserPersonnalInformation;
 use App\Domain\Card\Entity\Card;
 use App\Domain\CardTransaction\Entity\CardTransaction;
+use App\Domain\Commercial\Entity\Commercial;
 use App\Domain\EnabledCountry\Entity\EnabledCountry;
+use App\Domain\Partner\Entity\Partner;
 use App\Domain\QrCode\Entity\QrCode;
+use App\Domain\Trader\Entity\Trader;
 use App\Domain\Subscription\Entity\Subscription;
 use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -88,6 +91,20 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, Seriali
     private Collection $cardTransactions;
 
     /**
+     * @ORM\OneToOne(targetEntity=Commercial::class, mappedBy="user")
+     */
+    private ?Commercial $commercial;
+
+    /**
+     * @ORM\OneToOne(targetEntity=Partner::class, mappedBy="user")
+     */
+    private ?Partner $partner;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Trader::class, mappedBy="user")
+     */
+    private Collection $trader;
+
      * @ORM\ManyToOne(targetEntity=EnabledCountry::class, inversedBy="users")
      * @ORM\JoinColumn(nullable=false)
      */
@@ -96,6 +113,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, Seriali
 
     public function __construct()
     {
+        $this->trader = new ArrayCollection();
         $this->qrCodes = new ArrayCollection();
         $this->cards = new ArrayCollection();
         $this->cardTransactions = new ArrayCollection();
@@ -266,6 +284,30 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, Seriali
     }
 
     /**
+     * @return Commercial|null
+     */
+    public function getCommercial(): ?Commercial
+    {
+        return $this->commercial;
+    }
+
+    /**
+     * @return ArrayCollection|Collection
+     */
+    public function getTrader() : Collection
+    {
+        return $this->trader;
+    }
+
+    /**
+     * @return Partner|null
+     */
+    public function getPartner(): ?Partner
+    {
+        return $this->partner;
+    }
+  
+  
      * @return Subscription
      */
     public function getSubscription(): Subscription
@@ -282,7 +324,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, Seriali
         $this->subscription = $subscription;
         return $this;
     }
-
 
 
 
