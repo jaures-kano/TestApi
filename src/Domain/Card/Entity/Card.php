@@ -52,7 +52,13 @@ class Card
      */
     private Collection $cardTransaction;
 
+<<<<<<< HEAD
+    /**
+     * @param Collection $cardTransaction
+     */
+=======
 
+>>>>>>> 73e7531d7aabb7161c1e09f2ad8c829f9c41bbb4
     public function __construct()
     {
         $this->cardTransaction = new ArrayCollection();
