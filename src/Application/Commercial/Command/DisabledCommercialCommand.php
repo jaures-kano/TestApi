@@ -9,7 +9,7 @@ use Doctrine\ORM\EntityManagerInterface;
 
 /**
  * @author Elessa Maxime <elessamaxime@icloud.com>
- * @package App\Application\Commercial\Command
+ * @package App\Application\CommercialDomain\Command
  */
 class DisabledCommercialCommand
 {

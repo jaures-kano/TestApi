@@ -11,7 +11,7 @@ use Doctrine\Persistence\ManagerRegistry;
 /**
  * Class CommercialRepository
  * @author Elessa Maxime <elessamaxime@icloud.com>
- * @package App\Domain\Commercial\Repository
+ * @package App\Domain\CommercialDomain\Repository
  * @method Commercial|null find($id, $lockMode = null, $lockVersion = null)
  * @method Commercial|null findOneBy(array $criteria, array $orderBy = null)
  * @method Commercial[]    findAll()

@@ -6,14 +6,14 @@ namespace App\Domain\Commercial\Entity;
 
 use App\Application\Traits\BaseTimeTrait;
 use App\Domain\Auth\Entity\User;
-use Doctrine\ORM\Mapping as ORM;
 use App\Domain\Commercial\Repository\CommercialRepository;
+use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\IdGenerator\UlidGenerator;
 use Symfony\Component\Uid\Ulid;
 
 /**
  * @author Elessa Maxime <elessamaxime@icloud.com>
- * @package App\Domain\Commercial\Entity
+ * @package App\Domain\CommercialDomain\Entity
  * @ORM\Entity(repositoryClass=CommercialRepository::class)
  */
 class Commercial

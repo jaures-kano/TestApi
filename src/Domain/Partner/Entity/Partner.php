@@ -5,9 +5,9 @@ namespace App\Domain\Partner\Entity;
 
 
 use App\Application\Traits\BaseTimeTrait;
-use App\Domain\Auth\Entity\User;
-use Doctrine\ORM\Mapping as ORM;
+use App\Domain\AuthDomain\Auth\Entity\User;
 use App\Domain\Partner\Repository\PartnerRepository;
+use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\IdGenerator\UlidGenerator;
 use Symfony\Component\Uid\Ulid;
 

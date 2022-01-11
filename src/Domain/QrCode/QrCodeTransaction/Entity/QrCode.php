@@ -1,22 +1,15 @@
 <?php
 
-namespace App\Domain\QrCode\Entity;
+namespace App\Domain\QrCode\QrCodeTransaction\Entity;
 
-use ApiPlatform\Core\Annotation\ApiResource;
 use App\Application\Traits\BaseTimeTrait;
-use App\Domain\Auth\Entity\User;
+use App\Domain\AuthDomain\Auth\Entity\User;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 
 /**
  * Class QrCode
- * @ApiResource(
- *     collectionOperations={"post", "get"},
- *     itemOperations={"delete", "get"},
- *     denormalizationContext={"groups"={"write:qr_code"}},
- *     normalizationContext={"groups"={"read:qr_code"}}
- * )
  * @package App\Domain\QrCode\Entity
  * @author Catherine Mani<crescencegracemani@gmail.com>
  * @ORM\Entity()

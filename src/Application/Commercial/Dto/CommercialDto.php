@@ -10,7 +10,7 @@ use DateTimeInterface;
 
 /**
  * @author Elessa Maxime <elessamaxime@icloud.com>
- * @package App\Application\Commercial\Dto
+ * @package App\Application\CommercialDomain\Dto
  */
 class CommercialDto
 {
