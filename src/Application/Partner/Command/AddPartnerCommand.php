@@ -11,7 +11,7 @@ use Doctrine\ORM\EntityManagerInterface;
 
 /**
  * @author Elessa Maxime <elessamaxime@icloud.com>
- * @package App\Application\Partner\Command
+ * @package App\Application\PartnerDomain\Command
  */
 class AddPartnerCommand
 {

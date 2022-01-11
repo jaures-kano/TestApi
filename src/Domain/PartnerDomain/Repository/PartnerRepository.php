@@ -10,7 +10,7 @@ use Doctrine\Persistence\ManagerRegistry;
 
 /**
  * @author Elessa Maxime <elessamaxime@icloud.com>
- * @package App\Domain\Partner\Repository
+ * @package App\Domain\PartnerDomain\Repository
  * @method Partner|null find($id, $lockMode = null, $lockVersion = null)
  * @method Partner|null findOneBy(array $criteria, array $orderBy = null)
  * @method Partner[]    findAll()

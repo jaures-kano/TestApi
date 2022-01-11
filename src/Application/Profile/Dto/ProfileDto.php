@@ -8,7 +8,7 @@ use DateTimeInterface;
 
 /**
  * Class ProfileDto
- * @package App\Application\Profile\Dto
+ * @package App\Application\ProfileDomain\Dto
  * @author jaures kano <ruddyjaures@mail.com>
  */
 class ProfileDto

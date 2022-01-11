@@ -14,7 +14,7 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 /**
  * Class AccountRecoverCommand
- * @package App\Application\Profile\Command
+ * @package App\Application\ProfileDomain\Command
  * @author jaures kano <ruddyjaures@mail.com>
  */
 class AccountRecoverCommand extends AbstractCase

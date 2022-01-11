@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Domain\Profile\Event;
+namespace App\Domain\ProfileDomain\Event;
 
 
-use App\Domain\Auth\Entity\User;
+use App\Domain\AuthDomain\Auth\Entity\User;
 use Symfony\Contracts\EventDispatcher\Event;
 
 /**
  * Class PasswordRequestEvent
- * @package App\Domain\Profile\Event
+ * @package App\Domain\ProfileDomain\Event
  * @author jaures kano <ruddyjaures@mail.com>
  */
 class PasswordRequestEvent extends Event
