@@ -5,6 +5,7 @@ namespace App\Domain\EnabledCountry\Entity;
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Application\Traits\BaseTimeTrait;
 use App\Domain\Auth\Entity\User;
+use App\Domain\SubscriptionCountryFees\Entity\SubscriptionCountryFees;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -84,16 +85,15 @@ class EnabledCountry
     private Collection $users;
 
     /**
-     * @return Collection|User[]
+     * @ORM\OneToMany(targetEntity=User::class,mappedBy="enabledCountry")
      */
-    public function getUsers(): Collection
-    {
-        return $this->users;
-    }
+    private Collection $subscriptionCountryFees;
+
 
     public function __construct()
     {
         $this->users = new ArrayCollection();
+        $this->subscriptionCountryFees = new ArrayCollection();
     }
 
     /**
@@ -257,5 +257,21 @@ class EnabledCountry
     {
         $this->isEnabled = $isEnabled;
         return $this;
+    }
+
+    /**
+     * @return Collection|User[]
+     */
+    public function getUsers(): Collection
+    {
+        return $this->users;
+    }
+
+    /**
+     * @return Collection|SubscriptionCountryFees[]
+     */
+    public function getSubscriptionCountryFees() :Collection
+    {
+        return $this->subscriptionCountryFees;
     }
 }

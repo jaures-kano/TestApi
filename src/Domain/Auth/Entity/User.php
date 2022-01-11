@@ -17,6 +17,7 @@ use App\Domain\EnabledCountry\Entity\EnabledCountry;
 use App\Domain\Partner\Entity\Partner;
 use App\Domain\QrCode\Entity\QrCode;
 use App\Domain\Trader\Entity\Trader;
+use App\Domain\Subscription\Entity\Subscription;
 use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -85,7 +86,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, Seriali
     private Collection $cards;
 
     /**
-     * @ORM\OneToMany(targetEntity=CardTransaction::class,mappedBy="user" )
+     * @ORM\OneToMany(targetEntity=CardTransaction::class,mappedBy="users" )
      */
     private Collection $cardTransactions;
 
@@ -103,6 +104,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, Seriali
      * @ORM\OneToMany(targetEntity=Trader::class, mappedBy="user")
      */
     private Collection $trader;
+
+     * @ORM\ManyToOne(targetEntity=EnabledCountry::class, inversedBy="users")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private Subscription $subscription;
+
 
     public function __construct()
     {
@@ -299,6 +306,26 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, Seriali
     {
         return $this->partner;
     }
+  
+  
+     * @return Subscription
+     */
+    public function getSubscription(): Subscription
+    {
+        return $this->subscription;
+    }
+
+    /**
+     * @param Subscription $subscription
+     * @return User
+     */
+    public function setSubscription(Subscription $subscription): self
+    {
+        $this->subscription = $subscription;
+        return $this;
+    }
+
+
 
 
 }
