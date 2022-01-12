@@ -4,7 +4,7 @@
 namespace App\Application\QrCode\Dto;
 
 use App\Domain\AuthDomain\Auth\Entity\User;
-use App\Domain\QrCodeDomain\QrCodeTransaction\Entity\QrCode;
+use App\Domain\QrCodeDomain\QrCodeTransaction\Entity\QrCodeTransaction;
 use DateTime;
 
 /**
@@ -22,9 +22,9 @@ class QrCodeDto
 
     /**
      * QrCodeDto constructor.
-     * @param QrCode|null $qrCode
+     * @param QrCodeTransaction|null $qrCode
      */
-    public function __construct(?QrCode $qrCode = null)
+    public function __construct(?QrCodeTransaction $qrCode = null)
     {
         $this->qrCode = $qrCode === null ? null : $qrCode->getQrCode();
         $this->user = $qrCode === null ? null : $qrCode->getUser();

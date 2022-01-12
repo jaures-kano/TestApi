@@ -10,11 +10,11 @@ use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * Class QrCodeDomain
- * @package App\Domain\QrCodeDomain\Entity
+ * @package App\Domain\QrCodeDomain\QrCodeTransaction\Entity
  * @author Catherine Mani<crescencegracemani@gmail.com>
  * @ORM\Entity()
  */
-class QrCode
+class QrCodeTransaction
 {
 
     use BaseTimeTrait;
@@ -40,7 +40,7 @@ class QrCode
     private bool $isEnabled;
 
     /**
-     * @ORM\ManyToOne (targetEntity=User::class, inversedBy="qrCodes")
+     * @ORM\ManyToOne (targetEntity="App\Domain\AuthDomain\Auth\Entity\User", inversedBy="qrCodes")
      */
     private User $user;
 
@@ -63,7 +63,7 @@ class QrCode
 
     /**
      * @param string $qrCode
-     * @return QrCode
+     * @return QrCodeTransaction
      */
     public function setQrCode(string $qrCode): self
     {
@@ -81,7 +81,7 @@ class QrCode
 
     /**
      * @param bool $isEnabled
-     * @return QrCode
+     * @return QrCodeTransaction
      */
     public function setIsEnabled(bool $isEnabled): self
     {
@@ -99,7 +99,7 @@ class QrCode
 
     /**
      * @param User $user
-     * @return QrCode
+     * @return QrCodeTransaction
      */
     public function setUser(User $user): self
     {

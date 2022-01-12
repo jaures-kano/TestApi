@@ -6,7 +6,7 @@ namespace App\Application\QrCode\Command;
 
 use App\Adapter\Response\CaseResponse;
 use App\Application\QrCode\Dto\QrCodeDto;
-use App\Domain\QrCodeDomain\QrCodeTransaction\Entity\QrCode;
+use App\Domain\QrCodeDomain\QrCodeTransaction\Entity\QrCodeTransaction;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 
@@ -21,7 +21,7 @@ class CreateQrCodeCommand
 
     public function create(QrCodeDto $qrCodeDto): caseResponse
     {
-        $qrCode = new QrCode();
+        $qrCode = new QrCodeTransaction();
 
         $qrCode->setQrCode($qrCodeDto->qrCode)
             ->setIsEnabled($qrCodeDto->isEnabled)

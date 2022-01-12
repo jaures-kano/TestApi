@@ -73,7 +73,7 @@ class EnabledCountry
     private bool $isEnabled;
 
     /**
-     * @ORM\OneToMany(targetEntity=User::class,mappedBy="enabledCountry" )
+     * @ORM\OneToMany(targetEntity="App\Domain\AuthDomain\Auth\Entity\User",mappedBy="enabledCountry" )
      */
     private Collection $users;
 

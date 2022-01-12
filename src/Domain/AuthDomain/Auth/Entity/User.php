@@ -67,7 +67,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, Seriali
     private string $password;
 
     /**
-     * @ORM\ManyToOne(targetEntity=EnabledCountry::class, inversedBy="users")
+     * @ORM\ManyToOne(targetEntity="App\Domain\EnabledCountry\Entity\EnabledCountry", inversedBy="users")
      * @ORM\JoinColumn(nullable=false)
      */
     private EnabledCountry $enabledCountry;
@@ -103,7 +103,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, Seriali
     private Collection $trader;
 
     /*
-     * @ORM\ManyToOne(targetEntity=EnabledCountry::class, inversedBy="users")
+     * @ORM\ManyToOne(targetEntity="EnabledCountry::class", inversedBy="users")
      * @ORM\JoinColumn(nullable=false)
      */
     private Subscription $subscription;
