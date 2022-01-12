@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Api\OpenApi\Registration;
+namespace App\Http\Api\OpenApi\Authentification\Registration;
 
 
 use ApiPlatform\Core\OpenApi\Model\Operation;
@@ -10,14 +10,14 @@ use ArrayObject;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
- * Class FirstRegistrationPath
+ * Class CompeletRegistrationInformationPath
  * @package App\Http\Api\OpenApi\AuthRegistration
  * @author jaures kano <ruddyjaures@mail.com>
  */
-class FirstRegistrationPath
+class CompeletRegistrationPath
 {
 
-    public function addRegistrationPath($tag = 'tag', $operationId = 'default'): PathItem
+    public function addCompletRegistrationPath($tag, $operationId = 'default'): PathItem
     {
         return new PathItem(
             null, null, null, null, null,
@@ -33,7 +33,7 @@ class FirstRegistrationPath
                                     'properties' => [
                                         'message' => [
                                             'type' => 'string',
-                                            'example' => 'Message send to { choice methode } user',
+                                            'example' => 'success update',
                                         ],
                                     ],
                                 ],
@@ -41,7 +41,7 @@ class FirstRegistrationPath
                         ],
                     ],
                 ],
-                'Add first information of user who want to create an account.',
+                'Complete user information after use first registration path',
                 '', null, [],
                 new RequestBody(
                     $operationId,
@@ -50,21 +50,33 @@ class FirstRegistrationPath
                             'schema' => [
                                 'type' => 'object',
                                 'properties' => [
-                                    'phone' => [
-                                        'type' => 'string',
-                                        'example' => '699 999 999',
-                                    ],
                                     'email' => [
-                                        'type' => 'shaka@paiecash.com',
-                                        'example' => 'shaka@paiecash.com',
+                                        'type' => 'string',
+                                        'example' => 'Shaka@admin.com',
                                     ],
-                                    'country' => [
-                                        'type' => 'integer',
-                                        'example' => 1
+                                    'firstName' => [
+                                        'type' => 'string',
+                                        'example' => 'Shaka',
                                     ],
-                                    'confirmation' => [
-                                        'type' => 'boolean',
-                                        'example' => true
+                                    'lastName' => [
+                                        'type' => 'string',
+                                        'example' => 'Shaka',
+                                    ],
+                                    'birthday' => [
+                                        'type' => 'date',
+                                        'example' => '2020-08-01',
+                                    ],
+                                    'confirmPassword' => [
+                                        'type' => 'string',
+                                        'example' => 'Zulu',
+                                    ],
+                                    'password' => [
+                                        'type' => 'string',
+                                        'example' => 'Zulu',
+                                    ],
+                                    'code' => [
+                                        'type' => 'string',
+                                        'example' => '00225'
                                     ],
                                 ],
                             ],

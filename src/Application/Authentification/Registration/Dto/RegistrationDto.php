@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Application\Registration\Dto;
+namespace App\Application\Authentification\Registration\Dto;
 
 
 use App\Domain\EnabledCountry\Entity\EnabledCountry;

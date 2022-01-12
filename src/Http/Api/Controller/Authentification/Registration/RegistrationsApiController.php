@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Api\Controller\Registration;
+namespace App\Http\Api\Controller\Authentification\Registration;
 
 
-use App\Application\Registration\Command\FirstRegistrationCommand;
-use App\Application\Registration\Dto\RegistrationDto;
+use App\Application\Authentification\Registration\Command\FirstRegistrationCommand;
+use App\Application\Authentification\Registration\Dto\RegistrationDto;
 use App\Domain\EnabledCountry\Repository\EnabledCountryRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;

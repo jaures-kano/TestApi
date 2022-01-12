@@ -25,7 +25,7 @@ security:
       pattern: ^/api/auth/login
       stateless:
       custom_authenticators:
-        - App\Application\Auth\Authentificators\ApiAuthentificator
+        - App\Application\Authentification\Auth\Authentificators\ApiAuthentificator
       json_login:
         check_path: /api/auth/login
 

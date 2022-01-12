@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Api\Controller\Registration;
+namespace App\Http\Api\Controller\Authentification\Registration;
 
 use App\Application\Profile\Command\UpdateProfileCommand;
 use App\Application\Profile\Dto\ProfileDto;

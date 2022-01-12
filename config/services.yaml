@@ -25,15 +25,15 @@ services:
     resource: '../src/Http/App/Controller'
     tags: [ 'controller.service_arguments' ]
 
-  App\Application\Auth\Listenners\LoginListenner:
+  App\Application\Authentification\Auth\Listenners\LoginListenner:
     tags:
       - { name: 'kernel.event_listener' , event: 'security.authentication.success' }
   # add more service definitions when explicit configuration is needed
   # please note that last definitions always *replace* previous ones
 
-  App\Http\Api\OpenApi\Registration\OpenRegistrationApiFactory:
+  App\Http\Api\OpenApi\Authentification\Registration\OpenRegistrationApiFactory:
     decorates: 'api_platform.openapi.factory'
-    arguments: [ '@App\Http\Api\OpenApi\Registration\OpenRegistrationApiFactory.inner' ]
+    arguments: [ '@App\Http\Api\OpenApi\Authentification\Registration\OpenRegistrationApiFactory.inner' ]
     autoconfigure: false
 
   App\Http\Api\OpenApi\Authentification\OpenAuthentificationApiFactory:

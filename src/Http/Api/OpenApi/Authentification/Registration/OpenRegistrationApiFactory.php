@@ -1,6 +1,6 @@
 <?php /** @noinspection NullPointerExceptionInspection */
 
-namespace App\Http\Api\OpenApi\Registration;
+namespace App\Http\Api\OpenApi\Authentification\Registration;
 
 
 use ApiPlatform\Core\OpenApi\Factory\OpenApiFactoryInterface;

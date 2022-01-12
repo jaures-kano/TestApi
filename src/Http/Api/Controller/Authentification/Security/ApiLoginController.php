@@ -1,6 +1,6 @@
 <?php /** @noinspection PhpParamsInspection */
 
-namespace App\Http\Api\Controller\Security;
+namespace App\Http\Api\Controller\Authentification\Security;
 
 use App\Infrastructures\Jwt\JwtService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;

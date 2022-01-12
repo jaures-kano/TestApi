@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Application\Registration\Command;
+namespace App\Application\Authentification\Registration\Command;
 
 
 /**

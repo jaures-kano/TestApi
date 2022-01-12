@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Api\Controller\Security;
+namespace App\Http\Api\Controller\Authentification\Security;
 
 
 use App\Application\Profile\Command\AccountRecoverCommand;
