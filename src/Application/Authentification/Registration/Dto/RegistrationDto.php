@@ -3,8 +3,6 @@
 namespace App\Application\Authentification\Registration\Dto;
 
 
-use App\Domain\EnabledCountry\Entity\EnabledCountry;
-
 /**
  * Class RegistrationDto
  * @package App\Application\AuthRegistration\Dto
@@ -24,7 +22,7 @@ class RegistrationDto
 
     public string $passwordConfirm;
 
-    public EnabledCountry $country;
+    public string $country;
 
     public bool $confirmationMode;
 
@@ -35,17 +33,17 @@ class RegistrationDto
      * @param string $phone
      * @param string $password
      * @param string $passwordConfirm
-     * @param EnabledCountry $country
+     * @param string $country
      * @param bool $confirmationMode
      */
-    public function __construct(string         $firstName,
-                                string         $lastName,
-                                string         $email,
-                                string         $phone,
-                                string         $password,
-                                string         $passwordConfirm,
-                                EnabledCountry $country,
-                                bool           $confirmationMode)
+    public function __construct(string $firstName,
+                                string $lastName,
+                                string $email,
+                                string $phone,
+                                string $password,
+                                string $passwordConfirm,
+                                string $country,
+                                bool   $confirmationMode)
     {
         $this->firstName = $firstName;
         $this->lastName = $lastName;
