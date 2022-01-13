@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Infrastructures\Jwt;
+namespace App\Infrastructures\JwtToken;
 
 
 use App\Domain\Auth\Entity\User;

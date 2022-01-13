@@ -2,16 +2,20 @@
 
 namespace App\Http\Api\Controller\Authentification\Security;
 
-use App\Infrastructures\Jwt\JwtService;
+use App\Infrastructures\JwtToken\JwtService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
 
+
+/**
+ * @Route("api/authentification")
+ */
 class ApiLoginController extends AbstractController
 {
 
     /**
-     * @Route("/api/auth/login", name="api_route_login")
+     * @Route("/login", name="api_authentification_login")
      */
     public function indexApiLogin(JwtService $jwtService): JsonResponse
     {

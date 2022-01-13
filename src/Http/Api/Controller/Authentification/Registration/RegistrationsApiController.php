@@ -12,6 +12,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
+ * @Route("api/authentification")
  * Class RegistrationsApiController
  * @package App\Http\Api\Controller\AuthRegistration
  * @author jaures kano <ruddyjaures@mail.com>
@@ -20,7 +21,7 @@ class RegistrationsApiController extends AbstractController
 {
 
     /**
-     * @Route("/registration/first", name="registration_first")
+     * @Route("/registration", name="api_auth_registration")
      */
     public function indexFistRegistration(Request                  $request,
                                           FirstRegistrationCommand $command,
@@ -31,8 +32,13 @@ class RegistrationsApiController extends AbstractController
 
         if ($country !== null) {
             $registrationDto = new RegistrationDto(
+                $data['firstName'],
+                $data['lastName'],
                 $data['email'],
-                $data['phone'], $country,
+                $data['phone'],
+                $country,
+                $data['password'],
+                $data['confirmPassword'],
                 $data['confirmationMode']);
             $commandReponse = $command->saveFirstRegistration($registrationDto);
             if ($commandReponse->type === true) {
