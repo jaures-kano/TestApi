@@ -28,7 +28,7 @@ class Trader
     private Ulid $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity=User::Class, inversedBy="trader")
+     * @ORM\ManyToOne(targetEntity="App\Domain\AuthDomain\Auth\Entity\User", inversedBy="trader")
      */
     private User $user;
 

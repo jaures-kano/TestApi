@@ -40,12 +40,12 @@ class Card
 
 
     /**
-     * @ORM\ManyToOne (targetEntity=User::class, inversedBy="cards")
+     * @ORM\ManyToOne (targetEntity="App\Domain\AuthDomain\Auth\Entity\User", inversedBy="cards")
      */
     private User $user;
 
     /**
-     * @ORM\OneToMany(targetEntity=CardTransaction::class,mappedBy="card" )
+     * @ORM\OneToMany(targetEntity="App\Domain\CardsDomain\Card\Entity\CardTransaction",mappedBy="card" )
      */
     private Collection $cardTransaction;
 

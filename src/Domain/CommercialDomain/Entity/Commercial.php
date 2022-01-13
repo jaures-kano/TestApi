@@ -6,7 +6,6 @@ namespace App\Domain\CommercialDomain\Entity;
 
 use App\Application\Traits\BaseTimeTrait;
 use App\Domain\AuthDomain\Auth\Entity\User;
-use App\Domain\Commercial\Repository\CommercialRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\IdGenerator\UlidGenerator;
 use Symfony\Component\Uid\Ulid;
@@ -29,7 +28,7 @@ class Commercial
     private Ulid $id;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Domain\Auth\Entity\User", inversedBy="commercial")
+     * @ORM\OneToOne(targetEntity="App\Domain\AuthDomain\Auth\Entity\User", inversedBy="commercial")
      */
     private User $user;
 

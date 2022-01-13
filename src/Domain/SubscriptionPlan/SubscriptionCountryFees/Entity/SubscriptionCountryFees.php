@@ -10,7 +10,6 @@ use Doctrine\ORM\Mapping as ORM;
 
 class SubscriptionCountryFees
 {
-
     use BaseTimeTrait;
 
     /**
@@ -33,15 +32,16 @@ class SubscriptionCountryFees
     private float $fees;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Card::class, inversedBy="subscriptionCountryFees")
+     * @ORM\ManyToOne(targetEntity="App\Domain\SubscriptionPlan\SubscriptionType\Entity\SubscriptionType",
+     *     inversedBy="subscriptionCountryFees")
      */
     private SubscriptionType $subscriptionType;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Card::class, inversedBy="subscriptionCountryFees")
+     * @ORM\ManyToOne(targetEntity="App\Domain\EnabledCountry\Entity\EnabledCountry",
+     *     inversedBy="subscriptionCountryFees")
      */
     private EnabledCountry $enabledCountry;
-
 
     /**
      * @return int
@@ -49,16 +49,6 @@ class SubscriptionCountryFees
     public function getId(): int
     {
         return $this->id;
-    }
-
-    /**
-     * @param int $id
-     * @return SubscriptionCountryFees
-     */
-    public function setId(int $id): SubscriptionCountryFees
-    {
-        $this->id = $id;
-        return $this;
     }
 
     /**

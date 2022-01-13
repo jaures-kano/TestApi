@@ -6,7 +6,6 @@ namespace App\Domain\PartnerDomain\Entity;
 
 use App\Application\Traits\BaseTimeTrait;
 use App\Domain\AuthDomain\Auth\Entity\User;
-use App\Domain\Partner\Repository\PartnerRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\IdGenerator\UlidGenerator;
 use Symfony\Component\Uid\Ulid;
@@ -34,7 +33,8 @@ class Partner
     private string $code;
 
     /**
-     * @ORM\OneToOne(targetEntity=User::class, inversedBy="partner")
+     * @ORM\OneToOne(targetEntity="App\Domain\AuthDomain\Auth\Entity\User",
+     *     inversedBy="partner")
      */
     private User $user;
 

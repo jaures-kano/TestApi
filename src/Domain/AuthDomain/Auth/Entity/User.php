@@ -14,7 +14,6 @@ use App\Domain\CommercialDomain\Entity\Commercial;
 use App\Domain\EnabledCountry\Entity\EnabledCountry;
 use App\Domain\PartnerDomain\Entity\Partner;
 use App\Domain\SubscriptionPlan\Subscription\Entity\Subscription;
-use App\Domain\Trader\Entity\Trader;
 use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -67,43 +66,47 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, Seriali
     private string $password;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Domain\EnabledCountry\Entity\EnabledCountry", inversedBy="users")
+     * @ORM\ManyToOne(targetEntity="App\Domain\EnabledCountry\Entity\EnabledCountry",
+     *     inversedBy="users")
      * @ORM\JoinColumn(nullable=false)
      */
     private EnabledCountry $enabledCountry;
 
     /**
-     * @ORM\OneToMany(targetEntity=QrCode::class,mappedBy="user" )
+     * @ORM\OneToMany(targetEntity="App\Domain\QrCodeDomain\QrCodeTransaction\Entity\QrCodeTransaction",
+     *     mappedBy="user" )
      */
     private Collection $qrCodes;
 
     /**
-     * @ORM\OneToMany(targetEntity=Card::class,mappedBy="user" )
+     * @ORM\OneToMany(targetEntity="App\Domain\CardsDomain\Card\Entity\Card",mappedBy="user" )
      */
     private Collection $cards;
 
     /**
-     * @ORM\OneToMany(targetEntity=CardTransaction::class,mappedBy="users" )
+     * @ORM\OneToMany(targetEntity="App\Domain\CardsDomain\CardTransaction\Entity\CardTransaction",
+     *     mappedBy="users" )
      */
     private Collection $cardTransactions;
 
     /**
-     * @ORM\OneToOne(targetEntity=Commercial::class, mappedBy="user")
+     * @ORM\OneToOne(targetEntity="App\Domain\CommercialDomain\Entity\Commercial", mappedBy="user")
      */
     private ?Commercial $commercial;
 
     /**
-     * @ORM\OneToOne(targetEntity=Partner::class, mappedBy="user")
+     * @ORM\OneToOne(targetEntity="App\Domain\PartnerDomain\Entity\Partner", mappedBy="user")
      */
     private ?Partner $partner;
 
     /**
-     * @ORM\OneToMany(targetEntity=Trader::class, mappedBy="user")
+     * @ORM\OneToMany(targetEntity="App\Domain\Trader\Entity\Trader", mappedBy="user")
      */
     private Collection $trader;
 
-    /*
-     * @ORM\ManyToOne(targetEntity="EnabledCountry::class", inversedBy="users")
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Domain\SubscriptionPlan\Subscription\Entity\Subscription",
+     *      inversedBy="users")
      * @ORM\JoinColumn(nullable=false)
      */
     private Subscription $subscription;

@@ -57,12 +57,12 @@ class CardTransaction
     private string $recipient;
 
     /**
-     * @ORM\ManyToOne (targetEntity=User::class, inversedBy="cardTransactions")
+     * @ORM\ManyToOne (targetEntity="App\Domain\AuthDomain\Auth\Entity\User", inversedBy="cardTransactions")
      */
     private User $user;
 
     /**
-     * @ORM\ManyToOne (targetEntity=Card::class, inversedBy="cardTransactions")
+     * @ORM\ManyToOne (targetEntity="App\Domain\CardsDomain\Card\Entity\Card", inversedBy="cardTransactions")
      */
     private Card $card;
 

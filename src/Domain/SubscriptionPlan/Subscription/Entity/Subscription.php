@@ -27,15 +27,15 @@ class Subscription
      */
     private int $numberOfMonth;
 
-
     /**
-     * @ORM\OneToMany(targetEntity=Card::class,mappedBy="subscription" )
+     * @ORM\OneToMany(targetEntity="App\Domain\SubscriptionPlan\SubscriptionType\Entity\SubscriptionType",
+     *     mappedBy="subscription" )
      */
     private Collection $subscriptionTypes;
 
-
     /**
-     * @ORM\OneToMany(targetEntity=Card::class,mappedBy="subscription" )
+     * @ORM\OneToMany(targetEntity="App\Domain\AuthDomain\Auth\Entity\User",
+     *     mappedBy="subscription" )
      */
     private Collection $users;
 
