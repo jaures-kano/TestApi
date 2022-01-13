@@ -17,15 +17,20 @@ class OpenProfileApiFactory implements OpenApiFactoryInterface
 
     private InformationProfilePath $informationProfilePath;
 
+    private UpdateInformationProfilePath $updateInformationProfilePath;
+
     /**
      * @param OpenApiFactoryInterface $decorated
+     * @param UpdateInformationProfilePath $updateInformationProfilePath
      * @param InformationProfilePath $informationProfilePath
      */
-    public function __construct(OpenApiFactoryInterface $decorated,
-                                InformationProfilePath  $informationProfilePath)
+    public function __construct(OpenApiFactoryInterface      $decorated,
+                                UpdateInformationProfilePath $updateInformationProfilePath,
+                                InformationProfilePath       $informationProfilePath)
     {
         $this->decorated = $decorated;
         $this->informationProfilePath = $informationProfilePath;
+        $this->updateInformationProfilePath = $updateInformationProfilePath;
     }
 
 
@@ -37,6 +42,9 @@ class OpenProfileApiFactory implements OpenApiFactoryInterface
             $this->informationProfilePath->addInformationProfile(
                 'Profile information', 'profile-information'));
 
+        $openApi->getPaths()->addPath('/api/profile/update',
+            $this->updateInformationProfilePath->addUpdateInformationProfile(
+                'Profile information', 'profile-update'));
 
         return $openApi;
     }
