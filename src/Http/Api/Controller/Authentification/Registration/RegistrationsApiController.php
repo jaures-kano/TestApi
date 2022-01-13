@@ -28,33 +28,38 @@ class RegistrationsApiController extends AbstractController
                                           EnabledCountryRepository $repository): JsonResponse
     {
         $data = json_decode($request->getContent(), true);
-        $country = $repository->find($data['country']);
+        $requireData = [
+            'firstName', 'lastName', 'email', 'phone',
+            'country', 'password', 'confirmPassword', 'confirmationMode'
+        ];
 
-        if ($country !== null) {
-            $registrationDto = new RegistrationDto(
-                $data['firstName'],
-                $data['lastName'],
-                $data['email'],
-                $data['phone'],
-                $country,
-                $data['password'],
-                $data['confirmPassword'],
-                $data['confirmationMode']);
-            $commandReponse = $command->saveFirstRegistration($registrationDto);
-            if ($commandReponse->type === true) {
-                return $this->json([
-                    'message' => $commandReponse->messages
-                ]);
-            }
-
+        if (count(array_intersect($requireData, $data)) === count($requireData)) {
             return $this->json([
-                'message' => $commandReponse->messages
+                'message' => 'Bad request, missing parameter'
             ], 400);
         }
 
+        $registrationDto = new RegistrationDto(
+            $data['firstName'],
+            $data['lastName'],
+            $data['email'],
+            $data['phone'],
+            $data['country'],
+            $data['password'],
+            $data['confirmPassword'],
+            $data['confirmationMode']);
+
+        $commandReponse = $command->saveFirstRegistration($registrationDto);
+        if ($commandReponse->type === true) {
+            return $this->json([
+                'message' => $commandReponse->messages
+            ]);
+        }
+
         return $this->json([
-            'message' => 'Bad request, country not found'
+            'message' => $commandReponse->messages
         ], 400);
+
     }
 
 

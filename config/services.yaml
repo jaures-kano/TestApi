@@ -31,11 +31,6 @@ services:
   # add more service definitions when explicit configuration is needed
   # please note that last definitions always *replace* previous ones
 
-  App\Http\Api\OpenApi\Authentification\Registration\OpenRegistrationApiFactory:
-    decorates: 'api_platform.openapi.factory'
-    arguments: [ '@App\Http\Api\OpenApi\Authentification\Registration\OpenRegistrationApiFactory.inner' ]
-    autoconfigure: false
-
   App\Http\Api\OpenApi\Authentification\OpenAuthentificationApiFactory:
     decorates: 'api_platform.openapi.factory'
     arguments: [ '@App\Http\Api\OpenApi\Authentification\OpenAuthentificationApiFactory.inner' ]
