@@ -10,6 +10,9 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 
+/**
+ * @ORM\Entity
+ */
 class Card
 {
     use BaseTimeTrait;
@@ -23,7 +26,7 @@ class Card
 
     /**
      * @var int
-     * @ORM\Column(type="int")
+     * @ORM\Column(type="integer")
      */
     private int $cardNumber;
 
@@ -38,17 +41,17 @@ class Card
      */
     private ?DateTimeInterface $expiredAt;
 
-
     /**
-     * @ORM\ManyToOne (targetEntity="App\Domain\AuthDomain\Auth\Entity\User", inversedBy="cards")
+     * @ORM\ManyToOne (targetEntity="App\Domain\AuthDomain\Auth\Entity\User",
+     *     inversedBy="cards")
      */
     private User $user;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Domain\CardsDomain\Card\Entity\CardTransaction",mappedBy="card" )
+     * @ORM\OneToMany(targetEntity="App\Domain\CardsDomain\CardTransaction\Entity\CardTransaction",
+     *     mappedBy="card" )
      */
     private Collection $cardTransaction;
-
 
     public function __construct()
     {

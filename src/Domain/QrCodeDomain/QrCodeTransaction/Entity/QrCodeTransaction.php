@@ -40,10 +40,10 @@ class QrCodeTransaction
     private bool $isEnabled;
 
     /**
-     * @ORM\ManyToOne (targetEntity="App\Domain\AuthDomain\Auth\Entity\User", inversedBy="qrCodes")
+     * @ORM\ManyToOne (targetEntity="App\Domain\AuthDomain\Auth\Entity\User",
+     *     inversedBy="qrCodes")
      */
     private User $user;
-
 
     /**
      * @return int

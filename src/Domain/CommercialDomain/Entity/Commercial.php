@@ -13,7 +13,7 @@ use Symfony\Component\Uid\Ulid;
 /**
  * @author Elessa Maxime <elessamaxime@icloud.com>
  * @package App\Domain\CommercialDomain\Entity
- * @ORM\Entity(repositoryClass=CommercialRepository::class)
+ * @ORM\Entity(repositoryClass="App\Domain\CommercialDomain\Repository\CommercialRepository")
  */
 class Commercial
 {

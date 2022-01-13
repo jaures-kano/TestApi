@@ -10,6 +10,9 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 
+/**
+ * @ORM\Entity
+ */
 class Subscription
 {
     use BaseTimeTrait;
@@ -23,7 +26,7 @@ class Subscription
 
     /**
      * @var int
-     * @ORM\Column(type="int")
+     * @ORM\Column(type="integer")
      */
     private int $numberOfMonth;
 

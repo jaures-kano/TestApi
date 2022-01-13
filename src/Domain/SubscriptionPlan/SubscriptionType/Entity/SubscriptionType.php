@@ -4,15 +4,19 @@ namespace App\Domain\SubscriptionPlan\SubscriptionType\Entity;
 
 use App\Application\Traits\BaseTimeTrait;
 use App\Domain\SubscriptionPlan\Subscription\Entity\Subscription;
-use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
+
+/**
+ * @ORM\Entity
+ */
 class SubscriptionType
 {
 
     use BaseTimeTrait;
+
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -21,62 +25,46 @@ class SubscriptionType
     private int $id;
 
     /**
-     * @var int
-     * @ORM\Column(type="int")
+     * @var string
+     * @ORM\Column(type="string")
      */
-    private int $nom;
+    private string $designation;
 
     /**
      * @var bool
-     *  @ORM\Column( type="boolean", options={"default":true})
+     * @ORM\Column( type="boolean", options={"default":true})
      */
     private bool $buy;
 
     /**
      * @var bool
-     *  @ORM\Column( type="boolean", options={"default":true})
+     * @ORM\Column( type="boolean", options={"default":true})
      */
     private bool $withdrawal;
 
     /**
      * @var bool
-     *  @ORM\Column( type="boolean", options={"default":true})
+     * @ORM\Column( type="boolean", options={"default":true})
      */
     private bool $transfer;
 
-
     /**
-     * @ORM\ManyToOne(targetEntity=EnabledCountry::class, inversedBy="subscriptionTypes")
+     * @ORM\ManyToOne(targetEntity="App\Domain\SubscriptionPlan\Subscription\Entity\Subscription",
+     *     inversedBy="subscriptionTypes")
      * @ORM\JoinColumn(nullable=false)
      */
     private Subscription $subscription;
 
     /**
-     * @ORM\OneToMany (targetEntity=EnabledCountry::class,mappedBy="subscriptionType")
+     * @ORM\OneToMany (targetEntity="App\Domain\SubscriptionPlan\SubscriptionCountryFees\Entity\SubscriptionCountryFees",
+     *     mappedBy="subscriptionType")
      */
     private Collection $subscriptionCountryFees;
 
 
     public function __construct()
-     {
+    {
         $this->subscriptionCountryFees = new ArrayCollection();
-      }
-    /**
-     * @return DateTimeInterface
-     */
-    public function getCreatedAt(): DateTimeInterface
-    {
-        return $this->createdAt;
-    }
-
-    /**
-     * @param DateTimeInterface $createdAt
-     * @return SubscriptionType
-     */
-    public function setCreatedAt(DateTimeInterface $createdAt): SubscriptionType
-    {
-        $this->createdAt = $createdAt;
-        return $this;
     }
 
     /**
@@ -87,31 +75,22 @@ class SubscriptionType
         return $this->id;
     }
 
+
     /**
-     * @param int $id
-     * @return SubscriptionType
+     * @return string
      */
-    public function setId(int $id): SubscriptionType
+    public function getDesignation(): string
     {
-        $this->id = $id;
-        return $this;
+        return $this->designation;
     }
 
     /**
-     * @return int
-     */
-    public function getNom(): int
-    {
-        return $this->nom;
-    }
-
-    /**
-     * @param int $nom
+     * @param string $designation
      * @return SubscriptionType
      */
-    public function setNom(int $nom): SubscriptionType
+    public function setDesignation(string $designation): SubscriptionType
     {
-        $this->nom = $nom;
+        $this->designation = $designation;
         return $this;
     }
 
@@ -181,15 +160,10 @@ class SubscriptionType
      * @param Subscription $subscription
      * @return SubscriptionType
      */
-    public function setSubscription(Subscription $subscription): self
+    public function setSubscription(Subscription $subscription): SubscriptionType
     {
         $this->subscription = $subscription;
         return $this;
-    }
-
-    public function getSubscriptionCountryFees(): Collection
-    {
-        return $this -> subscriptionCountryFees;
     }
 
 

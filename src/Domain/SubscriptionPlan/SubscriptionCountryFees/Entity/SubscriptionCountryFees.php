@@ -8,6 +8,9 @@ use App\Domain\SubscriptionPlan\SubscriptionType\Entity\SubscriptionType;
 use Doctrine\ORM\Mapping as ORM;
 
 
+/**
+ * @ORM\Entity
+ */
 class SubscriptionCountryFees
 {
     use BaseTimeTrait;
@@ -21,7 +24,7 @@ class SubscriptionCountryFees
 
     /**
      * @var string
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="string")
      */
     private string $currency;
 

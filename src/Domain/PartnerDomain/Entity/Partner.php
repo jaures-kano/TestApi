@@ -13,7 +13,7 @@ use Symfony\Component\Uid\Ulid;
 /**
  * @author Elessa Maxime <elessamaxime@icloud.com>
  * @package App\Domain\PartnerDomain\Entity
- * @ORM\Entity(repositoryClass=PartnerRepository::class)
+ * @ORM\Entity(repositoryClass="App\Domain\PartnerDomain\Repository\PartnerRepository")
  */
 class Partner
 {

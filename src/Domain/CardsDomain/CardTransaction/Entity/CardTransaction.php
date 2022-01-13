@@ -9,6 +9,10 @@ use App\Domain\CardsDomain\Card\Entity\Card;
 use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
 
+
+/**
+ * @ORM\Entity
+ */
 class CardTransaction
 {
     use BaseTimeTrait;
@@ -21,8 +25,8 @@ class CardTransaction
     private int $id;
 
     /**
-     *  @var int
-     * @ORM\Column(type="int")
+     * @var int
+     * @ORM\Column(type="integer")
      */
     private int $referenceNumber ;
 
@@ -57,12 +61,14 @@ class CardTransaction
     private string $recipient;
 
     /**
-     * @ORM\ManyToOne (targetEntity="App\Domain\AuthDomain\Auth\Entity\User", inversedBy="cardTransactions")
+     * @ORM\ManyToOne (targetEntity="App\Domain\AuthDomain\Auth\Entity\User",
+     *     inversedBy="cardTransactions")
      */
     private User $user;
 
     /**
-     * @ORM\ManyToOne (targetEntity="App\Domain\CardsDomain\Card\Entity\Card", inversedBy="cardTransactions")
+     * @ORM\ManyToOne (targetEntity="App\Domain\CardsDomain\Card\Entity\Card",
+     *     inversedBy="cardTransactions")
      */
     private Card $card;
 

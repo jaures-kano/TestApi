@@ -78,7 +78,10 @@ class EnabledCountry
     private Collection $users;
 
     /**
-     * @ORM\OneToMany(targetEntity=User::class,mappedBy="enabledCountry")
+     * @ORM\OneToMany(
+     *     targetEntity="App\Domain\SubscriptionPlan\SubscriptionCountryFees\Entity\SubscriptionCountryFees",
+     *     mappedBy="enabledCountry"
+     * )
      */
     private Collection $subscriptionCountryFees;
 
