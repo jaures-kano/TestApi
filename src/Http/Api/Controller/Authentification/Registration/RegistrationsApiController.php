@@ -9,6 +9,7 @@ use App\Infrastructures\ParamatersChecker\ParamatersCheckerService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -28,6 +29,10 @@ class RegistrationsApiController extends AbstractController
                                           RegistrationCommand      $command): JsonResponse
     {
         $data = json_decode($request->getContent(), true);
+        if ($data === null) {
+            return $this->json(['message' => 'Bad request, invalid json'], Response::HTTP_BAD_REQUEST);
+        }
+
         $requireData = [
             'first_name', 'last_name', 'email', 'phone', 'api_key',
             'country', 'password', 'confirm_password', 'confirmation_mode'
@@ -37,9 +42,8 @@ class RegistrationsApiController extends AbstractController
         $missingParameter = $checkerService->arrayCheck($data, $requireData);
         if ($missingParameter['count'] > 0) {
             return $this->json([
-                'message' => 'Bad request, parameter '
-                    . implode(", ", $missingParameter['missing']) .
-                    ' are missing'
+                'message' => 'Bad request, missed parameter '
+                    . implode(", ", $missingParameter['missing'])
             ], 406);
         }
 

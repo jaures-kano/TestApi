@@ -33,7 +33,7 @@ class RegistrationActivationPath
                                     'properties' => [
                                         'message' => [
                                             'type' => 'string',
-                                            'example' => 'Message send to { choice methode } user',
+                                            'example' => 'Account activated',
                                         ],
                                     ],
                                 ],
@@ -41,7 +41,7 @@ class RegistrationActivationPath
                         ],
                     ],
                 ],
-                'Add first information of user who want to create an account.',
+                'Activate an account that have a first registration.',
                 '', null, [],
                 new RequestBody(
                     $operationId,
@@ -50,21 +50,17 @@ class RegistrationActivationPath
                             'schema' => [
                                 'type' => 'object',
                                 'properties' => [
-                                    'phone' => [
-                                        'type' => 'string',
-                                        'example' => '699 999 999',
-                                    ],
                                     'email' => [
                                         'type' => 'shaka@paiecash.com',
                                         'example' => 'shaka@paiecash.com',
                                     ],
-                                    'country' => [
+                                    'code' => [
                                         'type' => 'integer',
                                         'example' => 1
                                     ],
-                                    'confirmation' => [
-                                        'type' => 'boolean',
-                                        'example' => true
+                                    'api_key' => [
+                                        'type' => 'string',
+                                        'example' => '00000000000000'
                                     ],
                                 ],
                             ],
