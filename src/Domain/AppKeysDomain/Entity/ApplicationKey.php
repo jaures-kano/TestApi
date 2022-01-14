@@ -12,11 +12,10 @@ use Symfony\Component\Uid\Ulid;
  * Class ApplicationKey
  * @package App\Domain\AppKeysDomain\Entity
  * @author jaures kano <ruddyjaures@mail.com>
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Domain\AppKeysDomain\Repository\ApplicationKeyRepository")
  */
 class ApplicationKey
 {
-
     use BaseTimeTrait;
 
     /**
@@ -28,7 +27,7 @@ class ApplicationKey
     private ?Ulid $id;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", unique=true)
      */
     private string $designation;
 
