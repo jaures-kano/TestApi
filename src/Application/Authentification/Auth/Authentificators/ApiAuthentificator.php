@@ -15,53 +15,41 @@ use Symfony\Component\Security\Http\Authenticator\Passport\Passport;
 
 class ApiAuthentificator extends AbstractAuthenticator
 {
-    /**
-     * @param Request $request
-     * @return bool|null
-     */
     public function supports(Request $request): ?bool
     {
         $content = json_decode($request->getContent(), true);
         if ($content === null) {
             return false;
         }
-        return $request->getContentType() === 'application/json' && $request->isMethod('POST');
+
+        return $request->getContentType() === 'json' && $request->isMethod('POST');
     }
 
-    /**
-     * @param Request $request
-     * @return Passport
-     */
     public function authenticate(Request $request): Passport
     {
         // Converts it into a PHP object
         $content = json_decode($request->getContent(), true);
-
-        $request->getSession()->set(Security::LAST_USERNAME, $content['email']);
+        $request->getSession()->set(Security::LAST_USERNAME, $content['username']);
 
         return new Passport(
-            new UserBadge($content['email']),
+            new UserBadge($content['username']),
             new PasswordCredentials($content['password'])
         );
     }
 
-    /**
-     * @param Request $request
-     * @param TokenInterface $token
-     * @param string $firewallName
-     * @return Response|null
-     */
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $firewallName): ?Response
     {
         // on success, let the request continue
+        if ($token->getUser()->isActived() === false) {
+            $token->setAuthenticated(false);
+            return new JsonResponse([
+                'message' => 'The user account is not yet activated'
+            ], Response::HTTP_UNAUTHORIZED);
+        }
+
         return null;
     }
 
-    /**
-     * @param Request $request
-     * @param AuthenticationException $exception
-     * @return Response|null
-     */
     public function onAuthenticationFailure(Request $request, AuthenticationException $exception): ?Response
     {
         return new JsonResponse([

@@ -11,24 +11,24 @@ security:
     # used to reload user from session & other features (e.g. switch_user)
     app_user_provider:
       entity:
-        class: App\Domain\AuthDomain\Auth\Entity
+        class: App\Domain\AuthDomain\Auth\Entity\User
         property: email
-
 
   firewalls:
     dev:
       pattern: ^/(_(profiler|wdt)|css|images|js)/
       security: false
 
-
-    login:
-      pattern: ^/api/auth/login
-      stateless:
+    main:
+      pattern: ^/api/authentification/login
       custom_authenticators:
         - App\Application\Authentification\Auth\Authentificators\ApiAuthentificator
-      json_login:
-        check_path: /api/auth/login
 
+      json_login:
+        check_path: /api/authentification/login
+
+      logout:
+        path: app_logout
 
     api_token_refresh:
       pattern: ^/api/auth/token/refresh
@@ -41,9 +41,9 @@ security:
         #      pattern: ^/api
         #      stateless: true
         #      jwt:
-        #        authenticator: lexik_jwt_authentication.jwt_token_authenticator
+      #        authenticator: lexik_jwt_authentication.jwt_token_authenticator
 
-        # where to redirect after logout
+      # where to redirect after logout
       # target: app_any_route
 
       # activate different ways to authenticate
@@ -55,5 +55,5 @@ security:
   # Easy way to control access for large sections of your site
   # Note: Only the *first* access control that matches will be used
   access_control:
-    - { path: ^/api/auth/token/refresh, roles: PUBLIC_ACCESS }
+    - { path: ^/api/authentification/token/refresh, roles: PUBLIC_ACCESS }
   # - { path: ^/profile, roles: ROLE_USER }

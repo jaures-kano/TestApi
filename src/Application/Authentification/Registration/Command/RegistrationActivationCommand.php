@@ -10,6 +10,7 @@ use App\Adapter\Response\CaseResponse;
 use App\Application\ApplicationKey\KeyService;
 use App\Application\Authentification\Registration\Dto\RegistrationActivationDto;
 use App\Domain\AuthDomain\Auth\Repository\UserRepository;
+use DateTime;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -46,9 +47,7 @@ class RegistrationActivationCommand extends AbstractCase
                 [], HttpStatus::BADREQUEST);
         }
 
-
         $foundUser = $this->userRepository->findOneBy(['email' => $dto->email]);
-
         if ($foundUser === null) {
             return $this->errorResponse(CaseMessage::UNKNOW_EMAIL,
                 [], HttpStatus::BADREQUEST);
@@ -59,11 +58,17 @@ class RegistrationActivationCommand extends AbstractCase
                 [], HttpStatus::BADREQUEST);
         }
 
+        if ($foundUser->isActived() === true) {
+            return $this->errorResponse('Already actived',
+                [], HttpStatus::BADREQUEST);
+        }
+
         $foundUser->setIsActived(true);
+        $foundUser->setUpdatedAt(new DateTime());
         $this->em()->persist($foundUser);
         $this->em()->flush();
 
-        return $this->errorResponse('Account activated', [], Response::HTTP_BAD_REQUEST);
+        return $this->successResponse('Account activated', [], Response::HTTP_ACCEPTED);
     }
 
 }
