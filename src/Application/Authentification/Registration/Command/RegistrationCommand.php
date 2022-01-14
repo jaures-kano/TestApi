@@ -13,7 +13,7 @@ use App\Domain\AuthDomain\Auth\Entity\User;
 use App\Domain\AuthDomain\Auth\Repository\UserRepository;
 use App\Domain\AuthDomain\AuthRegistration\Event\FirstRegistrationEvent;
 use App\Domain\EnabledCountry\Repository\EnabledCountryRepository;
-use App\Infrastructures\Generator\ConfirmationAccountGenerator;
+use App\Infrastructures\Generator\TokenGenerator;
 use DateTime;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
@@ -31,11 +31,13 @@ class RegistrationCommand extends AbstractCase
     private UserRepository $userRepository;
     private KeyService $keyService;
     private EnabledCountryRepository $enabledCountryRepository;
+    private TokenGenerator $tokenGenerator;
 
     public function __construct(EventDispatcherInterface    $eventDispatcher,
                                 UserRepository              $userRepository,
                                 EnabledCountryRepository    $enabledCountryRepository,
                                 KeyService                  $keyService,
+                                TokenGenerator              $tokenGenerator,
                                 UserPasswordHasherInterface $hasher)
     {
         $this->eventDispatcher = $eventDispatcher;
@@ -43,6 +45,7 @@ class RegistrationCommand extends AbstractCase
         $this->userRepository = $userRepository;
         $this->keyService = $keyService;
         $this->enabledCountryRepository = $enabledCountryRepository;
+        $this->tokenGenerator = $tokenGenerator;
     }
 
     public function registration(RegistrationDto $registrationDto): CaseResponse
@@ -83,13 +86,14 @@ class RegistrationCommand extends AbstractCase
         }
 
         $user = new User();
-        $generator = new ConfirmationAccountGenerator($user);
         $user->setEmail($registrationDto->email);
         $user->setPhone($registrationDto->phone);
         $user->setFirstName($registrationDto->firstName);
         $user->setLastName($registrationDto->lastName);
-        $user->setConfirmationCode($generator->confirmCode());
+        $user->setConfirmationCode($this->tokenGenerator->getAuthToken());
         $user->setEnabledCountry($country);
+        $user->setCreatedAt(new DateTime());
+        $user->setResetTime(new DateTime('+30 minutes'));
         $user->setCreatedAt(new DateTime());
         $user->setPassword($this->hasher->hashPassword($user, $registrationDto->password));
         $this->em()->persist($user);
@@ -99,7 +103,8 @@ class RegistrationCommand extends AbstractCase
         $event = new FirstRegistrationEvent($user, $registrationDto->confirmationMode);
         $this->eventDispatcher->dispatch($event, FirstRegistrationEvent::NAME);
 
-        return $this->successResponse('Code send to user', [], HttpStatus::CREATED);
+        return $this->successResponse('Code send to user, token expired after 30 minutes',
+            [], HttpStatus::CREATED);
     }
 
 }

@@ -15,7 +15,7 @@ class TokenGenerator
     {
         $innerStrong = true;
         do {
-            $bytes = openssl_random_pseudo_bytes(3, $innerStrong);
+            $bytes = openssl_random_pseudo_bytes(2, $innerStrong);
             // $bytes needs to be verified as well
         } while (!$bytes || !$innerStrong);
 
