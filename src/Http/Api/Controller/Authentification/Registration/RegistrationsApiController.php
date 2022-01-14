@@ -3,7 +3,7 @@
 namespace App\Http\Api\Controller\Authentification\Registration;
 
 
-use App\Application\Authentification\Registration\Command\FirstRegistrationCommand;
+use App\Application\Authentification\Registration\Command\RegistrationCommand;
 use App\Application\Authentification\Registration\Dto\RegistrationDto;
 use App\Infrastructures\ParamatersChecker\ParamatersCheckerService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -25,7 +25,7 @@ class RegistrationsApiController extends AbstractController
      */
     public function indexFistRegistration(Request                  $request,
                                           ParamatersCheckerService $checkerService,
-                                          FirstRegistrationCommand $command): JsonResponse
+                                          RegistrationCommand      $command): JsonResponse
     {
         $data = json_decode($request->getContent(), true);
         $requireData = [
@@ -43,6 +43,7 @@ class RegistrationsApiController extends AbstractController
             ], 406);
         }
 
+        // chargement du dto
         $registrationDto = new RegistrationDto(
             $data['firstName'],
             $data['lastName'],
@@ -53,16 +54,17 @@ class RegistrationsApiController extends AbstractController
             $data['confirmPassword'],
             $data['confirmationMode']);
 
-        $commandReponse = $command->saveFirstRegistration($registrationDto);
+        // send action to application
+        $commandReponse = $command->registration($registrationDto);
         if ($commandReponse->type === true) {
             return $this->json([
                 'message' => $commandReponse->messages
-            ]);
+            ], $commandReponse->status);
         }
 
         return $this->json([
             'message' => $commandReponse->messages
-        ], 400);
+        ], $commandReponse->status);
     }
 
 }

@@ -4,6 +4,8 @@ namespace App\Application\Authentification\Registration\Command;
 
 
 use App\Adapter\Abstracts\AbstractCase;
+use App\Adapter\HttpStatus;
+use App\Adapter\Response\CaseResponse;
 use App\Application\Authentification\Registration\Dto\RegistrationDto;
 use App\Domain\AuthDomain\Auth\Entity\User;
 use App\Domain\AuthDomain\Auth\Repository\UserRepository;
@@ -14,11 +16,11 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 /**
- * Class FirstRegistrationCommand
+ * Class RegistrationCommand
  * @package App\Application\AuthRegistration\Command
  * @author jaures kano <ruddyjaures@mail.com>
  */
-class FirstRegistrationCommand extends AbstractCase
+class RegistrationCommand extends AbstractCase
 {
 
     private EventDispatcherInterface $eventDispatcher;
@@ -40,7 +42,7 @@ class FirstRegistrationCommand extends AbstractCase
         $this->userRepository = $userRepository;
     }
 
-    public function saveFirstRegistration(RegistrationDto $registrationDto)
+    public function registration(RegistrationDto $registrationDto): CaseResponse
     {
         $foundUser = $this->userRepository->findOneBy(['email' => $registrationDto->email]);
         if ($foundUser === null) {
@@ -49,7 +51,7 @@ class FirstRegistrationCommand extends AbstractCase
             $user->setEmail($registrationDto->email);
             $user->setPhone($registrationDto->email);
             $user->setConfirmationCode($generator->confirmCode());
-            $user->setEnabledCountry($registrationDto->country);
+//            $user->setEnabledCountry($registrationDto->country);
             $user->setCreatedAt(new DateTime());
             $user->setPassword($this->hasher->hashPassword($user, decbin(random_int(100, 300))));
             $this->em()->persist($user);
@@ -58,9 +60,10 @@ class FirstRegistrationCommand extends AbstractCase
             $event = new FirstRegistrationEvent($user, $registrationDto->confirmationMode);
             $this->eventDispatcher->dispatch($event, FirstRegistrationEvent::NAME);
 
-            return $this->successResponse('Code send to user', []);
+            return $this->successResponse('Code send to user', [], HttpStatus::ACCEPTED);
         }
-        return $this->errorResponse('Email already exist.', []);
+
+        return $this->errorResponse('Email already exist.', [], HttpStatus::NOTFOUND);
     }
 
 }

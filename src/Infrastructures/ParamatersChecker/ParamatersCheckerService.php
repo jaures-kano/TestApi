@@ -11,10 +11,9 @@ namespace App\Infrastructures\ParamatersChecker;
 class ParamatersCheckerService
 {
 
-    public function arrayCheck(array $sendArray, array $arrayRequire)
+    public function arrayCheck(array $sendArray, array $arrayRequire): array
     {
         $missingData = [];
-        $countMissed = 0;
 
         $arrayKey = array_keys($sendArray);
         foreach ($arrayRequire as $item) {

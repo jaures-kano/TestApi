@@ -40,3 +40,8 @@ services:
     decorates: 'api_platform.openapi.factory'
     arguments: [ '@App\Http\Api\OpenApi\Profile\OpenProfileApiFactory.inner' ]
     autoconfigure: false
+
+  App\Http\Api\OpenApi\QrCode\OpenQrCodeApiFactory:
+    decorates: 'api_platform.openapi.factory'
+    arguments: [ '@App\Http\Api\OpenApi\QrCode\OpenQrCodeApiFactory.inner' ]
+    autoconfigure: false

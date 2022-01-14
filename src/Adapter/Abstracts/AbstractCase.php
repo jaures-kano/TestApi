@@ -16,14 +16,14 @@ class AbstractCase extends AbstractController
 {
 
 
-    public function successResponse(string $message, array $data): CaseResponse
+    public function successResponse(string $message, array $data, $status = 200): CaseResponse
     {
-        return new CaseResponse(true, $message, $data);
+        return new CaseResponse(true, $message, $data, $status);
     }
 
-    public function errorResponse(string $message, array $data): CaseResponse
+    public function errorResponse(string $message, array $data, $status = 200): CaseResponse
     {
-        return new CaseResponse(false, $message, $data);
+        return new CaseResponse(false, $message, $data, $status);
     }
 
     public function em()

@@ -108,7 +108,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, Seriali
     /**
      * @ORM\ManyToOne(targetEntity="App\Domain\SubscriptionPlan\Subscription\Entity\Subscription",
      *      inversedBy="users")
-     * @ORM\JoinColumn(nullable=false)
      */
     private Subscription $subscription;
 
