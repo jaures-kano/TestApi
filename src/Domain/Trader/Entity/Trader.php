@@ -25,7 +25,7 @@ class Trader
      * @ORM\GeneratedValue(strategy="CUSTOM")
      * @ORM\CustomIdGenerator(class=UlidGenerator::class)
      */
-    private Ulid $id;
+    private ?Ulid $id;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Domain\AuthDomain\Auth\Entity\User", inversedBy="trader")
@@ -38,9 +38,9 @@ class Trader
     private bool $isEnabled = false;
 
     /**
-     * @return Ulid
+     * @return ?Ulid
      */
-    public function getId(): Ulid
+    public function getId(): ?Ulid
     {
         return $this->id;
     }

@@ -5,7 +5,9 @@ namespace App\Domain\QrCodeDomain\QrCodeTransaction\Entity;
 use App\Application\Traits\BaseTimeTrait;
 use App\Domain\AuthDomain\Auth\Entity\User;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\IdGenerator\UlidGenerator;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Uid\Ulid;
 
 
 /**
@@ -21,11 +23,12 @@ class QrCodeTransaction
 
     /**
      * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
-     * @Groups({"read:qr_code"})
+     * @ORM\Column(type="ulid", unique=true)
+     * @ORM\GeneratedValue(strategy="CUSTOM")
+     * @ORM\CustomIdGenerator(class=UlidGenerator::class)
+     * @Groups({"read:user"})
      */
-    private int $id;
+    private ?Ulid $id;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -46,9 +49,9 @@ class QrCodeTransaction
     private User $user;
 
     /**
-     * @return int
+     * @return Ulid
      */
-    public function getId(): int
+    public function getId(): Ulid
     {
         return $this->id;
     }

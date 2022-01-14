@@ -6,6 +6,9 @@ use App\Application\Traits\BaseTimeTrait;
 use App\Domain\EnabledCountry\Entity\EnabledCountry;
 use App\Domain\SubscriptionPlan\SubscriptionType\Entity\SubscriptionType;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\IdGenerator\UlidGenerator;
+use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Uid\Ulid;
 
 
 /**
@@ -17,10 +20,12 @@ class SubscriptionCountryFees
 
     /**
      * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="ulid", unique=true)
+     * @ORM\GeneratedValue(strategy="CUSTOM")
+     * @ORM\CustomIdGenerator(class=UlidGenerator::class)
+     * @Groups({"read:user"})
      */
-    private int $id;
+    private ?Ulid $id;
 
     /**
      * @var string
@@ -47,9 +52,9 @@ class SubscriptionCountryFees
     private EnabledCountry $enabledCountry;
 
     /**
-     * @return int
+     * @return Ulid
      */
-    public function getId(): int
+    public function getId(): Ulid
     {
         return $this->id;
     }

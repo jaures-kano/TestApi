@@ -8,6 +8,9 @@ use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\IdGenerator\UlidGenerator;
+use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Uid\Ulid;
 
 
 /**
@@ -19,10 +22,12 @@ class Card
 
     /**
      * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="ulid", unique=true)
+     * @ORM\GeneratedValue(strategy="CUSTOM")
+     * @ORM\CustomIdGenerator(class=UlidGenerator::class)
+     * @Groups({"read:user"})
      */
-    private int $id;
+    private ?Ulid $id;
 
     /**
      * @var int
@@ -59,9 +64,9 @@ class Card
     }
 
     /**
-     * @return int
+     * @return Ulid
      */
-    public function getId(): int
+    public function getId(): Ulid
     {
         return $this->id;
     }
