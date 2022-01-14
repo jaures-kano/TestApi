@@ -5,9 +5,6 @@ namespace App\Adapter\Abstracts;
 
 
 use App\Adapter\Response\CaseResponse;
-use App\Application\ApplicationKey\KeyService;
-use App\Domain\AuthDomain\Auth\Entity\User;
-use App\Infrastructures\JwtToken\JwtService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
@@ -17,28 +14,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
  */
 class AbstractCase extends AbstractController
 {
-
-    private KeyService $keyService;
-
-    private JwtService $jwtService;
-
-    public function __construct(KeyService $keyService, JwtService $jwtService)
-    {
-        $this->keyService = $keyService;
-        $this->jwtService = $jwtService;
-    }
-
-
-    public function isValidApikey(string $token): bool
-    {
-        return $this->keyService->isValidKey($token);
-    }
-
-
-    public function isUserTokenValid(User $user, string $token): bool
-    {
-        return $this->jwtService->isValidUserToken($user, $token);
-    }
 
 
     public function successResponse(string $message, array $data, $status = 200): CaseResponse
