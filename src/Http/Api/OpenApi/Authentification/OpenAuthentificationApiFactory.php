@@ -20,21 +20,16 @@ class OpenAuthentificationApiFactory implements OpenApiFactoryInterface
     private ResetPasswordPath $resetPasswordPath;
     private RefreshTokenPath $refreshTokenPath;
     private RegistrationPath $registrationPath;
+    private RegistrationActivationPath $registrationActivationPath;
 
-    /**
-     * @param OpenApiFactoryInterface $decorated
-     * @param RegistrationPath $registrationPath
-     * @param PasswordRecoverPath $passwordRecoverPath
-     * @param ResetPasswordPath $resetPasswordPath
-     * @param RefreshTokenPath $refreshTokenPath
-     * @param AuthentificationLoginPath $authentificationLoginPath
-     */
-    public function __construct(OpenApiFactoryInterface   $decorated,
-                                RegistrationPath          $registrationPath,
-                                PasswordRecoverPath       $passwordRecoverPath,
-                                ResetPasswordPath         $resetPasswordPath,
-                                RefreshTokenPath          $refreshTokenPath,
-                                AuthentificationLoginPath $authentificationLoginPath)
+
+    public function __construct(OpenApiFactoryInterface    $decorated,
+                                RegistrationPath           $registrationPath,
+                                PasswordRecoverPath        $passwordRecoverPath,
+                                ResetPasswordPath          $resetPasswordPath,
+                                RefreshTokenPath           $refreshTokenPath,
+                                RegistrationActivationPath $registrationActivationPath,
+                                AuthentificationLoginPath  $authentificationLoginPath)
     {
         $this->decorated = $decorated;
         $this->registrationPath = $registrationPath;
@@ -42,6 +37,7 @@ class OpenAuthentificationApiFactory implements OpenApiFactoryInterface
         $this->passwordRecoverPath = $passwordRecoverPath;
         $this->resetPasswordPath = $resetPasswordPath;
         $this->refreshTokenPath = $refreshTokenPath;
+        $this->registrationActivationPath = $registrationActivationPath;
     }
 
     public function __invoke(array $context = []): OpenApi
@@ -67,6 +63,10 @@ class OpenAuthentificationApiFactory implements OpenApiFactoryInterface
         $openApi->getPaths()->addPath('/api/authentification/token/refresh',
             $this->refreshTokenPath->addRefreshPath(
                 'Authentification proccess', 'refresh-token-login'));
+
+        $openApi->getPaths()->addPath('/api/authentification/registration/activation',
+            $this->registrationActivationPath->activateRegistrationPath(
+                'Authentification proccess', 'registration-activation-path'));
 
         return $openApi;
     }
