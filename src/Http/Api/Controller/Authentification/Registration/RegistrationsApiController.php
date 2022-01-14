@@ -29,7 +29,7 @@ class RegistrationsApiController extends AbstractController
     {
         $data = json_decode($request->getContent(), true);
         $requireData = [
-            'first_name', 'last_name', 'email', 'phone', 'api_key', 'access_token',
+            'first_name', 'last_name', 'email', 'phone', 'api_key',
             'country', 'password', 'confirm_password', 'confirmation_mode'
         ];
 
@@ -50,13 +50,13 @@ class RegistrationsApiController extends AbstractController
             $data['email'],
             $data['phone'],
             $data['password'],
-            $data['confirmPassword'],
-            $data['confirmationMode'],
+            $data['confirm_password'],
+            $data['confirmation_mode'],
             $data['country'],
             $data['api_key']);
 
         // send action to application
-        $commandReponse = $command->registration($registrationDto, $data['access_token']);
+        $commandReponse = $command->registration($registrationDto);
         if ($commandReponse->type === true) {
             return $this->json([
                 'message' => $commandReponse->messages

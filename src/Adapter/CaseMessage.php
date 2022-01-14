@@ -11,9 +11,15 @@ namespace App\Adapter;
 class CaseMessage
 {
 
-    public const INVALIDKEY = 'Invalid api key';
+    public const INVALID_KEY = 'Invalid api key';
 
-    public const INVALIDTOKEN = 'Invalid user token';
+    public const INVALID_TOKEN = 'Invalid user token';
+
+    public const MAIL_INVALID = 'Mail that you provide is invalid';
+
+    public const MAIL_USED = 'Mail that you provide is already have an account';
+
+    public const UNKNOW_COUNTRY = 'The country that you provide is not supported';
 
 
 }

@@ -50,22 +50,42 @@ class RegistrationPath
                             'schema' => [
                                 'type' => 'object',
                                 'properties' => [
+                                    'first_name' => [
+                                        'type' => 'string',
+                                        'example' => 'zulu',
+                                    ],
+                                    'last_name' => [
+                                        'type' => 'string',
+                                        'example' => 'shaka',
+                                    ],
                                     'phone' => [
                                         'type' => 'string',
                                         'example' => '699 999 999',
                                     ],
                                     'email' => [
-                                        'type' => 'shaka@paiecash.com',
+                                        'type' => 'string',
                                         'example' => 'shaka@paiecash.com',
                                     ],
                                     'country' => [
                                         'type' => 'integer',
-                                        'example' => 1
+                                        'example' => '0000000'
                                     ],
-                                    'confirmation' => [
+                                    'password' => [
+                                        'type' => 'string',
+                                        'example' => '123456',
+                                    ],
+                                    'confirm_password' => [
+                                        'type' => 'string',
+                                        'example' => '123456',
+                                    ],
+                                    'confirmation_mode' => [
                                         'type' => 'boolean',
                                         'example' => true
                                     ],
+                                    'api_key' => [
+                                        'type' => 'string',
+                                        'example' => '00000000000000000'
+                                    ]
                                 ],
                             ],
                         ],
