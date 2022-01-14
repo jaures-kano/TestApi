@@ -21,5 +21,7 @@ class CaseMessage
 
     public const UNKNOW_COUNTRY = 'The country that you provide is not supported';
 
+    public const INVALID_ID = 'Id of entity is not correct, please verify type then send again';
+
 
 }

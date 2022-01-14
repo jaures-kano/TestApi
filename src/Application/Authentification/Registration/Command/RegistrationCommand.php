@@ -17,6 +17,7 @@ use App\Infrastructures\Generator\ConfirmationAccountGenerator;
 use DateTime;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+use Symfony\Component\Uid\Ulid;
 
 /**
  * Class RegistrationCommand
@@ -58,6 +59,11 @@ class RegistrationCommand extends AbstractCase
 
         if ($registrationDto->password !== $registrationDto->passwordConfirm) {
             return $this->errorResponse('Password is not matching',
+                [], HttpStatus::BADREQUEST);
+        }
+
+        if (Ulid::isValid($registrationDto->country) === false) {
+            return $this->errorResponse(CaseMessage::INVALID_ID,
                 [], HttpStatus::BADREQUEST);
         }
 
