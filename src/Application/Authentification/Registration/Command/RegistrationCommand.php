@@ -90,10 +90,9 @@ class RegistrationCommand extends AbstractCase
         $user->setPhone($registrationDto->phone);
         $user->setFirstName($registrationDto->firstName);
         $user->setLastName($registrationDto->lastName);
-        $user->setConfirmationCode($this->tokenGenerator->getAuthToken());
+        $user->setConfirmationToken($this->tokenGenerator->getAuthToken());
         $user->setEnabledCountry($country);
         $user->setCreatedAt(new DateTime());
-        $user->setResetTime(new DateTime('+30 minutes'));
         $user->setCreatedAt(new DateTime());
         $user->setPassword($this->hasher->hashPassword($user, $registrationDto->password));
         $this->em()->persist($user);

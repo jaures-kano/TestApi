@@ -22,22 +22,31 @@ trait IdentityVerified
     private bool $identityVerified = false;
 
     /**
-     * @return bool
+     * @ORM\Column(type="boolean", options={"default": false})
+     * @Groups({"read:user"})
      */
+    private bool $isActived = false;
+
     public function getIdentityVerified(): bool
     {
         return $this->identityVerified;
     }
 
-    /**
-     * @param bool $identityVerified
-     * @return IdentityVerified
-     */
     public function setIdentityVerified(bool $identityVerified): self
     {
         $this->identityVerified = $identityVerified;
         return $this;
     }
 
+    public function isActived(): bool
+    {
+        return $this->isActived;
+    }
+
+    public function setIsActived(bool $isActived): self
+    {
+        $this->isActived = $isActived;
+        return $this;
+    }
 
 }

@@ -7,7 +7,6 @@ use App\Application\Traits\BaseTimeTrait;
 use App\Domain\AuthDomain\Auth\Traits\AuthSystems;
 use App\Domain\AuthDomain\Auth\Traits\IdentityVerified;
 use App\Domain\AuthDomain\Auth\Traits\ProccessorInfo;
-use App\Domain\AuthDomain\Auth\Traits\SystemsInformations;
 use App\Domain\AuthDomain\Auth\Traits\UserLocationInformation;
 use App\Domain\AuthDomain\Auth\Traits\UserPersonnalInformation;
 use App\Domain\CommercialDomain\Entity\Commercial;
@@ -35,7 +34,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, Seriali
     use ProccessorInfo;
     use UserPersonnalInformation;
     use UserLocationInformation;
-    use SystemsInformations;
     use BaseTimeTrait;
 
     /**

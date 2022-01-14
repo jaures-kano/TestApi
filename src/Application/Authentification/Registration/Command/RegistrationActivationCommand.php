@@ -41,6 +41,28 @@ class RegistrationActivationCommand extends AbstractCase
                 [], HttpStatus::BADREQUEST);
         }
 
+        if (!filter_var($dto->email, FILTER_VALIDATE_EMAIL)) {
+            return $this->errorResponse(CaseMessage::MAIL_INVALID,
+                [], HttpStatus::BADREQUEST);
+        }
+
+
+        $foundUser = $this->userRepository->findOneBy(['email' => $dto->email]);
+
+        if ($foundUser === null) {
+            return $this->errorResponse(CaseMessage::UNKNOW_EMAIL,
+                [], HttpStatus::BADREQUEST);
+        }
+
+        if ($dto->code !== $foundUser->getConfirmationToken()) {
+            return $this->errorResponse(CaseMessage::CODEERROR,
+                [], HttpStatus::BADREQUEST);
+        }
+
+        $foundUser->setIsActived(true);
+        $this->em()->persist($foundUser);
+        $this->em()->flush();
+
         return $this->errorResponse('Account activated', [], Response::HTTP_BAD_REQUEST);
     }
 
