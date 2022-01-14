@@ -5,15 +5,16 @@ namespace App\Domain\AppKeysDomain\Entity;
 
 use App\Application\Traits\BaseTimeTrait;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\IdGenerator\UlidGenerator;
 use Symfony\Component\Uid\Ulid;
 
 /**
- * Class UserApplicationKey
+ * Class ApplicationUserKey
  * @package App\Domain\AppKeysDomain\Entity
  * @author jaures kano <ruddyjaures@mail.com>
  * @ORM\Entity
  */
-class UserApplicationKey
+class ApplicationUserKey
 {
     use BaseTimeTrait;
 
@@ -58,9 +59,9 @@ class UserApplicationKey
 
     /**
      * @param string $key
-     * @return UserApplicationKey
+     * @return ApplicationUserKey
      */
-    public function setKey(string $key): UserApplicationKey
+    public function setKey(string $key): ApplicationUserKey
     {
         $this->key = $key;
         return $this;
@@ -76,9 +77,9 @@ class UserApplicationKey
 
     /**
      * @param int $keyAuthority
-     * @return UserApplicationKey
+     * @return ApplicationUserKey
      */
-    public function setKeyAuthority(int $keyAuthority): UserApplicationKey
+    public function setKeyAuthority(int $keyAuthority): ApplicationUserKey
     {
         $this->keyAuthority = $keyAuthority;
         return $this;
@@ -94,9 +95,9 @@ class UserApplicationKey
 
     /**
      * @param bool $isValid
-     * @return UserApplicationKey
+     * @return ApplicationUserKey
      */
-    public function setIsValid(bool $isValid): UserApplicationKey
+    public function setIsValid(bool $isValid): ApplicationUserKey
     {
         $this->isValid = $isValid;
         return $this;

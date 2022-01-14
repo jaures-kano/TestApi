@@ -22,14 +22,13 @@ class TokenGenerator
         return hexdec(bin2hex($bytes));
     }
 
-    public function getApiToken(): string
+    public function getApiToken($length = 20): string
     {
         $innerStrong = true;
         do {
-            $bytes = openssl_random_pseudo_bytes(32, $innerStrong);
+            $bytes = openssl_random_pseudo_bytes($length, $innerStrong);
             // $bytes needs to be verified as well
         } while (!$bytes || !$innerStrong);
-
         return bin2hex($bytes);
     }
 
