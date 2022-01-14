@@ -3,7 +3,6 @@
 namespace App\Application\ApplicationKey;
 
 
-use App\Domain\AppKeysDomain\Entity\ApplicationKey;
 use App\Domain\AppKeysDomain\Repository\ApplicationKeyRepository;
 
 /**
@@ -30,10 +29,13 @@ class KeyService
         return true;
     }
 
-    public function getKey($string): ?ApplicationKey
+    public function getKey($string): ?string
     {
         $findKey = $this->applicationKeyRepository->findOneBy(['designation' => $string]);
-        return $findKey ?? null;
+        if ($findKey !== null) {
+            return $findKey->getId() . '-' . $findKey->getKeyToken();
+        }
+        return null;
     }
 
 }

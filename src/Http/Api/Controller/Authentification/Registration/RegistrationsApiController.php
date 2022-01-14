@@ -29,8 +29,8 @@ class RegistrationsApiController extends AbstractController
     {
         $data = json_decode($request->getContent(), true);
         $requireData = [
-            'firstName', 'lastName', 'email', 'phone',
-            'country', 'password', 'confirmPassword', 'confirmationMode'
+            'first_name', 'last_name', 'email', 'phone', 'api_key', 'access_token',
+            'country', 'password', 'confirm_password', 'confirmation_mode'
         ];
 
         /// verify if data require
@@ -45,22 +45,24 @@ class RegistrationsApiController extends AbstractController
 
         // chargement du dto
         $registrationDto = new RegistrationDto(
-            $data['firstName'],
-            $data['lastName'],
+            $data['first_name'],
+            $data['last_name'],
             $data['email'],
             $data['phone'],
-            $data['country'],
             $data['password'],
             $data['confirmPassword'],
-            $data['confirmationMode']);
+            $data['confirmationMode'],
+            $data['country'],
+            $data['api_key']);
 
         // send action to application
-        $commandReponse = $command->registration($registrationDto);
+        $commandReponse = $command->registration($registrationDto, $data['access_token']);
         if ($commandReponse->type === true) {
             return $this->json([
                 'message' => $commandReponse->messages
             ], $commandReponse->status);
         }
+
 
         return $this->json([
             'message' => $commandReponse->messages

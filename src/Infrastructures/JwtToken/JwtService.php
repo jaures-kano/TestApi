@@ -3,7 +3,7 @@
 namespace App\Infrastructures\JwtToken;
 
 
-use App\Domain\Auth\Entity\User;
+use App\Domain\AuthDomain\Auth\Entity\User;
 use DateTime;
 use Gesdinet\JWTRefreshTokenBundle\Model\RefreshTokenManagerInterface;
 use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
@@ -55,4 +55,10 @@ class JwtService
         ];
     }
 
+    public function isValidUserToken(User $user, ?string $token): bool
+    {
+        $decodeToken = $this->tokenManager->decode($token);
+
+        return true;
+    }
 }

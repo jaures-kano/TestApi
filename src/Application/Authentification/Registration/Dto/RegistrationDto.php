@@ -26,24 +26,17 @@ class RegistrationDto
 
     public bool $confirmationMode;
 
-    /**
-     * @param string $firstName
-     * @param string $lastName
-     * @param string $email
-     * @param string $phone
-     * @param string $password
-     * @param string $passwordConfirm
-     * @param string $country
-     * @param bool $confirmationMode
-     */
+    public string $apiKey;
+
     public function __construct(string $firstName,
                                 string $lastName,
                                 string $email,
                                 string $phone,
                                 string $password,
                                 string $passwordConfirm,
+                                bool   $confirmationMode,
                                 string $country,
-                                bool   $confirmationMode)
+                                string $apiKey)
     {
         $this->firstName = $firstName;
         $this->lastName = $lastName;
@@ -53,6 +46,7 @@ class RegistrationDto
         $this->passwordConfirm = $passwordConfirm;
         $this->country = $country;
         $this->confirmationMode = $confirmationMode;
+        $this->apiKey = $apiKey;
     }
 
 

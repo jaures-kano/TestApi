@@ -42,7 +42,7 @@ class RegistrationCommand extends AbstractCase
         $this->userRepository = $userRepository;
     }
 
-    public function registration(RegistrationDto $registrationDto): CaseResponse
+    public function registration(RegistrationDto $registrationDto, string $token = null): CaseResponse
     {
         $foundUser = $this->userRepository->findOneBy(['email' => $registrationDto->email]);
         if ($foundUser === null) {
