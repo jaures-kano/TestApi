@@ -11,7 +11,18 @@ namespace App\Infrastructures\Generator;
 class TokenGenerator
 {
 
-    public function getToken(): string
+    public function getAuthToken(): string
+    {
+        $innerStrong = true;
+        do {
+            $bytes = openssl_random_pseudo_bytes(3, $innerStrong);
+            // $bytes needs to be verified as well
+        } while (!$bytes || !$innerStrong);
+
+        return hexdec(bin2hex($bytes));
+    }
+
+    public function getApiToken(): string
     {
         $innerStrong = true;
         do {
@@ -19,6 +30,7 @@ class TokenGenerator
             // $bytes needs to be verified as well
         } while (!$bytes || !$innerStrong);
 
-        return bindec($bytes);
+        return bin2hex($bytes);
     }
+
 }
