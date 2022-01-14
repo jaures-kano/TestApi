@@ -17,10 +17,12 @@ class OpenQrCodeApiFactory implements OpenApiFactoryInterface
     private QrCodeAddPath $qrCodeAddPath;
     private QrCodeCheckApiPath $qrCodeCheckApiPath;
     private QrCodeListPath $qrCodeListPath;
+    private QrCodeDetailsPath $qrCodeDetailsPath;
 
 
     public function __construct(OpenApiFactoryInterface $decorated,
                                 QrCodeAddPath           $qrCodeAddPath,
+                                QrCodeDetailsPath       $qrCodeDetailsPath,
                                 QrCodeCheckApiPath      $qrCodeCheckApiPath,
                                 QrCodeListPath          $qrCodeListPath)
     {
@@ -28,6 +30,7 @@ class OpenQrCodeApiFactory implements OpenApiFactoryInterface
         $this->qrCodeAddPath = $qrCodeAddPath;
         $this->qrCodeCheckApiPath = $qrCodeCheckApiPath;
         $this->qrCodeListPath = $qrCodeListPath;
+        $this->qrCodeDetailsPath = $qrCodeDetailsPath;
     }
 
 
@@ -43,9 +46,13 @@ class OpenQrCodeApiFactory implements OpenApiFactoryInterface
             $this->qrCodeListPath->listQrCodePath(
                 'Qr code systems', 'qr-code-list'));
 
-        $openApi->getPaths()->addPath('/api/qr_code/check',
+        $openApi->getPaths()->addPath('/api/qr_code/check/{code}',
             $this->qrCodeCheckApiPath->checkQrCodePath(
                 'Qr code systems', 'qr-code-check'));
+
+        $openApi->getPaths()->addPath('/api/qr_code/information/{code}',
+            $this->qrCodeDetailsPath->detailsQrCodePath(
+                'Qr code systems', 'qr-code-details'));
 
         return $openApi;
     }

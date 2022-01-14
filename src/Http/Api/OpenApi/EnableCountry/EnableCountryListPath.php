@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Api\OpenApi\QrCode;
+namespace App\Http\Api\OpenApi\EnableCountry;
 
 
 use ApiPlatform\Core\OpenApi\Model\Operation;
@@ -10,17 +10,17 @@ use ArrayObject;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
- * Class QrCodeAddPath
- * @package App\Http\Api\OpenApi\QrCode
+ * Class EnableCountryListPath
+ * @package App\Http\Api\OpenApi\EnableCountry
  * @author jaures kano <ruddyjaures@mail.com>
  */
-class QrCodeAddPath
+class EnableCountryListPath
 {
 
-    public function addQrCodePath($tag, $operationId = 'default'): PathItem
+    public function listEnableCountryPath($tag, $operationId = 'default'): PathItem
     {
         return new PathItem(
-            null, null, null, null, null,
+            null, null, null,
             new Operation(
                 $operationId,
                 [$tag],
@@ -62,7 +62,7 @@ class QrCodeAddPath
                             ],
                         ],
                     ]))
-            )
+            ), null, null,
         );
     }
 

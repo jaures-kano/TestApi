@@ -46,6 +46,7 @@ class OpenProfileApiFactory implements OpenApiFactoryInterface
             $this->updateInformationProfilePath->addUpdateInformationProfile(
                 'Profile information', 'profile-update'));
 
+
         return $openApi;
     }
 }

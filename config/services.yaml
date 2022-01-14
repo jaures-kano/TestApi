@@ -45,3 +45,14 @@ services:
     decorates: 'api_platform.openapi.factory'
     arguments: [ '@App\Http\Api\OpenApi\QrCode\OpenQrCodeApiFactory.inner' ]
     autoconfigure: false
+
+  App\Http\Api\OpenApi\SubscriptionPlan\OpenSubscriptionPlanApiFactory:
+    decorates: 'api_platform.openapi.factory'
+    arguments: [ '@App\Http\Api\OpenApi\SubscriptionPlan\OpenSubscriptionPlanApiFactory.inner' ]
+    autoconfigure: false
+
+  App\Http\Api\OpenApi\EnableCountry\OpenEnableCountryApiFactory:
+    decorates: 'api_platform.openapi.factory'
+    arguments: [ '@App\Http\Api\OpenApi\EnableCountry\OpenEnableCountryApiFactory.inner' ]
+    autoconfigure: false
+
