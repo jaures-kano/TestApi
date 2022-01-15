@@ -43,6 +43,11 @@ class UserRecoveryRequest
     private ?DateTimeInterface $expiredAt;
 
     /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private ?DateTimeInterface $validateAt;
+
+    /**
      * @ORM\ManyToOne(targetEntity="App\Domain\AuthDomain\Auth\Entity\User",
      *     inversedBy="users")
      * @ORM\JoinColumn(nullable=false)
@@ -96,6 +101,17 @@ class UserRecoveryRequest
     public function setExpiredAt(?DateTimeInterface $expiredAt): UserRecoveryRequest
     {
         $this->expiredAt = $expiredAt;
+        return $this;
+    }
+
+    public function getValidateAt(): ?DateTimeInterface
+    {
+        return $this->validateAt;
+    }
+
+    public function setValidateAt(?DateTimeInterface $validateAt): UserRecoveryRequest
+    {
+        $this->validateAt = $validateAt;
         return $this;
     }
 

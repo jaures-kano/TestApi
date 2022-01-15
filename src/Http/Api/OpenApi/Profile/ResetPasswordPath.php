@@ -50,17 +50,25 @@ class ResetPasswordPath
                             'schema' => [
                                 'type' => 'object',
                                 'properties' => [
+                                    'email' => [
+                                        'type' => 'string',
+                                        'example' => 'zulu@zulu.com',
+                                    ],
+                                    'confirmation_code' => [
+                                        'type' => 'string',
+                                        'example' => '12345',
+                                    ],
                                     'password' => [
                                         'type' => 'string',
-                                        'example' => '@zulu@',
+                                        'example' => '12345678',
                                     ],
-                                    'passwordConfirm' => [
+                                    'password_confirm' => [
                                         'type' => 'string',
-                                        'example' => '@zulu@',
+                                        'example' => '12345678',
                                     ],
-                                    'resetCode' => [
-                                        'type' => 'int',
-                                        'example' => '0000',
+                                    'api_key' => [
+                                        'type' => 'string',
+                                        'example' => '0000000000000000',
                                     ]
                                 ],
                             ],

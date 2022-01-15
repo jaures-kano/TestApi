@@ -30,7 +30,6 @@ class RequestRecoverCommand extends AbstractCase
     private UserRecoveryRequestRepository $userRecoveryRRepository;
     private TokenGenerator $tokenGenerator;
 
-
     public function __construct(EventDispatcherInterface      $eventDispatcher,
                                 UserRepository                $userRepository,
                                 TokenGenerator                $tokenGenerator,
@@ -43,7 +42,6 @@ class RequestRecoverCommand extends AbstractCase
         $this->userRecoveryRRepository = $userRecoveryRRepository;
         $this->tokenGenerator = $tokenGenerator;
     }
-
 
     public function recoverPassword($email, $mode, $apiKey): CaseResponse
     {

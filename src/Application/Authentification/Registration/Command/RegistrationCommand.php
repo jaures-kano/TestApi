@@ -61,7 +61,7 @@ class RegistrationCommand extends AbstractCase
         }
 
         if ($registrationDto->password !== $registrationDto->passwordConfirm) {
-            return $this->errorResponse('Password is not matching',
+            return $this->errorResponse(CaseMessage::CODE_ERROR,
                 [], HttpStatus::BADREQUEST);
         }
 

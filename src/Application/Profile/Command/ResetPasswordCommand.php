@@ -8,9 +8,10 @@ use App\Adapter\CaseMessage;
 use App\Adapter\HttpStatus;
 use App\Adapter\Response\CaseResponse;
 use App\Application\ApplicationKey\KeyService;
-use App\Application\Profile\Dto\RequestPasswordDto;
+use App\Application\Profile\Dto\ResetPasswordDto;
 use App\Domain\AuthDomain\Auth\Repository\UserRepository;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use App\Domain\ProfileDomain\Repository\UserRecoveryRequestRepository;
+use DateTime;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 /**
@@ -21,23 +22,23 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 class ResetPasswordCommand extends AbstractCase
 {
 
-    private EventDispatcherInterface $eventDispatcher;
-    private UserPasswordHasherInterface $hasher;
-    private UserRepository $userRepository;
     private KeyService $keyService;
+    private UserRecoveryRequestRepository $repositoryRequest;
+    private UserRepository $userRepository;
+    private UserPasswordHasherInterface $hasher;
 
-    public function __construct(EventDispatcherInterface    $eventDispatcher,
-                                UserRepository              $userRepository,
-                                KeyService                  $keyService,
-                                UserPasswordHasherInterface $hasher)
+    public function __construct(UserRecoveryRequestRepository $repositoryRequest,
+                                UserRepository                $userRepository,
+                                UserPasswordHasherInterface   $hasher,
+                                KeyService                    $keyService)
     {
-        $this->eventDispatcher = $eventDispatcher;
-        $this->hasher = $hasher;
-        $this->userRepository = $userRepository;
         $this->keyService = $keyService;
+        $this->repositoryRequest = $repositoryRequest;
+        $this->userRepository = $userRepository;
+        $this->hasher = $hasher;
     }
 
-    public function resetPassword(RequestPasswordDto $dto): CaseResponse
+    public function resetPassword(ResetPasswordDto $dto): CaseResponse
     {
 
         if ($this->keyService->isValidKey($dto->apiKey) === false) {
@@ -45,12 +46,44 @@ class ResetPasswordCommand extends AbstractCase
                 [], HttpStatus::BADREQUEST);
         }
 
+        if ($dto->passwordConfirm !== $dto->password) {
+            return $this->errorResponse(CaseMessage::CODE_ERROR,
+                [], HttpStatus::BADREQUEST);
+        }
+
+
         if (!filter_var($dto->email, FILTER_VALIDATE_EMAIL)) {
             return $this->errorResponse(CaseMessage::MAIL_INVALID,
                 [], HttpStatus::BADREQUEST);
         }
 
-        return $this->errorResponse('Reset code is not valid', []);
+        $foundUser = $this->userRepository->findOneBy(['email' => $dto->email]);
+        if ($foundUser === null) {
+            return $this->errorResponse(CaseMessage::UNKNOW_EMAIL,
+                [], HttpStatus::BADREQUEST);
+        }
+
+        $ifRequest = $this->repositoryRequest->findOneBy(['isValidate' => false, 'user' => $foundUser]);
+        if ($ifRequest === null) {
+            return $this->errorResponse('User d\'ont request to resetting his password',
+                [], HttpStatus::FORBIDEN);
+        }
+
+        if ($ifRequest->getConfirmationToken() !== $dto->confirmationCode) {
+            return $this->errorResponse(CaseMessage::CODE_INVALID,
+                [], HttpStatus::BADREQUEST);
+        }
+
+        $ifRequest->setIsValidate(true);
+        $ifRequest->setValidateAt(new DateTime());
+        $this->em()->persist($ifRequest);
+        $this->em()->flush();
+
+        $foundUser->setPassword($this->hasher->hashPassword($foundUser, $dto->password));
+        $this->em()->persist($foundUser);
+        $this->em()->flush();
+
+        return $this->successResponse('Password is reset', [], HttpStatus::ACCEPTED);
     }
 
 
