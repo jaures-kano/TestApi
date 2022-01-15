@@ -75,7 +75,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, Seriali
     private Collection $userRecovry;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Domain\QrCodeDomain\QrCodeTransaction\Entity\QrCodeTransaction",
+     * @ORM\OneToMany(targetEntity="App\Domain\QrCodeDomain\Entity\QrCodeTransaction",
      *     mappedBy="user" )
      */
     private Collection $qrCodes;

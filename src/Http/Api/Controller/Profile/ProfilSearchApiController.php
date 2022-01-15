@@ -28,15 +28,15 @@ class ProfilSearchApiController extends AbstractController
 
         if($data){
             $user = null;
-            if(array_key_exists('email', $data))
-            {
-                $user = $repository->findOneBy(['email'=>$data['email']]);
-            }elseif (array_key_exists('phone', $data))
-            {
-                $user = $repository->findOneBy(['phone'=>$data['phone']]);
+            if (array_key_exists('email', $data)) {
+                $user = $repository->findOneBy(['email' => $data['email']]);
+            } elseif (array_key_exists('phone', $data)) {
+                $user = $repository->findOneBy(['phone' => $data['phone']]);
             }
 
-            if($user) return $this->json(['message' => $user], 200, [], ['groups'=>'read:user']) ;
+            if ($user) {
+                return $this->json(['message' => $user], 200, [], ['groups' => 'read:user']);
+            }
 
             return $this->json(['message' => 'user not found'], 404);
         }

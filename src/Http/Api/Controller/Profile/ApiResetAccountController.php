@@ -5,7 +5,6 @@ namespace App\Http\Api\Controller\Profile;
 
 use App\Application\Profile\Command\ResetPasswordCommand;
 use App\Application\Profile\Dto\ResetPasswordDto;
-use App\Domain\AuthDomain\Auth\Repository\UserRepository;
 use App\Infrastructures\ParamatersChecker\ParamatersCheckerService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -25,7 +24,6 @@ class ApiResetAccountController extends AbstractController
      * @Route("/account/reset", name="api_reset_account")
      */
     public function indexResetPassword(Request                  $request,
-                                       UserRepository           $userRepository,
                                        ParamatersCheckerService $checkerService,
                                        ResetPasswordCommand     $command): JsonResponse
     {
@@ -50,7 +48,7 @@ class ApiResetAccountController extends AbstractController
             $content['confirmation_code'],
             $content['password'],
             $content['password_confirm'],
-            $content['api_key'],
+            $content['api_key']
         );
 
         $commandReponse = $command->resetPassword($dto);
