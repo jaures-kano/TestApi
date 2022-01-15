@@ -53,12 +53,14 @@ class PasswordRecoverPath
                                     'email' => [
                                         'type' => 'string',
                                         'example' => 'admin@admin.com',
+                                        'required' => true
                                     ],
-                                    'phone' => [
+                                    'api_key' => [
                                         'type' => 'string',
-                                        'example' => '666 999 666',
+                                        'example' => '0000000000000000',
+                                        'required' => true
                                     ],
-                                    'isMail' => [
+                                    'confirmation_mode' => [
                                         'type' => 'bool',
                                         'example' => true,
                                         'required' => true

@@ -3,7 +3,7 @@
 namespace App\Domain\ProfileDomain\Event;
 
 
-use App\Domain\AuthDomain\Auth\Entity\User;
+use App\Domain\ProfileDomain\Entity\UserRecoveryRequest;
 use Symfony\Contracts\EventDispatcher\Event;
 
 /**
@@ -16,19 +16,19 @@ class PasswordRequestEvent extends Event
 
     public const NAME = 'onResetPasswordRequest';
 
-    protected User $user;
+    protected UserRecoveryRequest $userRecoveryRequest;
 
     protected bool $mode;
 
-    public function __construct(User $user, bool $mode)
+    public function __construct(UserRecoveryRequest $userRecoveryRequest, bool $mode)
     {
-        $this->user = $user;
+        $this->userRecoveryRequest = $userRecoveryRequest;
         $this->mode = $mode;
     }
 
-    public function getUser(): User
+    public function getUserRequest(): UserRecoveryRequest
     {
-        return $this->user;
+        return $this->userRecoveryRequest;
     }
 
     public function getMode(): bool

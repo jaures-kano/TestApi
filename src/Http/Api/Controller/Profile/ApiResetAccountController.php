@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("api/profle")
+ * @Route("api/profile")
  * Class ApiResetAccountController
  * @package App\Http\Api\Controller\Authentification\Security
  * @author jaures kano <ruddyjaures@mail.com>

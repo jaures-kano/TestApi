@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("api/profle")
+ * @Route("api/profile")
  * Class ApiRecoverAccountController
  * @package App\Http\Api\Controller\Security
  * @author jaures kano <ruddyjaures@mail.com>
@@ -34,20 +34,21 @@ class ApiRecoverAccountController extends AbstractController
 
         /// verify if data require
         $missingParameter = $checkerService->arrayCheck($content,
-            ['email', 'phone', 'confirmation_mode', 'api_key']);
+            ['email', 'confirmation_mode', 'api_key']);
+
         if ($missingParameter['count'] > 0) {
             return $this->json([
-                'message' => 'Bad request, missed parameter '
+                'message' => 'Bad request, missed parameter'
                     . implode(", ", $missingParameter['missing'])
             ], 406);
         }
 
-
-        $commandResponse = $command->recoverPassword($user, $isMail);
+        $commandResponse = $command->recoverPassword
+        ($content['email'], $content['confirmation_mode'], $content['api_key']);
 
         return $this->json([
             'message' => $commandResponse->messages
-        ], 400);
+        ], $commandResponse->status);
     }
 
 }

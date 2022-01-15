@@ -11,21 +11,26 @@ use Doctrine\ORM\Mapping as ORM;
  * Class UserRecovryRequest
  * @package App\Domain\ProfileDomain\Entity
  * @author jaures kano <ruddyjaures@mail.com>
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Domain\ProfileDomain\Repository\UserRecoveryRequestRepository")
  */
-class UserRecovryRequest
+class UserRecoveryRequest
 {
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
      */
-    private ?int $id;
+    private ?int $id = null;
 
     /**
      * @ORM\Column(type="string", nullable=true)
      */
     private ?string $confirmationToken;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private bool $isValidate = false;
 
     /**
      * @ORM\Column(type="datetime")
@@ -49,12 +54,24 @@ class UserRecovryRequest
         return $this->id;
     }
 
+    public function isValidate(): bool
+    {
+        return $this->isValidate;
+    }
+
+    public function setIsValidate(bool $isValidate): UserRecoveryRequest
+    {
+        $this->isValidate = $isValidate;
+        return $this;
+    }
+
+
     public function getConfirmationToken(): ?string
     {
         return $this->confirmationToken;
     }
 
-    public function setConfirmationToken(?string $confirmationToken): UserRecovryRequest
+    public function setConfirmationToken(?string $confirmationToken): UserRecoveryRequest
     {
         $this->confirmationToken = $confirmationToken;
         return $this;
@@ -65,7 +82,7 @@ class UserRecovryRequest
         return $this->requestAt;
     }
 
-    public function setRequestAt(?DateTimeInterface $requestAt): UserRecovryRequest
+    public function setRequestAt(?DateTimeInterface $requestAt): UserRecoveryRequest
     {
         $this->requestAt = $requestAt;
         return $this;
@@ -76,7 +93,7 @@ class UserRecovryRequest
         return $this->expiredAt;
     }
 
-    public function setExpiredAt(?DateTimeInterface $expiredAt): UserRecovryRequest
+    public function setExpiredAt(?DateTimeInterface $expiredAt): UserRecoveryRequest
     {
         $this->expiredAt = $expiredAt;
         return $this;
@@ -87,7 +104,7 @@ class UserRecovryRequest
         return $this->user;
     }
 
-    public function setUser(User $user): UserRecovryRequest
+    public function setUser(User $user): UserRecoveryRequest
     {
         $this->user = $user;
         return $this;

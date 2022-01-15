@@ -69,7 +69,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, Seriali
     private EnabledCountry $enabledCountry;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Domain\ProfileDomain\Entity\UserRecovryRequest",
+     * @ORM\OneToMany(targetEntity="App\Domain\ProfileDomain\Entity\UserRecoveryRequest",
      *     mappedBy="user" )
      */
     private Collection $userRecovry;
