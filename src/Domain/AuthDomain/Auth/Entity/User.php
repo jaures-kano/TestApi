@@ -5,6 +5,7 @@ namespace App\Domain\AuthDomain\Auth\Entity;
 
 use App\Application\Traits\BaseTimeTrait;
 use App\Domain\AuthDomain\Auth\Traits\AuthSystems;
+use App\Domain\AuthDomain\Auth\Traits\EntrepriseTrait;
 use App\Domain\AuthDomain\Auth\Traits\IdentityVerified;
 use App\Domain\AuthDomain\Auth\Traits\UserLocationInformation;
 use App\Domain\AuthDomain\Auth\Traits\UserPersonnalInformation;
@@ -28,6 +29,7 @@ use Symfony\Component\Uid\Ulid;
  */
 class User implements UserInterface, PasswordAuthenticatedUserInterface, Serializable
 {
+    use EntrepriseTrait;
     use AuthSystems;
     use IdentityVerified;
     use UserPersonnalInformation;
