@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Http\Api\Controller\Profil;
+namespace App\Http\Api\Controller\Profile;
 
 
 use App\Domain\AuthDomain\Auth\Repository\UserRepository;

@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Api\Controller\Authentification\Security;
+namespace App\Http\Api\Controller\Profile;
 
 
-use App\Application\Profile\Command\AccountRecoverCommand;
+use App\Application\Profile\Command\RequestRecoverCommand;
 use App\Domain\AuthDomain\Auth\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("api/authentification")
+ * @Route("api/profle")
  * Class ApiResetAccountController
  * @package App\Http\Api\Controller\Authentification\Security
  * @author jaures kano <ruddyjaures@mail.com>
@@ -23,7 +23,7 @@ class ApiResetAccountController extends AbstractController
      */
     public function indexResetPassword(Request               $request,
                                        UserRepository        $userRepository,
-                                       AccountRecoverCommand $command): JsonResponse
+                                       RequestRecoverCommand $command): JsonResponse
     {
         $content = json_decode($request->getContent(), true);
         $password = $content['password'];

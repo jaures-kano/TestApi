@@ -16,8 +16,6 @@ class OpenAuthentificationApiFactory implements OpenApiFactoryInterface
 
     private OpenApiFactoryInterface $decorated;
     private AuthentificationLoginPath $authentificationLoginPath;
-    private PasswordRecoverPath $passwordRecoverPath;
-    private ResetPasswordPath $resetPasswordPath;
     private RefreshTokenPath $refreshTokenPath;
     private RegistrationPath $registrationPath;
     private RegistrationActivationPath $registrationActivationPath;
@@ -25,8 +23,6 @@ class OpenAuthentificationApiFactory implements OpenApiFactoryInterface
 
     public function __construct(OpenApiFactoryInterface    $decorated,
                                 RegistrationPath           $registrationPath,
-                                PasswordRecoverPath        $passwordRecoverPath,
-                                ResetPasswordPath          $resetPasswordPath,
                                 RefreshTokenPath           $refreshTokenPath,
                                 RegistrationActivationPath $registrationActivationPath,
                                 AuthentificationLoginPath  $authentificationLoginPath)
@@ -34,8 +30,6 @@ class OpenAuthentificationApiFactory implements OpenApiFactoryInterface
         $this->decorated = $decorated;
         $this->registrationPath = $registrationPath;
         $this->authentificationLoginPath = $authentificationLoginPath;
-        $this->passwordRecoverPath = $passwordRecoverPath;
-        $this->resetPasswordPath = $resetPasswordPath;
         $this->refreshTokenPath = $refreshTokenPath;
         $this->registrationActivationPath = $registrationActivationPath;
     }
@@ -52,13 +46,6 @@ class OpenAuthentificationApiFactory implements OpenApiFactoryInterface
             $this->authentificationLoginPath->addLoginPath(
                 'Authentification proccess', 'auth-login'));
 
-        $openApi->getPaths()->addPath('/api/authentification/account/recover',
-            $this->passwordRecoverPath->addPasswordRecoverPath(
-                'Authentification proccess', 'recover-login'));
-
-        $openApi->getPaths()->addPath('/api/authentification/account/reset',
-            $this->resetPasswordPath->addResetPasswordPath(
-                'Authentification proccess', 'reset-login'));
 
         $openApi->getPaths()->addPath('/api/authentification/token/refresh',
             $this->refreshTokenPath->addRefreshPath(

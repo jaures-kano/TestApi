@@ -44,7 +44,7 @@ class ApiAuthentificator extends AbstractAuthenticator
             $token->setAuthenticated(false);
             return new JsonResponse([
                 'message' => 'The user account is not yet activated'
-            ], Response::HTTP_UNAUTHORIZED);
+            ], Response::HTTP_UPGRADE_REQUIRED);
         }
 
         return null;

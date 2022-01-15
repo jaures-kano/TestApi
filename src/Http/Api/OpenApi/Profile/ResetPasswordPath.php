@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Api\OpenApi\Authentification;
+namespace App\Http\Api\OpenApi\Profile;
 
 
 use ApiPlatform\Core\OpenApi\Model\Operation;
@@ -10,14 +10,14 @@ use ArrayObject;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
- * Class PasswordRecoverPath
+ * Class ResetPasswordPath
  * @package App\Http\Api\OpenApi\Authentification
  * @author jaures kano <ruddyjaures@mail.com>
  */
-class PasswordRecoverPath
+class ResetPasswordPath
 {
 
-    public function addPasswordRecoverPath($tag, $operationId = 'default'): PathItem
+    public function addResetPasswordPath($tag, $operationId = 'default'): PathItem
     {
         return new PathItem(
             null, null, null, null, null,
@@ -33,7 +33,7 @@ class PasswordRecoverPath
                                     'properties' => [
                                         'message' => [
                                             'type' => 'string',
-                                            'example' => 'Confirmation code send user',
+                                            'example' => 'password well reset',
                                         ]
                                     ],
                                 ],
@@ -50,19 +50,18 @@ class PasswordRecoverPath
                             'schema' => [
                                 'type' => 'object',
                                 'properties' => [
-                                    'email' => [
+                                    'password' => [
                                         'type' => 'string',
-                                        'example' => 'admin@admin.com',
+                                        'example' => '@zulu@',
                                     ],
-                                    'phone' => [
+                                    'passwordConfirm' => [
                                         'type' => 'string',
-                                        'example' => '666 999 666',
+                                        'example' => '@zulu@',
                                     ],
-                                    'isMail' => [
-                                        'type' => 'bool',
-                                        'example' => true,
-                                        'required' => true
-                                    ],
+                                    'resetCode' => [
+                                        'type' => 'int',
+                                        'example' => '0000',
+                                    ]
                                 ],
                             ],
                         ],
@@ -70,5 +69,4 @@ class PasswordRecoverPath
             )
         );
     }
-
 }
