@@ -1,22 +1,21 @@
 <?php
 
 
-namespace App\Domain\EntrepriseDomain\EntreprisePrestation\EntrepriseProduct\Entity;
-
+namespace App\Domain\EntrepriseDomain\EntreprisePrestation\Entity;
 
 use App\Application\Traits\BaseTimeTrait;
-use App\Domain\EntrepriseDomain\Entreprise\Entity\EntrepriseInformation;
-use Symfony\Bridge\Doctrine\IdGenerator\UlidGenerator;
+use App\Domain\EntrepriseDomain\Entreprise\Entity\Entreprise;
 use App\Domain\EntrepriseDomain\EntreprisePrestation\EntrepriseProduct\Repository\EntrepriseProductRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\IdGenerator\UlidGenerator;
 use Symfony\Component\Uid\Ulid;
 
 /**
  * @author Elessa Maxime <elessamaxime@icloud.com>
- * @package App\Domain\EntrepriseDomain\EntreprisePrestation\EntrepriseProduct\Entity
+ * @package App\Domain\EntrepriseDomain\EntreprisePrestation\Entity
  * @ORM\Entity(repositoryClass=EntrepriseProductRepository::class)
  */
-class EntrepriseProduct
+class EntreprisePrestation
 {
     use BaseTimeTrait;
 
@@ -49,9 +48,9 @@ class EntrepriseProduct
     private ?int $price = null;
 
     /**
-     * @ORM\ManyToOne(targetEntity=EntrepriseInformation::class, inversedBy="products")
+     * @ORM\ManyToOne(targetEntity=Entreprise::class, inversedBy="products")
      */
-    private EntrepriseInformation $entreprise;
+    private Entreprise $entreprise;
 
     /**
      * @ORM\ManyToOne(targetEntity=EntreprisePromotion::class, inversedBy="product")
@@ -76,9 +75,9 @@ class EntrepriseProduct
 
     /**
      * @param string|null $type
-     * @return EntrepriseProduct
+     * @return EntreprisePrestation
      */
-    public function setType(?string $type): EntrepriseProduct
+    public function setType(?string $type): EntreprisePrestation
     {
         $this->type = $type;
 
@@ -95,9 +94,9 @@ class EntrepriseProduct
 
     /**
      * @param string|null $designation
-     * @return EntrepriseProduct
+     * @return EntreprisePrestation
      */
-    public function setDesignation(?string $designation): EntrepriseProduct
+    public function setDesignation(?string $designation): EntreprisePrestation
     {
         $this->designation = $designation;
 
@@ -114,9 +113,9 @@ class EntrepriseProduct
 
     /**
      * @param string|null $imageName
-     * @return EntrepriseProduct
+     * @return EntreprisePrestation
      */
-    public function setImageName(?string $imageName): EntrepriseProduct
+    public function setImageName(?string $imageName): EntreprisePrestation
     {
         $this->imageName = $imageName;
 
@@ -133,9 +132,9 @@ class EntrepriseProduct
 
     /**
      * @param int|null $price
-     * @return EntrepriseProduct
+     * @return EntreprisePrestation
      */
-    public function setOrice(?int $price): EntrepriseProduct
+    public function setOrice(?int $price): EntreprisePrestation
     {
         $this->price = $price;
 
@@ -143,18 +142,18 @@ class EntrepriseProduct
     }
 
     /**
-     * @return EntrepriseInformation
+     * @return Entreprise
      */
-    public function getEntreprise(): EntrepriseInformation
+    public function getEntreprise(): Entreprise
     {
         return $this->entreprise;
     }
 
     /**
-     * @param EntrepriseInformation $entreprise
-     * @return EntrepriseProduct
+     * @param Entreprise $entreprise
+     * @return EntreprisePrestation
      */
-    public function setEntreprise(EntrepriseInformation $entreprise): EntrepriseProduct
+    public function setEntreprise(Entreprise $entreprise): EntreprisePrestation
     {
         $this->entreprise = $entreprise;
 
@@ -171,9 +170,9 @@ class EntrepriseProduct
 
     /**
      * @param EntreprisePromotion $promotion
-     * @return EntrepriseProduct
+     * @return EntreprisePrestation
      */
-    public function setPromotion(EntreprisePromotion $promotion): EntrepriseProduct
+    public function setPromotion(EntreprisePromotion $promotion): EntreprisePrestation
     {
         $this->promotion = $promotion;
 

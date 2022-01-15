@@ -1,18 +1,18 @@
 <?php
 
 
-namespace App\Domain\EntrepriseDomain\Entreprise\Entity;
+namespace App\Domain\EntrepriseDomain\EntrepriseClient\Entity;
 
 use App\Application\Traits\BaseTimeTrait;
 use App\Domain\AuthDomain\Auth\Entity\User;
-use App\Domain\EntrepriseDomain\Entreprise\Repository\EntrepriseAffiliationRepository;
+use App\Domain\EntrepriseDomain\Entreprise\Entity\Entreprise;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Uid\Ulid;
 use Symfony\Bridge\Doctrine\IdGenerator\UlidGenerator;
+use Symfony\Component\Uid\Ulid;
 
 /**
  * @author Elessa Maxime <elessamaxime@icloud.com>
- * @package App\Domain\EntrepriseDomain\Entreprise\Entity
+ * @package App\Domain\EntrepriseDomain\EntrepriseClient\Entity
  * @ORM\Entity(repositoryClass=EntrepriseAffiliationRepository::class)
  */
 class EntrepriseAffiliation
@@ -30,53 +30,37 @@ class EntrepriseAffiliation
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="entrepriseAffiliation")
      */
-    private ?User $user = null;
+    private ?User $user;
 
     /**
-     * @ORM\ManyToOne(targetEntity=EntrepriseInformation::class, inversedBy="entrepriseAffiliation")
+     * @ORM\ManyToOne(targetEntity=Entreprise::class, inversedBy="entrepriseAffiliation")
      */
-    private ?EntrepriseInformation $entreprise = null;
+    private ?Entreprise $entreprise;
 
-    /**
-     * @return Ulid|null
-     */
+
     public function getId(): ?Ulid
     {
         return $this->id;
     }
 
-    /**
-     * @return User|null
-     */
     public function getUser(): ?User
     {
         return $this->user;
     }
 
-    /**
-     * @param User|null $user
-     * @return EntrepriseAffiliation
-     */
-    public function setUser(?User $user): EntrepriseAffiliation
+    public function setUser(?User $user): self
     {
         $this->user = $user;
 
         return $this;
     }
 
-    /**
-     * @return EntrepriseInformation|null
-     */
-    public function getEntreprise(): ?EntrepriseInformation
+    public function getEntreprise(): ?Entreprise
     {
         return $this->entreprise;
     }
 
-    /**
-     * @param EntrepriseInformation|null $entreprise
-     * @return EntrepriseAffiliation
-     */
-    public function setEntreprise(?EntrepriseInformation $entreprise): EntrepriseAffiliation
+    public function setEntreprise(?Entreprise $entreprise): self
     {
         $this->entreprise = $entreprise;
 

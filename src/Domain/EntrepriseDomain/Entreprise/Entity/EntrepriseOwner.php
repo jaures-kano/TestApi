@@ -5,10 +5,10 @@ namespace App\Domain\EntrepriseDomain\Entreprise\Entity;
 
 
 use App\Domain\AuthDomain\Auth\Entity\User;
-use Doctrine\ORM\Mapping as ORM;
 use App\Domain\EntrepriseDomain\Entreprise\Repository\EntrepriseOwnerRepository;
-use Symfony\Component\Uid\Ulid;
+use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\IdGenerator\UlidGenerator;
+use Symfony\Component\Uid\Ulid;
 
 /**
  * @author Elessa Maxime <elessamaxime@icloud.com>
@@ -31,35 +31,25 @@ class EntrepriseOwner
     private ?User $user = null;
 
     /**
-     * @ORM\ManyToOne(targetEntity=EntrepriseInformation::class, inversedBy="owner")
+     * @ORM\ManyToOne(targetEntity=Entreprise::class, inversedBy="owner")
      */
-    private ?EntrepriseInformation $entreprise = null;
+    private ?Entreprise $entreprise;
 
     /**
      * @ORM\ManyToOne(targetEntity=EntrepriseOwnerType::class, inversedBy="owner")
      */
     private EntrepriseOwnerType $ownerType;
 
-    /**
-     * @return Ulid|null
-     */
     public function getId(): ?Ulid
     {
         return $this->id;
     }
 
-    /**
-     * @return User|null
-     */
     public function getUser(): ?User
     {
         return $this->user;
     }
 
-    /**
-     * @param User|null $user
-     * @return EntrepriseOwner
-     */
     public function setUser(?User $user): EntrepriseOwner
     {
         $this->user = $user;
@@ -67,37 +57,24 @@ class EntrepriseOwner
         return $this;
     }
 
-    /**
-     * @return EntrepriseInformation|null
-     */
-    public function getEntreprise(): ?EntrepriseInformation
+
+    public function getEntreprise(): ?Entreprise
     {
         return $this->entreprise;
     }
 
-    /**
-     * @param EntrepriseInformation|null $entreprise
-     * @return EntrepriseOwner
-     */
-    public function setEntreprise(?EntrepriseInformation $entreprise): EntrepriseOwner
+    public function setEntreprise(?Entreprise $entreprise): EntrepriseOwner
     {
         $this->entreprise = $entreprise;
 
         return $this;
     }
 
-    /**
-     * @return EntrepriseOwnerType
-     */
     public function getOwnerType(): EntrepriseOwnerType
     {
         return $this->ownerType;
     }
 
-    /**
-     * @param EntrepriseOwnerType $ownerType
-     * @return EntrepriseOwner
-     */
     public function setOwnerType(EntrepriseOwnerType $ownerType): EntrepriseOwner
     {
         $this->ownerType = $ownerType;

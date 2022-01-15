@@ -4,7 +4,7 @@
 namespace App\Domain\AuthDomain\Auth\Traits;
 
 use App\Domain\EntrepriseDomain\Entreprise\Entity\EntrepriseOwner;
-use App\Domain\EntrepriseDomain\Entreprise\Entity\EntrepriseAffiliation;
+use App\Domain\EntrepriseDomain\EntrepriseClient\Entity\EntrepriseAffiliation;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -34,17 +34,13 @@ trait EntrepriseTrait
     /**
      * @return Collection|null
      */
-    public function getEntrepriseOwner()
+    public function getEntrepriseOwner(): ?Collection
     {
         return $this->entrepriseOwner;
     }
 
-    /**
-     * @return Collection|null
-     */
-    public function getEntrepriseAffiliation()
+    public function getEntrepriseAffiliation(): ?Collection
     {
         return $this->entrepriseAffiliation;
     }
-
 }

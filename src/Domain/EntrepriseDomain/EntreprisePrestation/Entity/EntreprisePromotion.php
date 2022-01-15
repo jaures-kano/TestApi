@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Domain\EntrepriseDomain\EntreprisePrestation\EntrepriseProduct\Entity;
+namespace App\Domain\EntrepriseDomain\EntreprisePrestation\Entity;
 
 
 use App\Application\Traits\BaseTimeTrait;
@@ -14,7 +14,7 @@ use Symfony\Component\Uid\Ulid;
 
 /**
  * @author Elessa Maxime <elessamaxime@icloud.com>
- * @package App\Domain\EntrepriseDomain\EntreprisePrestation\EntrepriseProduct\Entity
+ * @package App\Domain\EntrepriseDomain\EntreprisePrestation\EntreprisePrestation\Entity
  * @ORM\Entity(repositoryClass=EntreprisePromotionRepository::class)
  */
 class EntreprisePromotion
@@ -40,16 +40,14 @@ class EntreprisePromotion
     private ?int $percentage = null;
 
     /**
-     * @ORM\OneToMany(targetEntity=EntrepriseProduct::class, mappedBy="promotion")
+     * @ORM\OneToMany(targetEntity=EntreprisePrestation::class, mappedBy="promotion")
      */
-    private ?Collection $product = null;
+    private ?Collection $prestation;
 
-    /**
-     * EntreprisePromotion constructor
-     */
+
     public function __construct()
     {
-        $this->product = new ArrayCollection();
+        $this->prestation = new ArrayCollection();
     }
 
     /**
@@ -60,18 +58,11 @@ class EntreprisePromotion
         return $this->id;
     }
 
-    /**
-     * @return DateTimeInterface|null
-     */
     public function getVisibility(): ?DateTimeInterface
     {
         return $this->visibility;
     }
 
-    /**
-     * @param DateTimeInterface|null $visibility
-     * @return EntreprisePromotion
-     */
     public function setVisibility(?DateTimeInterface $visibility): EntreprisePromotion
     {
         $this->visibility = $visibility;
@@ -79,9 +70,7 @@ class EntreprisePromotion
         return $this;
     }
 
-    /**
-     * @return int|null
-     */
+
     public function getPercentage(): ?int
     {
         return $this->percentage;
@@ -101,9 +90,9 @@ class EntreprisePromotion
     /**
      * @return Collection|null
      */
-    public function getProduct()
+    public function getPrestation()
     {
-        return $this->product;
+        return $this->prestation;
     }
 
 }

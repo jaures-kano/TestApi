@@ -142,11 +142,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, Seriali
         return $this;
     }
 
-    /**
-     * A visual identifier that represents this user.
-     *
-     * @see UserInterface
-     */
     public function getUserIdentifier(): string
     {
         return $this->email;
@@ -160,9 +155,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, Seriali
         return $this->email;
     }
 
-    /**
-     * @see UserInterface
-     */
     public function getRoles(): array
     {
         // guarantee every user at least has ROLE_USER
@@ -178,9 +170,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, Seriali
         return $this;
     }
 
-    /**
-     * @see PasswordAuthenticatedUserInterface
-     */
+
     public function getPassword(): string
     {
         return $this->password;
@@ -193,25 +183,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, Seriali
         return $this;
     }
 
-    /**
-     * @return Collection|User[]
-     */
+
     public function getUserRecovry(): Collection
     {
         return $this->userRecovry;
     }
 
-    /**
-     * @return Collection|User[]
-     */
     public function getQrCodes(): Collection
     {
         return $this->qrCodes;
     }
 
-    /**
-     * @return EnabledCountry
-     */
+
     public function getEnabledCountry(): EnabledCountry
     {
         return $this->enabledCountry;
@@ -223,20 +206,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, Seriali
         return $this;
     }
 
-    /**
-     * Returning a salt is only needed, if you are not using a modern
-     * hashing algorithm (e.g. bcrypt or sodium) in your security.yaml.
-     *
-     * @see UserInterface
-     */
     public function getSalt(): ?string
     {
         return null;
     }
 
-    /**
-     * @see UserInterface
-     */
     public function eraseCredentials(): void
     {
     }
@@ -250,9 +224,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, Seriali
         ]);
     }
 
-    /**
-     * @param string $serialized
-     */
     public function unserialize($serialized): void
     {
         [
@@ -262,60 +233,39 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, Seriali
         ] = unserialize($serialized);
     }
 
-    /**
-     * @return DateTimeInterface|null
-     */
+
     public function getPhoneVerfiedAt(): ?DateTimeInterface
     {
         return $this->phoneVerfiedAt;
     }
 
-    /**
-     * @param DateTimeInterface|null $phoneVerfiedAt
-     * @return User
-     */
     public function setPhoneVerfiedAt(?DateTimeInterface $phoneVerfiedAt): User
     {
         $this->phoneVerfiedAt = $phoneVerfiedAt;
         return $this;
     }
 
-    /**
-     * @return ArrayCollection|Collection
-     */
+
     public function getCards():Collection
     {
         return $this->cards;
     }
 
-
-    /**
-     * @return ArrayCollection|Collection
-     */
     public function getCardTransactions():Collection
     {
         return $this->cardTransactions;
     }
 
-    /**
-     * @return Commercial|null
-     */
     public function getCommercial(): ?Commercial
     {
         return $this->commercial;
     }
 
-    /**
-     * @return ArrayCollection|Collection
-     */
     public function getTrader() : Collection
     {
         return $this->trader;
     }
 
-    /**
-     * @return Partner|null
-     */
     public function getPartner(): ?Partner
     {
         return $this->partner;
