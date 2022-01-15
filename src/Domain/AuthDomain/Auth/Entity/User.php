@@ -7,7 +7,6 @@ use App\Application\Traits\BaseTimeTrait;
 use App\Domain\AuthDomain\Auth\Traits\AuthSystems;
 use App\Domain\AuthDomain\Auth\Traits\EntrepriseTrait;
 use App\Domain\AuthDomain\Auth\Traits\IdentityVerified;
-use App\Domain\AuthDomain\Auth\Traits\ProccessorInfo;
 use App\Domain\AuthDomain\Auth\Traits\UserLocationInformation;
 use App\Domain\AuthDomain\Auth\Traits\UserPersonnalInformation;
 use App\Domain\CommercialDomain\Entity\Commercial;
@@ -33,7 +32,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, Seriali
     use EntrepriseTrait;
     use AuthSystems;
     use IdentityVerified;
-    use ProccessorInfo;
     use UserPersonnalInformation;
     use UserLocationInformation;
     use BaseTimeTrait;
@@ -73,7 +71,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, Seriali
     private EnabledCountry $enabledCountry;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Domain\QrCodeDomain\QrCodeTransaction\Entity\QrCodeTransaction",
+     * @ORM\OneToMany(targetEntity="App\Domain\ProfileDomain\Entity\UserRecoveryRequest",
+     *     mappedBy="user" )
+     */
+    private Collection $userRecovry;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Domain\QrCodeDomain\Entity\QrCodeTransaction",
      *     mappedBy="user" )
      */
     private Collection $qrCodes;
@@ -114,6 +118,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, Seriali
 
     public function __construct()
     {
+        $this->userRecovry = new ArrayCollection();
         $this->trader = new ArrayCollection();
         $this->qrCodes = new ArrayCollection();
         $this->cards = new ArrayCollection();
@@ -186,6 +191,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, Seriali
         $this->password = $password;
 
         return $this;
+    }
+
+    /**
+     * @return Collection|User[]
+     */
+    public function getUserRecovry(): Collection
+    {
+        return $this->userRecovry;
     }
 
     /**

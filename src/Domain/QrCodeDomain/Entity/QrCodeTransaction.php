@@ -1,12 +1,11 @@
 <?php
 
-namespace App\Domain\QrCodeDomain\QrCodeTransaction\Entity;
+namespace App\Domain\QrCodeDomain\Entity;
 
 use App\Application\Traits\BaseTimeTrait;
 use App\Domain\AuthDomain\Auth\Entity\User;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\IdGenerator\UlidGenerator;
-use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Uid\Ulid;
 
 
@@ -26,19 +25,21 @@ class QrCodeTransaction
      * @ORM\Column(type="ulid", unique=true)
      * @ORM\GeneratedValue(strategy="CUSTOM")
      * @ORM\CustomIdGenerator(class=UlidGenerator::class)
-     * @Groups({"read:user"})
      */
     private ?Ulid $id;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"read:qr_code", "write:qr_code"})
+     */
+    private string $designation;
+
+    /**
+     * @ORM\Column(type="string", length=255)
      */
     private string $qrCode;
 
     /**
      * @ORM\Column( type="boolean", options={"default":true})
-     * @Groups({"read:qr_code"})
      */
     private bool $isEnabled;
 
@@ -48,62 +49,49 @@ class QrCodeTransaction
      */
     private User $user;
 
-    /**
-     * @return Ulid
-     */
     public function getId(): Ulid
     {
         return $this->id;
     }
 
-    /**
-     * @return string
-     */
+    public function getDesignation(): string
+    {
+        return $this->designation;
+    }
+
+    public function setDesignation(string $designation): self
+    {
+        $this->designation = $designation;
+        return $this;
+    }
+
     public function getQrCode(): string
     {
         return $this->qrCode;
     }
 
-    /**
-     * @param string $qrCode
-     * @return QrCodeTransaction
-     */
     public function setQrCode(string $qrCode): self
     {
         $this->qrCode = $qrCode;
         return $this;
     }
 
-    /**
-     * @return bool
-     */
     public function getIsEnabled(): bool
     {
         return $this->isEnabled;
     }
 
-    /**
-     * @param bool $isEnabled
-     * @return QrCodeTransaction
-     */
     public function setIsEnabled(bool $isEnabled): self
     {
         $this->isEnabled = $isEnabled;
         return $this;
     }
 
-    /**
-     * @return User
-     */
     public function getUser(): User
     {
         return $this->user;
     }
 
-    /**
-     * @param User $user
-     * @return QrCodeTransaction
-     */
     public function setUser(User $user): self
     {
         $this->user = $user;

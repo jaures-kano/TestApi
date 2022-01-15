@@ -18,19 +18,21 @@ class OpenProfileApiFactory implements OpenApiFactoryInterface
     private InformationProfilePath $informationProfilePath;
 
     private UpdateInformationProfilePath $updateInformationProfilePath;
+    private PasswordRecoverPath $passwordRecoverPath;
+    private ResetPasswordPath $resetPasswordPath;
 
-    /**
-     * @param OpenApiFactoryInterface $decorated
-     * @param UpdateInformationProfilePath $updateInformationProfilePath
-     * @param InformationProfilePath $informationProfilePath
-     */
+
     public function __construct(OpenApiFactoryInterface      $decorated,
                                 UpdateInformationProfilePath $updateInformationProfilePath,
+                                PasswordRecoverPath          $passwordRecoverPath,
+                                ResetPasswordPath            $resetPasswordPath,
                                 InformationProfilePath       $informationProfilePath)
     {
         $this->decorated = $decorated;
         $this->informationProfilePath = $informationProfilePath;
         $this->updateInformationProfilePath = $updateInformationProfilePath;
+        $this->passwordRecoverPath = $passwordRecoverPath;
+        $this->resetPasswordPath = $resetPasswordPath;
     }
 
 
@@ -40,11 +42,19 @@ class OpenProfileApiFactory implements OpenApiFactoryInterface
 
         $openApi->getPaths()->addPath('/api/profile/information',
             $this->informationProfilePath->addInformationProfile(
-                'Profile information', 'profile-information'));
+                'Profile', 'profile-information'));
 
         $openApi->getPaths()->addPath('/api/profile/update',
             $this->updateInformationProfilePath->addUpdateInformationProfile(
-                'Profile information', 'profile-update'));
+                'Profile', 'profile-update'));
+
+        $openApi->getPaths()->addPath('/api/profile/account/recover',
+            $this->passwordRecoverPath->addPasswordRecoverPath(
+                'Profile', 'recover-login'));
+
+        $openApi->getPaths()->addPath('/api/profile/account/reset',
+            $this->resetPasswordPath->addResetPasswordPath(
+                'Profile', 'reset-login'));
 
 
         return $openApi;

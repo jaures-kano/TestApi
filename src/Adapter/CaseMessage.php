@@ -19,7 +19,9 @@ class CaseMessage
 
     public const MAIL_EXIST = 'Mail already exist';
 
-    public const CODEERROR = 'Confirmation code d\'ont match';
+    public const CODE_ERROR = 'Password code d\'ont match';
+
+    public const CODE_INVALID = 'Confirmation code d\'ont match';
 
     public const MAIL_USED = 'Mail that you provide is already have an account';
 

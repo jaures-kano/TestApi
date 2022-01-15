@@ -35,7 +35,7 @@ class PasswordResetSubscriber implements EventSubscriberInterface
     public function onRequestResetPassword(PasswordRequestEvent $event): void
     {
         if ($event->getMode() === true) {
-            $this->resetPasswordMail->send($event->getUser());
+            $this->resetPasswordMail->send($event->getUserRequest());
         }
     }
 

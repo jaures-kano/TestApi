@@ -4,9 +4,8 @@
 namespace App\Infrastructures\Mailing\Auth;
 
 
-use App\Domain\AuthDomain\Auth\Entity\User;
+use App\Domain\ProfileDomain\Entity\UserRecoveryRequest;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
-use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Address;
 
@@ -24,19 +23,16 @@ class ResetPasswordMail
         $this->mailer = $mailer;
     }
 
-    /**
-     * @param User $user
-     * @throws TransportExceptionInterface
-     */
-    public function send(User $user): void
+    public function send(UserRecoveryRequest $userRecoveryRequest): void
     {
         $email = (new TemplatedEmail())
             ->from('ruddyjaures@gmail.com')
-            ->to(new Address($user->getEmail()))
+            ->to(new Address($userRecoveryRequest->getUser()->getEmail()))
             ->subject("Demande de reinitialisation de mot de passe")
             ->htmlTemplate("email/auth/resetPassword.html.twig")
             ->context([
-                'user' => $user
+                'user' => $userRecoveryRequest->getUser(),
+                'request' => $userRecoveryRequest,
             ]);
 
         $this->mailer->send($email);
