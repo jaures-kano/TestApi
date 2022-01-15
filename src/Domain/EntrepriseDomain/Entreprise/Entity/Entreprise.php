@@ -62,11 +62,18 @@ class Entreprise
      */
     private Collection $prestations;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Domain\CardsDomain\Entity\Card",
+     *     mappedBy="entreprise" )
+     */
+    private Collection $cards;
+
     public function __construct()
     {
         $this->prestations = new ArrayCollection();
         $this->entrepriseAffiliation = new ArrayCollection();
         $this->owner = new ArrayCollection();
+        $this->cards = new ArrayCollection();
     }
 
     /**
@@ -175,6 +182,14 @@ class Entreprise
     public function getPrestations()
     {
         return $this->prestations;
+    }
+
+    /**
+     * @return Collection|null
+     */
+    public function getCards()
+    {
+        return $this->cards;
     }
 
 }

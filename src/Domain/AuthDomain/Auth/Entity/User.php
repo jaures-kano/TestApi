@@ -83,13 +83,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, Seriali
     private Collection $qrCodes;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Domain\CardsDomain\Card\Entity\Card",
+     * @ORM\OneToMany(targetEntity="App\Domain\CardsDomain\Entity\Card",
      *     mappedBy="user" )
      */
     private Collection $cards;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Domain\CardsDomain\CardTransaction\Entity\CardTransaction",
+     * @ORM\OneToMany(targetEntity="App\Domain\CardsDomain\Entity\CardTransaction",
      *     mappedBy="users" )
      */
     private Collection $cardTransactions;
@@ -114,7 +114,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, Seriali
      *      inversedBy="users")
      */
     private Subscription $subscription;
-
 
     public function __construct()
     {

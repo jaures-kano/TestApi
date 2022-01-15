@@ -12,6 +12,7 @@ use Symfony\Component\Uid\Ulid;
  * Class QrCodeAffiliation
  * @package App\Domain\QrCodeDomain\Entity
  * @author jaures kano <ruddyjaures@mail.com>
+ * @ORM\Entity()
  */
 class QrCodeAffiliation
 {
@@ -41,7 +42,7 @@ class QrCodeAffiliation
     private bool $isEnabled;
 
 
-    public function getId(): Ulid
+    public function getId(): ?Ulid
     {
         return $this->id;
     }
