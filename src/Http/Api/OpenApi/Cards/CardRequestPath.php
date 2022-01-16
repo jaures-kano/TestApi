@@ -31,13 +31,29 @@ class CardRequestPath
                                 'schema' => [
                                     'type' => 'object',
                                     'properties' => [
-                                        'token' => [
+                                        'card_number' => [
                                             'type' => 'string',
-                                            'example' => 'eyxxxGciOiJSUzI1NiIsInR5cCI6IkpXUyJ9.eyJleHAiOjE0NDI0MDM3NTgsImVtYWlsIjoid',
+                                            'example' => '000000000000000000000',
                                         ],
-                                        'refresh_token' => [
+                                        'card_type' => [
                                             'type' => 'string',
-                                            'example' => 'eyxxxGciOiJSUzI1NiIsInR5cCI6IkpXUyJ9.eyJleHAiOjE0NDI0MDM3NTgsImVtYWlsIjoid',
+                                            'example' => '000000000000000000000',
+                                        ],
+                                        'amount' => [
+                                            'type' => 'string',
+                                            'example' => '1000 EURO',
+                                        ],
+                                        'cvv' => [
+                                            'type' => 'string',
+                                            'example' => '624',
+                                        ],
+                                        'password' => [
+                                            'type' => 'string',
+                                            'example' => '11111',
+                                        ],
+                                        'expiredAt' => [
+                                            'type' => 'string',
+                                            'example' => '000000000000000000000',
                                         ]
                                     ],
                                 ],
@@ -54,9 +70,31 @@ class CardRequestPath
                             'schema' => [
                                 'type' => 'object',
                                 'properties' => [
-                                    'refresh_token' => [
+                                    'user_id' => [
                                         'type' => 'string',
-                                        'example' => 'xxx00a7a9e970f9bbe076e05743e00648908c38366c551a8cdf524ba424fc3e520988f6320a5498',
+                                        'example' => 'OPPEEMMOEMOMEJNUNUNU',
+                                    ],
+                                    'card_type' => [
+                                        'type' => 'string',
+                                        'example' => 'OPPEEMMOEMOMEJNUNUNU',
+                                    ],
+                                    'amount' => [
+                                        'type' => 'float',
+                                        'example' => '10',
+                                    ],
+                                    'paiement_method' => [
+                                        'type' => 'string',
+                                        'example' => 'OPPEEMMOEMOMEJNUNUNU',
+                                    ],
+                                    'api_key' => [
+                                        'type' => 'string',
+                                        'example' => 'OPPEEMMOEMOMEJNUNUNU',
+                                        'required' => true
+                                    ],
+                                    'access_token' => [
+                                        'type' => 'string',
+                                        'example' => 'jjijijij205kjbhvjhvhj',
+                                        'required' => true
                                     ]
                                 ],
                             ],

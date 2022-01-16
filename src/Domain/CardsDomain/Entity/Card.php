@@ -47,6 +47,11 @@ class Card
     private string $cardNumber;
 
     /**
+     * @ORM\Column(type="float")
+     */
+    private float $amount = 0;
+
+    /**
      * @ORM\ManyToOne (targetEntity="App\Domain\AuthDomain\Auth\Entity\User",
      *     inversedBy="cards")
      */
@@ -152,4 +157,17 @@ class Card
     {
         return $this->qrCodes;
     }
+
+    public function getAmount(): ?float
+    {
+        return $this->amount;
+    }
+
+    public function setAmount($amount): self
+    {
+        $this->amount = $amount;
+        return $this;
+    }
+
+
 }

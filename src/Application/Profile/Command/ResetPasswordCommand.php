@@ -42,36 +42,48 @@ class ResetPasswordCommand extends AbstractCase
     {
 
         if ($this->keyService->isValidKey($dto->apiKey) === false) {
-            return $this->errorResponse(CaseMessage::INVALID_KEY,
-                [], HttpStatus::BADREQUEST);
+            return $this->errorResponse(
+                [
+                    'message' => CaseMessage::INVALID_KEY
+                ], HttpStatus::BADREQUEST);
         }
 
         if ($dto->passwordConfirm !== $dto->password) {
-            return $this->errorResponse(CaseMessage::CODE_ERROR,
-                [], HttpStatus::BADREQUEST);
+            return $this->errorResponse(
+                [
+                    'message' => CaseMessage::CODE_ERROR
+                ], HttpStatus::BADREQUEST);
         }
 
 
         if (!filter_var($dto->email, FILTER_VALIDATE_EMAIL)) {
-            return $this->errorResponse(CaseMessage::MAIL_INVALID,
-                [], HttpStatus::BADREQUEST);
+            return $this->errorResponse(
+                [
+                    'message' => CaseMessage::MAIL_INVALID
+                ], HttpStatus::BADREQUEST);
         }
 
         $foundUser = $this->userRepository->findOneBy(['email' => $dto->email]);
         if ($foundUser === null) {
-            return $this->errorResponse(CaseMessage::UNKNOW_EMAIL,
-                [], HttpStatus::BADREQUEST);
+            return $this->errorResponse(
+                [
+                    'message' => CaseMessage::UNKNOW_EMAIL
+                ], HttpStatus::BADREQUEST);
         }
 
         $ifRequest = $this->repositoryRequest->findOneBy(['isValidate' => false, 'user' => $foundUser]);
         if ($ifRequest === null) {
-            return $this->errorResponse('User d\'ont request to resetting his password',
-                [], HttpStatus::FORBIDEN);
+            return $this->errorResponse(
+                [
+                    'message' => 'User d\'ont request to resetting his password'
+                ], HttpStatus::FORBIDEN);
         }
 
         if ($ifRequest->getConfirmationToken() !== $dto->confirmationCode) {
-            return $this->errorResponse(CaseMessage::CODE_INVALID,
-                [], HttpStatus::BADREQUEST);
+            return $this->errorResponse(
+                [
+                    'message' => CaseMessage::CODE_INVALID
+                ], HttpStatus::BADREQUEST);
         }
 
         $ifRequest->setIsValidate(true);
@@ -83,7 +95,9 @@ class ResetPasswordCommand extends AbstractCase
         $this->em()->persist($foundUser);
         $this->em()->flush();
 
-        return $this->successResponse('Password is reset', [], HttpStatus::ACCEPTED);
+        return $this->successResponse([
+            'message' => 'Password is reset'
+        ], HttpStatus::ACCEPTED);
     }
 
 
