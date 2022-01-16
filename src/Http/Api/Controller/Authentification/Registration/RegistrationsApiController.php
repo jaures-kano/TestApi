@@ -61,16 +61,7 @@ class RegistrationsApiController extends AbstractController
 
         // send action to application
         $commandReponse = $command->registration($registrationDto);
-        if ($commandReponse->type === true) {
-            return $this->json([
-                'message' => $commandReponse->messages
-            ], $commandReponse->status);
-        }
-
-
-        return $this->json([
-            'message' => $commandReponse->messages
-        ], $commandReponse->status);
+        return $this->json($commandReponse->data, $commandReponse->status);
     }
 
 }

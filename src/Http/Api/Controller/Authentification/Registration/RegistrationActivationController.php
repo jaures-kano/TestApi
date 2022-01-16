@@ -49,9 +49,7 @@ class RegistrationActivationController extends AbstractController
         );
         $commandReponse = $command->activateAccount($dto);
 
-        return $this->json([
-            'message' => $commandReponse->messages
-        ], $commandReponse->status);
+        return $this->json($commandReponse->data, $commandReponse->status);
     }
 
 }

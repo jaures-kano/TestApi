@@ -5,6 +5,7 @@ namespace App\Domain\QrCodeDomain\Entity;
 use App\Application\Traits\BaseTimeTrait;
 use App\Domain\AuthDomain\Auth\Entity\User;
 use App\Domain\CardsDomain\Entity\Card;
+use App\Domain\EntrepriseDomain\Entreprise\Entity\Entreprise;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\IdGenerator\UlidGenerator;
 use Symfony\Component\Uid\Ulid;
@@ -56,6 +57,12 @@ class QrCodeTransaction
      */
     private Card $card;
 
+    /**
+     * @ORM\ManyToOne (targetEntity="App\Domain\EntrepriseDomain\Entreprise\Entity\Entreprise",
+     *     inversedBy="qrCodes")
+     */
+    private Entreprise $entreprise;
+
     public function getId(): Ulid
     {
         return $this->id;
@@ -104,5 +111,28 @@ class QrCodeTransaction
         $this->user = $user;
         return $this;
     }
+
+    public function getCard(): Card
+    {
+        return $this->card;
+    }
+
+    public function setCard(Card $card): self
+    {
+        $this->card = $card;
+        return $this;
+    }
+
+    public function getEntreprise(): Entreprise
+    {
+        return $this->entreprise;
+    }
+
+    public function setEntreprise(Entreprise $entreprise): self
+    {
+        $this->entreprise = $entreprise;
+        return $this;
+    }
+
 
 }

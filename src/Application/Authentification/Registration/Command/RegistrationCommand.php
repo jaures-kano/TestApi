@@ -51,38 +51,48 @@ class RegistrationCommand extends AbstractCase
     public function registration(RegistrationDto $registrationDto): CaseResponse
     {
         if ($this->keyService->isValidKey($registrationDto->apiKey) === false) {
-            return $this->errorResponse(CaseMessage::INVALID_KEY,
-                [], HttpStatus::BADREQUEST);
+            return $this->errorResponse(
+                [
+                    'message' => CaseMessage::INVALID_KEY
+                ], HttpStatus::BADREQUEST);
         }
 
         if (!filter_var($registrationDto->email, FILTER_VALIDATE_EMAIL)) {
-            return $this->errorResponse(CaseMessage::MAIL_INVALID,
-                [], HttpStatus::BADREQUEST);
+            return $this->errorResponse(
+                [
+                    'message' => CaseMessage::MAIL_INVALID
+                ], HttpStatus::BADREQUEST);
         }
 
         if ($registrationDto->password !== $registrationDto->passwordConfirm) {
-            return $this->errorResponse(CaseMessage::CODE_ERROR,
-                [], HttpStatus::BADREQUEST);
+            return $this->errorResponse(
+                [
+                    'message' => CaseMessage::CODE_ERROR
+                ], HttpStatus::BADREQUEST);
         }
 
         if (Ulid::isValid($registrationDto->country) === false) {
-            return $this->errorResponse(CaseMessage::INVALID_ID,
-                [], HttpStatus::BADREQUEST);
+            return $this->errorResponse(
+                [
+                    'messsage' => CaseMessage::INVALID_ID
+                ], HttpStatus::BADREQUEST);
         }
 
         $country = $this->enabledCountryRepository
             ->findOneBy(['id' => $registrationDto->country, 'isEnabled' => true]);
-
         if ($country === null) {
-            return $this->errorResponse(CaseMessage::UNKNOW_COUNTRY,
-                [], HttpStatus::BADREQUEST);
+            return $this->errorResponse(
+                [
+                    'message' => CaseMessage::UNKNOW_COUNTRY
+                ], HttpStatus::BADREQUEST);
         }
 
         $foundUser = $this->userRepository->findOneBy(['email' => $registrationDto->email]);
-
         if ($foundUser !== null) {
-            return $this->errorResponse(CaseMessage::MAIL_USED,
-                [], HttpStatus::BADREQUEST);
+            return $this->errorResponse(
+                [
+                    'message' => CaseMessage::MAIL_USED
+                ], HttpStatus::BADREQUEST);
         }
 
         $user = new User();
@@ -102,8 +112,10 @@ class RegistrationCommand extends AbstractCase
         $event = new FirstRegistrationEvent($user, $registrationDto->confirmationMode);
         $this->eventDispatcher->dispatch($event, FirstRegistrationEvent::NAME);
 
-        return $this->successResponse('Code send to user, token expired after 30 minutes',
-            [], HttpStatus::CREATED);
+        return $this->successResponse(
+            [
+                'message' => 'Code send to user, token expired after 30 minutes'
+            ], HttpStatus::CREATED);
     }
 
 }

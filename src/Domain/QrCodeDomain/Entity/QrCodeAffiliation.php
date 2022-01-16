@@ -13,7 +13,7 @@ use Symfony\Component\Uid\Ulid;
  * Class QrCodeAffiliation
  * @package App\Domain\QrCodeDomain\Entity
  * @author jaures kano <ruddyjaures@mail.com>
- * @ORM\Entity()
+ * @ORM\Entity(repositoryClass="App\Domain\QrCodeDomain\Repository\QrCodeAffiliationRepository")
  */
 class QrCodeAffiliation
 {
@@ -45,8 +45,9 @@ class QrCodeAffiliation
     /**
      * @ORM\ManyToOne(targetEntity="App\Domain\EntrepriseDomain\Entreprise\Entity\Entreprise",
      *     inversedBy="qrCodes")
+     * @ORM\JoinColumn(nullable=false)
      */
-    private ?Entreprise $entreprise;
+    private Entreprise $entreprise;
 
     public function getId(): ?Ulid
     {
@@ -85,5 +86,17 @@ class QrCodeAffiliation
         $this->isEnabled = $isEnabled;
         return $this;
     }
+
+    public function getEntreprise(): Entreprise
+    {
+        return $this->entreprise;
+    }
+
+    public function setEntreprise(?Entreprise $entreprise): self
+    {
+        $this->entreprise = $entreprise;
+        return $this;
+    }
+
 
 }

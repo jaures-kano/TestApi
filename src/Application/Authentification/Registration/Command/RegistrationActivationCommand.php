@@ -11,7 +11,6 @@ use App\Application\ApplicationKey\KeyService;
 use App\Application\Authentification\Registration\Dto\RegistrationActivationDto;
 use App\Domain\AuthDomain\Auth\Repository\UserRepository;
 use DateTime;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
@@ -23,44 +22,51 @@ class RegistrationActivationCommand extends AbstractCase
 {
 
     private UserRepository $userRepository;
-    private EventDispatcherInterface $eventDispatcher;
     private KeyService $keyService;
 
-    public function __construct(UserRepository           $userRepository,
-                                KeyService               $keyService,
-                                EventDispatcherInterface $eventDispatcher)
+    public function __construct(UserRepository $userRepository,
+                                KeyService     $keyService)
     {
         $this->userRepository = $userRepository;
-        $this->eventDispatcher = $eventDispatcher;
         $this->keyService = $keyService;
     }
 
     public function activateAccount(RegistrationActivationDto $dto): CaseResponse
     {
         if ($this->keyService->isValidKey($dto->apiKey) === false) {
-            return $this->errorResponse(CaseMessage::INVALID_KEY,
-                [], HttpStatus::BADREQUEST);
+            return $this->errorResponse(
+                [
+                    'message' => CaseMessage::INVALID_KEY
+                ], HttpStatus::BADREQUEST);
         }
 
         if (!filter_var($dto->email, FILTER_VALIDATE_EMAIL)) {
-            return $this->errorResponse(CaseMessage::MAIL_INVALID,
-                [], HttpStatus::BADREQUEST);
+            return $this->errorResponse(
+                [
+                    'message' => CaseMessage::MAIL_INVALID
+                ], HttpStatus::BADREQUEST);
         }
 
         $foundUser = $this->userRepository->findOneBy(['email' => $dto->email]);
         if ($foundUser === null) {
-            return $this->errorResponse(CaseMessage::UNKNOW_EMAIL,
-                [], HttpStatus::BADREQUEST);
+            return $this->errorResponse(
+                [
+                    'message' => CaseMessage::UNKNOW_EMAIL
+                ], HttpStatus::BADREQUEST);
         }
 
         if ($dto->code !== $foundUser->getConfirmationToken()) {
-            return $this->errorResponse(CaseMessage::CODEERROR,
-                [], HttpStatus::BADREQUEST);
+            return $this->errorResponse(
+                [
+                    'message' => CaseMessage::CODE_ERROR
+                ], HttpStatus::BADREQUEST);
         }
 
         if ($foundUser->isActived() === true) {
-            return $this->errorResponse('Already actived',
-                [], HttpStatus::BADREQUEST);
+            return $this->errorResponse(
+                [
+                    'message' => 'Already actived'
+                ], HttpStatus::BADREQUEST);
         }
 
         $foundUser->setIsActived(true);
@@ -68,7 +74,9 @@ class RegistrationActivationCommand extends AbstractCase
         $this->em()->persist($foundUser);
         $this->em()->flush();
 
-        return $this->successResponse('Account activated', [], Response::HTTP_ACCEPTED);
+        return $this->successResponse([
+            'message' => 'Account activated'
+        ], Response::HTTP_ACCEPTED);
     }
 
 }
