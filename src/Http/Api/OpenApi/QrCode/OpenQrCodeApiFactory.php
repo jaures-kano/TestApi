@@ -41,13 +41,13 @@ class OpenQrCodeApiFactory implements OpenApiFactoryInterface
     {
         $openApi = ($this->decorated)($context);
 
-        $openApi->getPaths()->addPath('/api/qr_code/add/transaction',
+        $openApi->getPaths()->addPath('/api/qr_code/transaction/add',
             $this->qrCodeAddPath->addQrCodePath(
                 'Qr code systems', 'qr-code-add'));
 
-        $openApi->getPaths()->addPath('/api/qr_code/add/affiliation',
+        $openApi->getPaths()->addPath('/api/qr_code/affiliation/add',
             $this->qrCodeAddAffiliationPath->addQrCodePath(
-                'Qr code systems', 'qr-code-add-transaction'));
+                'Qr code systems', 'qr-code-add-affiliation'));
 
         $openApi->getPaths()->addPath('/api/qr_code/list/affilliation',
             $this->qrCodeListPath->listQrCodePath(

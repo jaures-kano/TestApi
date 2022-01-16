@@ -3,11 +3,13 @@
 namespace App\Http\Api\Controller\QrCode;
 
 
-use App\Application\QrCode\Query\CheckQrCodeQuery;
+use App\Application\QrCode\Command\CreateQrCodeCommand;
+use App\Application\QrCode\Dto\QrCodeTransactionDto;
 use App\Infrastructures\ParamatersChecker\ParamatersCheckerService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -20,14 +22,20 @@ class QrCodeCreateController extends AbstractController
 {
 
     /**
-     * @Route("/create", name="api_qr_code_create")
+     * @Route("/transaction/add", name="api_qr_code_create")
      */
     public function qrcodeCheck(Request                  $request,
                                 ParamatersCheckerService $checkerService,
-                                CheckQrCodeQuery         $checkQrCodeQuery): JsonResponse
+                                CreateQrCodeCommand      $createQrCodeCommand): JsonResponse
     {
-        $parameters = $request->query->all();
-        $missingParameter = $checkerService->arrayCheck($parameters, ['card_id', 'api_key']);
+        $data = json_decode($request->getContent(), true);
+        if ($data === null) {
+            return $this->json(['message' => 'Bad request, invalid json'], Response::HTTP_BAD_REQUEST);
+        }
+
+        /// verify if data require
+        $requireData = ['designation', 'card_id', 'api_key', 'access_token'];
+        $missingParameter = $checkerService->arrayCheck($data, $requireData);
         if ($missingParameter['count'] > 0) {
             return $this->json([
                 'message' => 'Bad request, missed parameter '
@@ -35,7 +43,14 @@ class QrCodeCreateController extends AbstractController
             ], 406);
         }
 
-        $queryReponse = $checkQrCodeQuery->check($parameters['code'], $parameters['api_key']);
+        $dto = new QrCodeTransactionDto(
+            $data['designation'],
+            $data['card_id'],
+            $data['api_key'],
+            $data['access_token']
+        );
+
+        $queryReponse = $createQrCodeCommand->createTransactionQrCode($dto);
         return $this->json($queryReponse->data, $queryReponse->status);
     }
 

@@ -17,15 +17,18 @@ class QrCodeTransactionDto
     public string $apiKey;
 
     public ?string $entreprise;
+    public string $accesToken;
 
     public function __construct(string  $designation,
                                 string  $card,
                                 string  $apiKey,
-                                ?string $entreprise)
+                                string  $accesToken,
+                                ?string $entreprise = null)
     {
         $this->designation = $designation;
         $this->card = $card;
         $this->entreprise = $entreprise;
         $this->apiKey = $apiKey;
+        $this->accesToken = $accesToken;
     }
 }

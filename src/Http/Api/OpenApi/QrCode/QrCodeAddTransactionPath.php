@@ -31,13 +31,17 @@ class QrCodeAddTransactionPath
                                 'schema' => [
                                     'type' => 'object',
                                     'properties' => [
-                                        'token' => [
+                                        'qrCode' => [
                                             'type' => 'string',
-                                            'example' => 'eyxxxGciOiJSUzI1NiIsInR5cCI6IkpXUyJ9.eyJleHAiOjE0NDI0MDM3NTgsImVtYWlsIjoid',
+                                            'example' => 'PTR-000000000000000000000',
                                         ],
-                                        'refresh_token' => [
+                                        'designation' => [
                                             'type' => 'string',
-                                            'example' => 'eyxxxGciOiJSUzI1NiIsInR5cCI6IkpXUyJ9.eyJleHAiOjE0NDI0MDM3NTgsImVtYWlsIjoid',
+                                            'example' => 'mew new qr code',
+                                        ],
+                                        'message' => [
+                                            'type' => 'string',
+                                            'example' => '',
                                         ]
                                     ],
                                 ],
@@ -45,7 +49,7 @@ class QrCodeAddTransactionPath
                         ],
                     ],
                 ],
-                'Refresh user token when is expired',
+                'Create a new qr code for transaction',
                 '', null, [],
                 new RequestBody(
                     $operationId,
@@ -54,9 +58,30 @@ class QrCodeAddTransactionPath
                             'schema' => [
                                 'type' => 'object',
                                 'properties' => [
-                                    'refresh_token' => [
+                                    'designation' => [
                                         'type' => 'string',
-                                        'example' => 'xxx00a7a9e970f9bbe076e05743e00648908c38366c551a8cdf524ba424fc3e520988f6320a5498',
+                                        'example' => 'My new qr code',
+                                        'required' => true
+                                    ],
+                                    'card_id' => [
+                                        'type' => 'string',
+                                        'example' => '00000000000000',
+                                        'required' => true
+                                    ],
+                                    'entreprise_id' => [
+                                        'type' => 'string',
+                                        'example' => 'JNIDIDJNDJNDJNDJD',
+                                        'required' => true
+                                    ],
+                                    'api_key' => [
+                                        'type' => 'string',
+                                        'example' => '000000000000000',
+                                        'required' => true
+                                    ],
+                                    'access_token' => [
+                                        'type' => 'string',
+                                        'example' => '000000000000000',
+                                        'required' => true
                                     ]
                                 ],
                             ],
