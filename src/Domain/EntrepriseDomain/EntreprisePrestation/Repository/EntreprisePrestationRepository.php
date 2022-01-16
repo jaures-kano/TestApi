@@ -1,10 +1,10 @@
 <?php
 
 
-namespace App\Domain\EntrepriseDomain\EntreprisePrestation\EntrepriseProduct\Repository;
+namespace App\Domain\EntrepriseDomain\EntreprisePrestation\Repository;
 
 
-use App\Domain\EntrepriseDomain\EntreprisePrestation\EntrepriseProduct\Entity\EntreprisePrestation;
+use App\Domain\EntrepriseDomain\EntreprisePrestation\Entity\EntreprisePrestation;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -16,7 +16,7 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method EntreprisePrestation[]    findAll()
  * @method EntreprisePrestation[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class EntrepriseProductRepository extends ServiceEntityRepository
+class EntreprisePrestationRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {

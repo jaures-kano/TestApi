@@ -5,6 +5,7 @@ namespace App\Domain\EntrepriseDomain\EntreprisePrestation\Entity;
 
 
 use App\Application\Traits\BaseTimeTrait;
+use App\Domain\EntrepriseDomain\EntreprisePrestation\Repository\EntreprisePromotionRepository;
 use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;

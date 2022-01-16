@@ -46,7 +46,7 @@ class OpenQrCodeApiFactory implements OpenApiFactoryInterface
             $this->qrCodeListPath->listQrCodePath(
                 'Qr code systems', 'qr-code-list'));
 
-        $openApi->getPaths()->addPath('/api/qr_code/check/{code}',
+        $openApi->getPaths()->addPath('/api/qr_code/check',
             $this->qrCodeCheckApiPath->checkQrCodePath(
                 'Qr code systems', 'qr-code-check'));
 

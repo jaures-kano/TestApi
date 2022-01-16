@@ -1,10 +1,10 @@
 <?php
 
 
-namespace App\Domain\EntrepriseDomain\EntreprisePrestation\EntrepriseProduct\Repository;
+namespace App\Domain\EntrepriseDomain\EntreprisePrestation\Repository;
 
 
-use App\Domain\EntrepriseDomain\EntreprisePrestation\EntrepriseProduct\Entity\EntreprisePromotion;
+use App\Domain\EntrepriseDomain\EntreprisePrestation\Entity\EntreprisePromotion;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 

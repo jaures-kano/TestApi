@@ -3,10 +3,9 @@
 namespace App\Http\Api\OpenApi\QrCode;
 
 
+use ApiPlatform\Core\OpenApi\Model;
 use ApiPlatform\Core\OpenApi\Model\Operation;
 use ApiPlatform\Core\OpenApi\Model\PathItem;
-use ApiPlatform\Core\OpenApi\Model\RequestBody;
-use ArrayObject;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
@@ -46,22 +45,11 @@ class QrCodeCheckApiPath
                     ],
                 ],
                 'Refresh user token when is expired',
-                '', null, [],
-                new RequestBody(
-                    $operationId,
-                    new ArrayObject([
-                        'application/json' => [
-                            'schema' => [
-                                'type' => 'object',
-                                'properties' => [
-                                    'refresh_token' => [
-                                        'type' => 'string',
-                                        'example' => 'xxx00a7a9e970f9bbe076e05743e00648908c38366c551a8cdf524ba424fc3e520988f6320a5498',
-                                    ]
-                                ],
-                            ],
-                        ],
-                    ]))
+                '', null,
+                [
+                    new Model\Parameter('code', 'query', 'Qr code string'),
+                    new Model\Parameter('api_key', 'query', 'Api key')
+                ]
             ), null, null,
         );
     }

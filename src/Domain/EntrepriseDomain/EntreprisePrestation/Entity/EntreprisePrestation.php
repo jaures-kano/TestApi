@@ -5,7 +5,7 @@ namespace App\Domain\EntrepriseDomain\EntreprisePrestation\Entity;
 
 use App\Application\Traits\BaseTimeTrait;
 use App\Domain\EntrepriseDomain\Entreprise\Entity\Entreprise;
-use App\Domain\EntrepriseDomain\EntreprisePrestation\EntrepriseProduct\Repository\EntrepriseProductRepository;
+use App\Domain\EntrepriseDomain\EntreprisePrestation\Repository\EntreprisePrestationRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\IdGenerator\UlidGenerator;
 use Symfony\Component\Uid\Ulid;
@@ -13,7 +13,7 @@ use Symfony\Component\Uid\Ulid;
 /**
  * @author Elessa Maxime <elessamaxime@icloud.com>
  * @package App\Domain\EntrepriseDomain\EntreprisePrestation\Entity
- * @ORM\Entity(repositoryClass=EntrepriseProductRepository::class)
+ * @ORM\Entity(repositoryClass=EntreprisePrestationRepository::class)
  */
 class EntreprisePrestation
 {
