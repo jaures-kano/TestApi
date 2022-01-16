@@ -23,6 +23,10 @@ class CaseMessage
 
     public const CODE_INVALID = 'Confirmation code d\'ont match';
 
+    public const WRONG_PASSWORD = 'Wrong password';
+
+    public const INSUFFICIENT = 'Insufficient card sold';
+
     public const MAIL_USED = 'Mail that you provide is already have an account';
 
     public const UNKNOW_EMAIL = 'Email is not registed';

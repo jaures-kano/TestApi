@@ -46,19 +46,25 @@ class RequestRecoverCommand extends AbstractCase
     public function recoverPassword($email, $mode, $apiKey): CaseResponse
     {
         if ($this->keyService->isValidKey($apiKey) === false) {
-            return $this->errorResponse(CaseMessage::INVALID_KEY,
-                [], HttpStatus::BADREQUEST);
+            return $this->errorResponse(
+                [
+                    'message' => CaseMessage::INVALID_KEY
+                ], HttpStatus::BADREQUEST);
         }
 
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            return $this->errorResponse(CaseMessage::MAIL_INVALID,
-                [], HttpStatus::BADREQUEST);
+            return $this->errorResponse(
+                [
+                    'message' => CaseMessage::MAIL_INVALID
+                ], HttpStatus::BADREQUEST);
         }
 
         $foundUser = $this->userRepository->findOneBy(['email' => $email]);
         if ($foundUser === null) {
-            return $this->errorResponse(CaseMessage::UNKNOW_EMAIL,
-                [], HttpStatus::BADREQUEST);
+            return $this->errorResponse(
+                [
+                    'message' => CaseMessage::UNKNOW_EMAIL
+                ], HttpStatus::BADREQUEST);
         }
 
         $requestSend = $this->userRecoveryRRepository->findOneBy(['isValidate' => false]);
@@ -77,7 +83,9 @@ class RequestRecoverCommand extends AbstractCase
         $message = 'Un Email a ete envoye a votre avec un code de confirmation';
         $mode === false && $message = 'Un Sms a ete envoye a votre avec un code de confirmation';
 
-        return $this->successResponse($message, [], HttpStatus::ACCEPTED);
+        return $this->successResponse([
+            'message' => $message
+        ], HttpStatus::ACCEPTED);
 
     }
 

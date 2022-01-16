@@ -31,13 +31,13 @@ class CardTransfertPath
                                 'schema' => [
                                     'type' => 'object',
                                     'properties' => [
-                                        'token' => [
+                                        'message' => [
                                             'type' => 'string',
-                                            'example' => 'eyxxxGciOiJSUzI1NiIsInR5cCI6IkpXUyJ9.eyJleHAiOjE0NDI0MDM3NTgsImVtYWlsIjoid',
+                                            'example' => 'Transfert sucessfully done',
                                         ],
-                                        'refresh_token' => [
+                                        'reference' => [
                                             'type' => 'string',
-                                            'example' => 'eyxxxGciOiJSUzI1NiIsInR5cCI6IkpXUyJ9.eyJleHAiOjE0NDI0MDM3NTgsImVtYWlsIjoid',
+                                            'example' => '00000001122325555',
                                         ]
                                     ],
                                 ],
@@ -45,7 +45,7 @@ class CardTransfertPath
                         ],
                     ],
                 ],
-                'Refresh user token when is expired',
+                'Transfert money to an account',
                 '', null, [],
                 new RequestBody(
                     $operationId,
@@ -54,9 +54,35 @@ class CardTransfertPath
                             'schema' => [
                                 'type' => 'object',
                                 'properties' => [
-                                    'refresh_token' => [
+                                    'card_sender_id' => [
                                         'type' => 'string',
-                                        'example' => 'xxx00a7a9e970f9bbe076e05743e00648908c38366c551a8cdf524ba424fc3e520988f6320a5498',
+                                        'example' => 'IMIDMIMDIMIMDIMD',
+                                        'required' => true
+                                    ],
+                                    'card_receiver_id' => [
+                                        'type' => 'string',
+                                        'example' => 'IMIDMIMDIMIMDIMD',
+                                        'required' => true
+                                    ],
+                                    'amount' => [
+                                        'type' => 'string',
+                                        'example' => 10000,
+                                        'required' => true
+                                    ],
+                                    'card_user_password' => [
+                                        'type' => 'string',
+                                        'example' => '123456',
+                                        'required' => true
+                                    ],
+                                    'access_token' => [
+                                        'type' => 'string',
+                                        'example' => 'INDIOIDDJNDKimoDMoID',
+                                        'required' => true
+                                    ],
+                                    'api_key' => [
+                                        'type' => 'string',
+                                        'example' => 'KJNKJDJKNomiomdodmIMSOMOSMKmomos',
+                                        'required' => true
                                     ]
                                 ],
                             ],

@@ -47,7 +47,7 @@ class CardListPath
                 'Refresh user token when is expired',
                 '', null,
                 [
-                    new Model\Parameter('code', 'query', 'Qr code string'),
+                    new Model\Parameter('access_token', 'query', 'Access token'),
                     new Model\Parameter('api_key', 'query', 'Api key')
                 ]
             ), null, null,

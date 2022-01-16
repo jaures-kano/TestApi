@@ -45,10 +45,7 @@ class ApiRecoverAccountController extends AbstractController
 
         $commandResponse = $command->recoverPassword
         ($content['email'], $content['confirmation_mode'], $content['api_key']);
-
-        return $this->json([
-            'message' => $commandResponse->messages
-        ], $commandResponse->status);
+        return $this->json($commandResponse->data, $commandResponse->status);
     }
 
 }

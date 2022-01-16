@@ -54,8 +54,9 @@ class Card
     /**
      * @ORM\ManyToOne (targetEntity="App\Domain\AuthDomain\Auth\Entity\User",
      *     inversedBy="cards")
+     * @ORM\JoinColumn(nullable=false)
      */
-    private ?User $user;
+    private User $user;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Domain\EntrepriseDomain\Entreprise\Entity\Entreprise",
@@ -119,7 +120,7 @@ class Card
         return $this;
     }
 
-    public function getUser(): ?User
+    public function getUser(): User
     {
         return $this->user;
     }
