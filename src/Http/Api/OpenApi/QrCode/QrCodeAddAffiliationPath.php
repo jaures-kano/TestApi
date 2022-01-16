@@ -10,11 +10,11 @@ use ArrayObject;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
- * Class QrCodeAddPath
+ * Class QrCodeAddAffiliationPath
  * @package App\Http\Api\OpenApi\QrCode
  * @author jaures kano <ruddyjaures@mail.com>
  */
-class QrCodeAddPath
+class QrCodeAddAffiliationPath
 {
 
     public function addQrCodePath($tag, $operationId = 'default'): PathItem

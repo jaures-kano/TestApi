@@ -5,7 +5,7 @@ namespace App\Application\QrCode\Command;
 
 
 use App\Adapter\Response\CaseResponse;
-use App\Application\QrCode\Dto\QrCodeDto;
+use App\Application\QrCode\Dto\QrCodeTransactionDto;
 use App\Domain\QrCodeDomain\Entity\QrCodeTransaction;
 use Doctrine\ORM\EntityManagerInterface;
 
@@ -24,11 +24,11 @@ class UnableOrDisableQrCodeCommand
     }
 
     /**
-     * @param QrCodeDto $qrCodeDto
+     * @param QrCodeTransactionDto $qrCodeDto
      * @param QrCodeTransaction $qrCode
      * @return CaseResponse
      */
-    public function UnableOrDisable(QrCodeDto $qrCodeDto, QrCodeTransaction $qrCode): caseResponse
+    public function UnableOrDisable(QrCodeTransactionDto $qrCodeDto, QrCodeTransaction $qrCode): caseResponse
     {
         $qrCode->setIsEnabled(true);
         $this->manager->flush();
