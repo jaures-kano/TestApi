@@ -56,3 +56,8 @@ services:
     arguments: [ '@App\Http\Api\OpenApi\EnableCountry\OpenEnableCountryApiFactory.inner' ]
     autoconfigure: false
 
+  App\Http\Api\OpenApi\Cards\OpenCardApiFactory:
+    decorates: 'api_platform.openapi.factory'
+    arguments: [ '@App\Http\Api\OpenApi\Cards\OpenCardApiFactory.inner' ]
+    autoconfigure: false
+
