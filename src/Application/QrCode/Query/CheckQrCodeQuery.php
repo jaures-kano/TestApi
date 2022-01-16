@@ -66,7 +66,7 @@ class CheckQrCodeQuery extends AbstractCase
                     'lastName' => $user->getLastName(),
                     'isCertified' => $user->getIdentityVerified(),
                     'email' => $user->getEmail(),
-                    'phone' => $user->getEnabledCountry()->getCallingCode() . $user->getFirstName(),
+                    'phone' => $user->getEnabledCountry()->getCallingCode() . $user->getPhone(),
                     'country' => $user->getEnabledCountry()->getName()
                 ],
                 'entreprise' => $ifTransactonCode->getEntreprise() !== null ? [

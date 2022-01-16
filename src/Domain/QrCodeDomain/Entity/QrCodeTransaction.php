@@ -123,7 +123,7 @@ class QrCodeTransaction
         return $this;
     }
 
-    public function getEntreprise(): Entreprise
+    public function getEntreprise(): ?Entreprise
     {
         return $this->entreprise;
     }

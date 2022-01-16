@@ -28,7 +28,7 @@ class QrCodeCheckController extends AbstractController
     {
         $parameters = $request->query->all();
         $missingParameter = $checkerService->arrayCheck($parameters,
-            ['code', 'api_key', 'access_token']);
+            ['code', 'api_key']);
         if ($missingParameter['count'] > 0) {
             return $this->json([
                 'message' => 'Bad request, missed parameter '
