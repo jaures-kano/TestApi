@@ -68,12 +68,19 @@ class Entreprise
      */
     private Collection $cards;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Domain\QrCodeDomain\Entity\QrCodeAffiliation",
+     *     mappedBy="entreprise" )
+     */
+    private Collection $qrCodes;
+
     public function __construct()
     {
         $this->prestations = new ArrayCollection();
         $this->entrepriseAffiliation = new ArrayCollection();
         $this->owner = new ArrayCollection();
         $this->cards = new ArrayCollection();
+        $this->qrCodes = new ArrayCollection();
     }
 
     /**
@@ -192,4 +199,8 @@ class Entreprise
         return $this->cards;
     }
 
+    public function getQrCodes()
+    {
+        return $this->qrCodes;
+    }
 }

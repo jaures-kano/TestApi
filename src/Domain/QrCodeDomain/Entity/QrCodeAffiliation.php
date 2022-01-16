@@ -4,6 +4,7 @@ namespace App\Domain\QrCodeDomain\Entity;
 
 
 use App\Application\Traits\BaseTimeTrait;
+use App\Domain\EntrepriseDomain\Entreprise\Entity\Entreprise;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\IdGenerator\UlidGenerator;
 use Symfony\Component\Uid\Ulid;
@@ -37,10 +38,15 @@ class QrCodeAffiliation
     private string $qrCode;
 
     /**
-     * @ORM\Column( type="boolean", options={"default":true})
+     * @ORM\Column(type="boolean", options={"default":true})
      */
     private bool $isEnabled;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Domain\EntrepriseDomain\Entreprise\Entity\Entreprise",
+     *     inversedBy="qrCodes")
+     */
+    private ?Entreprise $entreprise;
 
     public function getId(): ?Ulid
     {

@@ -7,6 +7,8 @@ use App\Application\Traits\BaseTimeTrait;
 use App\Domain\AuthDomain\Auth\Entity\User;
 use App\Domain\EntrepriseDomain\Entreprise\Entity\Entreprise;
 use DateTimeInterface;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\IdGenerator\UlidGenerator;
 use Symfony\Component\Uid\Ulid;
@@ -30,11 +32,6 @@ class Card
     private Ulid $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private string $expiryDdate;
-
-    /**
      * @ORM\Column(type="date", length=255)
      */
     private DateTimeInterface $expiredAt;
@@ -56,32 +53,32 @@ class Card
     private ?User $user;
 
     /**
-     * @ORM\ManyToOne (targetEntity="App\Domain\EntrepriseDomain\Entreprise\Entity\Entreprise",
+     * @ORM\ManyToOne(targetEntity="App\Domain\EntrepriseDomain\Entreprise\Entity\Entreprise",
      *     inversedBy="cards")
      */
     private ?Entreprise $entreprise;
 
     /**
-     * @ORM\ManyToOne (targetEntity="App\Domain\CardsDomain\Entity\CardType",
+     * @ORM\ManyToOne(targetEntity="App\Domain\CardsDomain\Entity\CardType",
      *     inversedBy="cards")
      * @ORM\JoinColumn(nullable=false)
      */
     private CardType $cardType;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Domain\QrCodeDomain\Entity\QrCodeTransaction",
+     *     mappedBy="card")
+     */
+    private Collection $qrCodes;
+
+    public function __construct()
+    {
+        $this->qrCodes = new ArrayCollection();
+    }
+
     public function getId(): Ulid
     {
         return $this->id;
-    }
-
-    public function getExpiryDdate(): string
-    {
-        return $this->expiryDdate;
-    }
-
-    public function setExpiryDdate(string $expiryDdate): Card
-    {
-        $this->expiryDdate = $expiryDdate;
-        return $this;
     }
 
     public function getExpiredAt(): DateTimeInterface
@@ -149,5 +146,10 @@ class Card
     {
         $this->cardType = $cardType;
         return $this;
+    }
+
+    public function getQrCodes()
+    {
+        return $this->qrCodes;
     }
 }

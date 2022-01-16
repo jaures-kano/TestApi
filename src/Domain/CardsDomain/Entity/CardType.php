@@ -31,8 +31,8 @@ class CardType
     private string $designation;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Domain\CardsDomain\Entity\Card",
-     *      inversedBy="cardType")
+     * @ORM\OneToMany(targetEntity="App\Domain\CardsDomain\Entity\Card",
+     *      mappedBy="cardType")
      */
     private Collection $cards;
 
