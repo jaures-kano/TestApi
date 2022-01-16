@@ -5,7 +5,9 @@ namespace App\Infrastructures\JwtToken;
 
 use App\Domain\AuthDomain\Auth\Entity\User;
 use DateTime;
+use Exception;
 use Gesdinet\JWTRefreshTokenBundle\Model\RefreshTokenManagerInterface;
+use Lexik\Bundle\JWTAuthenticationBundle\Services\JWSProvider\JWSProviderInterface;
 use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
 
 /**
@@ -19,14 +21,18 @@ class JwtService
     private JWTTokenManagerInterface $tokenManager;
 
     private RefreshTokenManagerInterface $refreshTokenManager;
+    private JWSProviderInterface $jwsProvider;
+
 
     public function __construct(
         JWTTokenManagerInterface     $tokenManager,
+        JWSProviderInterface         $jwsProvider,
         RefreshTokenManagerInterface $refreshTokenManager
     )
     {
         $this->tokenManager = $tokenManager;
         $this->refreshTokenManager = $refreshTokenManager;
+        $this->jwsProvider = $jwsProvider;
     }
 
     public function createNewJWT(User $user): array
@@ -34,7 +40,7 @@ class JwtService
         $token = $this->tokenManager->create($user);
 
         $datetime = new DateTime();
-        $datetime->modify('+86400 seconds');
+        $datetime->modify('+30 days');
 
         $lastToken = $this->refreshTokenManager->getLastFromUsername($user->getId());
 
@@ -55,10 +61,26 @@ class JwtService
         ];
     }
 
-    public function isValidUserToken(User $user, ?string $token): bool
+    public function isValidUserToken(string $token)
     {
-        $decodeToken = $this->tokenManager->decode($token);
+        try {
+            $jws = $this->jwsProvider->load($token);
+        } catch (Exception $e) {
+            return 'Invalid token';
+        }
 
-        return true;
+        if ($jws->isInvalid()) {
+            return 'Invalid token';
+        }
+
+        if ($jws->isExpired()) {
+            return 'Token expired';
+        }
+
+        if (!$jws->isVerified()) {
+            return 'Token not verified';
+        }
+
+        return $jws->getPayload();
     }
 }

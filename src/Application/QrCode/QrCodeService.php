@@ -5,6 +5,7 @@ namespace App\Application\QrCode;
 
 use App\Domain\CardsDomain\Entity\Card;
 use App\Domain\EntrepriseDomain\Entreprise\Entity\Entreprise;
+use App\Infrastructures\Generator\TokenGenerator;
 
 /**
  * Class QrCodeService
@@ -16,11 +17,13 @@ class QrCodeService
 
     public function generateTransactionQrCode(Card $card): string
     {
-        return 'PTR-' . $card->getId() . bin2hex(random_int(100, 999));
+        $generator = new TokenGenerator();
+        return 'PTR-' . $card->getId() . strtoupper($generator->getApiToken(10));
     }
 
     public function generateAffiliationQrCode(Entreprise $entreprise): string
     {
-        return 'PAF-' . $entreprise->getId() . bin2hex(random_int(100, 999));
+        $generator = new TokenGenerator();
+        return 'PAF-' . $entreprise->getId() . strtoupper($generator->getApiToken(10));
     }
 }
