@@ -16,19 +16,18 @@ use Symfony\Component\Routing\Annotation\Route;
  * @package App\Http\Api\Controller\QrCode
  * @author jaures kano <ruddyjaures@mail.com>
  */
-class QrCodeCheckController extends AbstractController
+class QrCodeCreateController extends AbstractController
 {
 
     /**
-     * @Route("/check", name="api_qr_code_check")
+     * @Route("/create", name="api_qr_code_create")
      */
     public function qrcodeCheck(Request                  $request,
                                 ParamatersCheckerService $checkerService,
                                 CheckQrCodeQuery         $checkQrCodeQuery): JsonResponse
     {
         $parameters = $request->query->all();
-        $missingParameter = $checkerService->arrayCheck($parameters,
-            ['code', 'api_key', 'access_token']);
+        $missingParameter = $checkerService->arrayCheck($parameters, ['card_id', 'api_key']);
         if ($missingParameter['count'] > 0) {
             return $this->json([
                 'message' => 'Bad request, missed parameter '

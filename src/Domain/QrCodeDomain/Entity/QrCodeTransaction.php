@@ -61,7 +61,7 @@ class QrCodeTransaction
      * @ORM\ManyToOne (targetEntity="App\Domain\EntrepriseDomain\Entreprise\Entity\Entreprise",
      *     inversedBy="qrCodes")
      */
-    private Entreprise $entreprise;
+    private ?Entreprise $entreprise;
 
     public function getId(): Ulid
     {
@@ -128,7 +128,7 @@ class QrCodeTransaction
         return $this->entreprise;
     }
 
-    public function setEntreprise(Entreprise $entreprise): self
+    public function setEntreprise(?Entreprise $entreprise): self
     {
         $this->entreprise = $entreprise;
         return $this;

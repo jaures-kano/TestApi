@@ -14,26 +14,18 @@ class QrCodeTransactionDto
 
     public string $card;
 
-    public string $user;
-
     public string $apiKey;
 
     public ?string $entreprise;
 
-    public ?string $qrCode;
-
     public function __construct(string  $designation,
-                                string  $user,
                                 string  $card,
                                 string  $apiKey,
-                                ?string $entreprise,
-                                ?string $qrCode)
+                                ?string $entreprise)
     {
         $this->designation = $designation;
-        $this->user = $user;
         $this->card = $card;
         $this->entreprise = $entreprise;
-        $this->qrCode = $qrCode;
         $this->apiKey = $apiKey;
     }
 }

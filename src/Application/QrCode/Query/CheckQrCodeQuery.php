@@ -59,7 +59,8 @@ class CheckQrCodeQuery extends AbstractCase
         if ($ifTransactonCode !== null) {
             $user = $ifTransactonCode->getUser();
             return $this->successResponse([
-                'type' => 'transaction',
+                'type' => 001,
+                'desc' => 'Qr code for transaction',
                 'owner' => [
                     'firstName' => $user->getFirstName(),
                     'lastName' => $user->getLastName(),
@@ -72,10 +73,8 @@ class CheckQrCodeQuery extends AbstractCase
                     'enteprise' => $ifTransactonCode->getEntreprise()->getDescription(),
                     'description' => $ifTransactonCode->getEntreprise()->getDescription(),
                 ] : null,
-                'card' => [
-                    'number' => '000000'
-                ],
-                'link' => '/card/transaction/transfert'
+                'cardId' => $ifTransactonCode->getCard()->getId(),
+                'link' => '/api/card/transfert'
             ], HttpStatus::ACCEPTED);
         }
 
