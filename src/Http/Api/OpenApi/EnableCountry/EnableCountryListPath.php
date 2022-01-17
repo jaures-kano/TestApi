@@ -3,10 +3,9 @@
 namespace App\Http\Api\OpenApi\EnableCountry;
 
 
+use ApiPlatform\Core\OpenApi\Model;
 use ApiPlatform\Core\OpenApi\Model\Operation;
 use ApiPlatform\Core\OpenApi\Model\PathItem;
-use ApiPlatform\Core\OpenApi\Model\RequestBody;
-use ArrayObject;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
@@ -31,13 +30,17 @@ class EnableCountryListPath
                                 'schema' => [
                                     'type' => 'object',
                                     'properties' => [
-                                        'token' => [
-                                            'type' => 'string',
-                                            'example' => 'eyxxxGciOiJSUzI1NiIsInR5cCI6IkpXUyJ9.eyJleHAiOjE0NDI0MDM3NTgsImVtYWlsIjoid',
-                                        ],
-                                        'refresh_token' => [
-                                            'type' => 'string',
-                                            'example' => 'eyxxxGciOiJSUzI1NiIsInR5cCI6IkpXUyJ9.eyJleHAiOjE0NDI0MDM3NTgsImVtYWlsIjoid',
+                                        'countries' => [
+                                            'type' => 'array',
+                                            'example' => [
+                                                '...',
+                                                [
+                                                    'name' => 'cameroun',
+                                                    'calling_code' => '+237',
+                                                    'regex_code' => 'cameroun',
+                                                    'id' => 'PLDDJNDJK000',
+                                                ]
+                                            ],
                                         ]
                                     ],
                                 ],
@@ -45,23 +48,11 @@ class EnableCountryListPath
                         ],
                     ],
                 ],
-                'Refresh user token when is expired',
-                '', null, [],
-                new RequestBody(
-                    $operationId,
-                    new ArrayObject([
-                        'application/json' => [
-                            'schema' => [
-                                'type' => 'object',
-                                'properties' => [
-                                    'refresh_token' => [
-                                        'type' => 'string',
-                                        'example' => 'xxx00a7a9e970f9bbe076e05743e00648908c38366c551a8cdf524ba424fc3e520988f6320a5498',
-                                    ]
-                                ],
-                            ],
-                        ],
-                    ]))
+                'Get list of enable country',
+                '', null,
+                [
+                    new Model\Parameter('api_key', 'query', 'Api key')
+                ]
             ), null, null,
         );
     }
