@@ -29,7 +29,7 @@ class ResetPasswordMail
             ->from('ruddyjaures@gmail.com')
             ->to(new Address($userRecoveryRequest->getUser()->getEmail()))
             ->subject("Demande de reinitialisation de mot de passe")
-            ->htmlTemplate("email/auth/resetPassword.html.twig")
+            ->htmlTemplate("email/Auth/resetPassword.html.twig")
             ->context([
                 'user' => $userRecoveryRequest->getUser(),
                 'request' => $userRecoveryRequest,

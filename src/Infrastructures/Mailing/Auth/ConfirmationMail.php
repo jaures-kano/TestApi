@@ -34,7 +34,7 @@ class ConfirmationMail
             ->from('ruddyjaures@gmail.com')
             ->to(new Address($user->getEmail()))
             ->subject("confirmer votre adresse email Paie Cash")
-            ->htmlTemplate("email/auth/confirmation.html.twig")
+            ->htmlTemplate("email/Auth/confirmation.html.twig")
             ->context([
                 "user" => $user
             ]);
