@@ -19,10 +19,12 @@ class OpenCardApiFactory implements OpenApiFactoryInterface
     private CardListPath $cardListPath;
     private CardRequestPath $cardRequestPath;
     private CardHistoryPath $cardHistoryPath;
+    private CardCheckPath $cardCheckPath;
 
     public function __construct(OpenApiFactoryInterface $decorated,
                                 CardTransfertPath       $cardTransfertPath,
                                 CardListPath            $cardListPath,
+                                CardCheckPath           $cardCheckPath,
                                 CardRequestPath         $cardRequestPath,
                                 CardHistoryPath         $cardHistoryPath
     )
@@ -33,6 +35,7 @@ class OpenCardApiFactory implements OpenApiFactoryInterface
         $this->cardListPath = $cardListPath;
         $this->cardRequestPath = $cardRequestPath;
         $this->cardHistoryPath = $cardHistoryPath;
+        $this->cardCheckPath = $cardCheckPath;
     }
 
     public function __invoke(array $context = []): OpenApi
@@ -50,6 +53,10 @@ class OpenCardApiFactory implements OpenApiFactoryInterface
         $openApi->getPaths()->addPath('/api/card/transfert',
             $this->cardTransfertPath->cardTransfert(
                 'Card operation', 'card-transfert'));
+
+        $openApi->getPaths()->addPath('/api/card/check',
+            $this->cardCheckPath->checkCard(
+                'Card operation', 'card-check'));
 
         $openApi->getPaths()->addPath('/api/card/list',
             $this->cardListPath->cardList(
