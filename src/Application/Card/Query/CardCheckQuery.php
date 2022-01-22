@@ -41,12 +41,12 @@ class CardCheckQuery extends AbstractCase
                 ], HttpStatus::BADREQUEST);
         }
 
-        $tokenResponse = $this->jwtService->isValidUserToken($accessToken);
-        if (is_array($tokenResponse) === false) {
-            return $this->errorResponse([
-                'message' => $tokenResponse
-            ], HttpStatus::BADREQUEST);
-        }
+//        $tokenResponse = $this->jwtService->isValidUserToken($accessToken);
+//        if (is_array($tokenResponse) === false) {
+//            return $this->errorResponse([
+//                'message' => $tokenResponse
+//            ], HttpStatus::BADREQUEST);
+//        }
 
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             return $this->errorResponse(
@@ -81,6 +81,6 @@ class CardCheckQuery extends AbstractCase
         return $this->successResponse([
             'totalCard' => 0,
             'message' => 'User d\'ont have any card'
-        ], HttpStatus::NOCONTENT);
+        ], HttpStatus::ACCEPTED);
     }
 }
