@@ -28,7 +28,7 @@ class ApiCardCheckController extends AbstractController
     {
         $parameters = $request->query->all();
         $missingParameter = $checkerService->arrayCheck($parameters,
-            ['access_token', 'api_key', 'card_number']);
+            ['access_token', 'api_key', 'email']);
         if ($missingParameter['count'] > 0) {
             return $this->json([
                 'message' => 'Bad request, missed parameter '
@@ -39,7 +39,7 @@ class ApiCardCheckController extends AbstractController
         $queryReponse = $query->checkCard(
             $parameters['access_token'],
             $parameters['api_key'],
-            $parameters['card_number']);
+            $parameters['email']);
         return $this->json($queryReponse->data, $queryReponse->status);
     }
 }

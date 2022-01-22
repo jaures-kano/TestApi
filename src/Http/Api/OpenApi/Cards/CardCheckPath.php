@@ -47,10 +47,9 @@ class CardCheckPath
                 'check if card is in paiecash',
                 '', null,
                 [
-                    new Parameter('card_number', 'query', 'Access token'),
-                    new Parameter('user_mail', 'query', 'Access token'),
-                    new Parameter('access_token', 'query', 'Access token'),
-                    new Parameter('api_key', 'query', 'Api key')
+                    new Parameter('email', 'query', 'User email', true),
+                    new Parameter('access_token', 'query', 'Access token', true),
+                    new Parameter('api_key', 'query', 'Api key', true)
                 ]
             ), null, null,
         );
