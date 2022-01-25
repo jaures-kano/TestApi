@@ -23,6 +23,8 @@ security:
       pattern: ^/api/authentification/login
       custom_authenticators:
         - App\Application\Authentification\Auth\Authentificators\ApiAuthentificator
+        - App\Infrastructures\Social\Authenticator\FacebookAuthenticator
+        - App\Infrastructures\Social\Authenticator\GoogleAuthenticator
 
       json_login:
         check_path: /api/authentification/login
@@ -33,8 +35,6 @@ security:
     api_token_refresh:
       pattern: ^/api/auth/token/refresh
       stateless: true
-
-
 
         #
         #    api:

@@ -13,6 +13,7 @@ use App\Domain\CommercialDomain\Entity\Commercial;
 use App\Domain\EnabledCountry\Entity\EnabledCountry;
 use App\Domain\PartnerDomain\Entity\Partner;
 use App\Domain\SubscriptionPlan\Subscription\Entity\Subscription;
+use App\Infrastructures\Social\Entity\SocialLoggableTrait;
 use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -29,6 +30,7 @@ use Symfony\Component\Uid\Ulid;
  */
 class User implements UserInterface, PasswordAuthenticatedUserInterface, Serializable
 {
+    use SocialLoggableTrait;
     use EntrepriseTrait;
     use AuthSystems;
     use IdentityVerified;
