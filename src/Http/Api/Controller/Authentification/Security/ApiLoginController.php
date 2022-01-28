@@ -2,6 +2,7 @@
 
 namespace App\Http\Api\Controller\Authentification\Security;
 
+use App\Domain\AuthDomain\Auth\Entity\User;
 use App\Infrastructures\JwtToken\JwtService;
 use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -22,14 +23,25 @@ class ApiLoginController extends AbstractController
     {
         $user = $this->getUser();
         if ($user !== null) {
+            /** @var User $user */
             $jwt = $jwtService->createNewJWT($user);
             return $this->json([
                 'message' => 'successfull login!',
-                'user' => $user,
+                'user' => [
+                    'id' => $user->getId(),
+                    'google_id' => $user->getGoogleId(),
+                    'facebook_id' => $user->getFacebookId(),
+                    'email' => $user->getEmail(),
+                    'lastName' => $user->getLastName(),
+                    'firstName' => $user->getLastName(),
+                    'lastLoginAt' => $user->getLastLoginAt(),
+                    'createdAt' => $user->getCreatedAt(),
+                    'updatedAt' => $user->getUpdatedAt(),
+                ],
                 'token' => $jwt['token'],
                 'refresh_token' => $jwt['refresh_refresh'],
                 'expired_at' => $jwt['expired_at']
-            ], 201, [], ['groups' => 'read:user']);
+            ], 201, []);
         }
 
         return new JsonResponse([

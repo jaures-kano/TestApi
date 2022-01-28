@@ -31,6 +31,7 @@ class RegistrationSocialController extends AbstractController
                                           SocialRegistrationCommand $command): JsonResponse
     {
         $data = json_decode($request->getContent(), true);
+        dd($request->attributes->get('service'));
         if ($data === null) {
             return $this->json(['message' => 'Bad request, invalid json'], Response::HTTP_BAD_REQUEST);
         }

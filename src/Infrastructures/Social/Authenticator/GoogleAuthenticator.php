@@ -29,8 +29,15 @@ class GoogleAuthenticator extends AbstractAuthenticator
 
     public function supports(Request $request): ?bool
     {
-        // continue ONLY if the current ROUTE matches the check ROUTE
-        return $request->attributes->get('_route') === 'connect_facebook_check';
+        $content = json_decode($request->getContent(), true);
+        if ($content === null) {
+            return false;
+        }
+
+        return $request->getContentType() === 'json'
+            && $request->isMethod('POST')
+            && $request->attributes->get('service') === 'google'
+            && $request->attributes->get('_route') === 'api_auth_registration_social';
     }
 
     public function authenticate(Request $request): Passport

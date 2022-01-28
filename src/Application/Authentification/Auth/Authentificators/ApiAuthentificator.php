@@ -22,7 +22,9 @@ class ApiAuthentificator extends AbstractAuthenticator
             return false;
         }
 
-        return $request->getContentType() === 'json' && $request->isMethod('POST');
+        return $request->getContentType() === 'json'
+            && $request->isMethod('POST')
+            && $request->attributes->get('_route') === 'api_authentification_login';
     }
 
     public function authenticate(Request $request): Passport
