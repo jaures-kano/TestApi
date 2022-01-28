@@ -15,7 +15,7 @@ class SocialLoginController extends AbstractController
 {
 
     /**
-     * @Route("/login/social/connect/{service}", name="oauth_connect")
+     * @Route("/login/social/connect/{service}", name="api_auth_registration_social")
      */
     public function connect(JwtService $jwtService): JsonResponse
     {

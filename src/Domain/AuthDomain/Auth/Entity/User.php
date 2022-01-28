@@ -219,7 +219,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, Seriali
         return serialize([
             $this->id,
             $this->email,
-            $this->password,
         ]);
     }
 
@@ -228,7 +227,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, Seriali
         [
             $this->id,
             $this->email,
-            $this->password,
         ] = unserialize($serialized);
     }
 
