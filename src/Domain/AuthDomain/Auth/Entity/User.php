@@ -61,14 +61,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, Seriali
 
     /**
      * @var string The hashed password
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", nullable=true)
      */
     private string $password;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Domain\EnabledCountry\Entity\EnabledCountry",
      *     inversedBy="users")
-     * @ORM\JoinColumn(nullable=false)
      */
     private EnabledCountry $enabledCountry;
 
@@ -172,7 +171,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, Seriali
     }
 
 
-    public function getPassword(): string
+    public function getPassword(): ?string
     {
         return $this->password;
     }
@@ -183,7 +182,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, Seriali
 
         return $this;
     }
-
 
     public function getUserRecovry(): Collection
     {
@@ -196,7 +194,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, Seriali
     }
 
 
-    public function getEnabledCountry(): EnabledCountry
+    public function getEnabledCountry(): ?EnabledCountry
     {
         return $this->enabledCountry;
     }
@@ -272,19 +270,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, Seriali
         return $this->partner;
     }
 
-
-    /*
-     * @return Subscription
-     */
     public function getSubscription(): Subscription
     {
         return $this->subscription;
     }
 
-    /**
-     * @param Subscription $subscription
-     * @return User
-     */
     public function setSubscription(Subscription $subscription): self
     {
         $this->subscription = $subscription;

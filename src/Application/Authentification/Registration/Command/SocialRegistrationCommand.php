@@ -1,4 +1,4 @@
-<?php
+<?php /** @noinspection ALL */
 
 namespace App\Application\Authentification\Registration\Command;
 
@@ -8,9 +8,10 @@ use App\Adapter\CaseMessage;
 use App\Adapter\HttpStatus;
 use App\Adapter\Response\CaseResponse;
 use App\Application\ApplicationKey\KeyService;
-use App\Application\Authentification\Registration\Dto\RegistrationDto;
+use App\Application\Authentification\Registration\Dto\SocialRegistrationDto;
 use App\Domain\AuthDomain\Auth\Entity\User;
 use App\Domain\AuthDomain\Auth\Repository\UserRepository;
+use App\Infrastructures\JwtToken\JwtService;
 use DateTime;
 
 /**
@@ -20,17 +21,22 @@ use DateTime;
  */
 class SocialRegistrationCommand extends AbstractCase
 {
+    private const SERVICE = ['facebook', 'google'];
+
     private UserRepository $userRepository;
     private KeyService $keyService;
+    private JwtService $jwtService;
 
     public function __construct(UserRepository $userRepository,
+                                JwtService     $jwtService,
                                 KeyService     $keyService)
     {
         $this->userRepository = $userRepository;
         $this->keyService = $keyService;
+        $this->jwtService = $jwtService;
     }
 
-    public function registration(RegistrationDto $registrationDto): CaseResponse
+    public function registration(SocialRegistrationDto $registrationDto, $service): CaseResponse
     {
         if ($this->keyService->isValidKey($registrationDto->apiKey) === false) {
             return $this->errorResponse(
@@ -54,17 +60,41 @@ class SocialRegistrationCommand extends AbstractCase
                 ], HttpStatus::BADREQUEST);
         }
 
+        if (in_array($service, self::SERVICE, true) === false) {
+            return $this->errorResponse(
+                [
+                    'message' => 'Unknow service'
+                ], HttpStatus::BADREQUEST);
+        }
+
         $user = new User();
         $user->setEmail($registrationDto->email);
         $user->setFirstName($registrationDto->firstName);
-        $user->setLastName($registrationDto->lastName);
+        $user->setIsActived(true);
+        $service === self::SERVICE[0] ? $user->setFacebookId($registrationDto->accountId) : null;
+        $service === self::SERVICE[1] ? $user->setGoogleId($registrationDto->accountId) : null;
         $user->setCreatedAt(new DateTime());
         $this->em()->persist($user);
         $this->em()->flush();
 
+        $jwt = $this->jwtService->createNewJWT($user);
         return $this->successResponse(
             [
-                'message' => 'Code send to user, token expired after 30 minutes'
+                'message' => 'successfull login!',
+                'user' => [
+                    'id' => $user->getId(),
+                    'google_id' => $user->getGoogleId(),
+                    'facebook_id' => $user->getFacebookId(),
+                    'email' => $user->getEmail(),
+                    'lastName' => $user->getLastName(),
+                    'firstName' => $user->getLastName(),
+                    'lastLoginAt' => $user->getLastLoginAt(),
+                    'createdAt' => $user->getCreatedAt(),
+                    'updatedAt' => $user->getUpdatedAt(),
+                ],
+                'token' => $jwt['token'],
+                'refresh_token' => $jwt['refresh_refresh'],
+                'expired_at' => $jwt['expired_at']
             ], HttpStatus::CREATED);
     }
 

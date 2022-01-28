@@ -3,8 +3,8 @@
 namespace App\Http\Api\Controller\Authentification\Registration;
 
 
-use App\Application\Authentification\Registration\Command\RegistrationCommand;
-use App\Application\Authentification\Registration\Dto\RegistrationDto;
+use App\Application\Authentification\Registration\Command\SocialRegistrationCommand;
+use App\Application\Authentification\Registration\Dto\SocialRegistrationDto;
 use App\Infrastructures\ParamatersChecker\ParamatersCheckerService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -21,13 +21,14 @@ use Symfony\Component\Routing\Annotation\Route;
 class RegistrationSocialController extends AbstractController
 {
 
+
     /**
-     * @Route("/registration/social/{service}", name="api_auth_registration")
+     * @Route("/registration/social/{service}", name="api_auth_registration_social")
      */
-    public function indexFistRegistration(Request                  $request,
-                                          string                   $servce,
-                                          ParamatersCheckerService $checkerService,
-                                          RegistrationCommand      $command): JsonResponse
+    public function indexFistRegistration(string                    $service,
+                                          Request                   $request,
+                                          ParamatersCheckerService  $checkerService,
+                                          SocialRegistrationCommand $command): JsonResponse
     {
         $data = json_decode($request->getContent(), true);
         if ($data === null) {
@@ -35,7 +36,7 @@ class RegistrationSocialController extends AbstractController
         }
 
         $requireData = [
-            'first_name', 'last_name', 'email', 'api_key'
+            'first_name', 'account_id', 'email', 'api_key'
         ];
 
         /// verify if data require
@@ -48,14 +49,14 @@ class RegistrationSocialController extends AbstractController
         }
 
         // chargement du dto
-        $registrationDto = new RegistrationDto(
+        $registrationDto = new SocialRegistrationDto(
             $data['first_name'],
-            $data['last_name'],
             $data['email'],
+            $data['account_id'],
             $data['api_key']);
 
         // send action to application
-        $commandReponse = $command->registration($registrationDto);
+        $commandReponse = $command->registration($registrationDto, $service);
         return $this->json($commandReponse->data, $commandReponse->status);
     }
 
