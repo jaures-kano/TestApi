@@ -2,11 +2,9 @@
 
 namespace App\Infrastructures\Social\Authenticator;
 
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Http\Authenticator\AbstractAuthenticator;
@@ -16,14 +14,6 @@ use Symfony\Component\Security\Http\Authenticator\Passport\SelfValidatingPasspor
 
 class FacebookAuthenticator extends AbstractAuthenticator
 {
-    private $entityManager;
-    private $router;
-
-    public function __construct(EntityManagerInterface $entityManager, RouterInterface $router)
-    {
-        $this->entityManager = $entityManager;
-        $this->router = $router;
-    }
 
     public function supports(Request $request): ?bool
     {
@@ -35,7 +25,7 @@ class FacebookAuthenticator extends AbstractAuthenticator
         return $request->getContentType() === 'json'
             && $request->isMethod('POST')
             && $request->attributes->get('service') === 'facebook'
-            && $request->attributes->get('_route') === 'api_auth_registration_social';
+            && $request->attributes->get('_route') === 'api_auth_login_social';
     }
 
     public function authenticate(Request $request): Passport

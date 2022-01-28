@@ -15,7 +15,7 @@ class SocialLoginController extends AbstractController
 {
 
     /**
-     * @Route("/login/social/connect/{service}", name="api_auth_registration_social")
+     * @Route("/login/social/connect/{service}", name="api_auth_login_social")
      */
     public function connect(JwtService $jwtService): JsonResponse
     {
@@ -31,7 +31,7 @@ class SocialLoginController extends AbstractController
                     'facebook_id' => $user->getFacebookId(),
                     'email' => $user->getEmail(),
                     'lastName' => $user->getLastName(),
-                    'firstName' => $user->getLastName(),
+                    'firstName' => $user->getFirstName(),
                     'lastLoginAt' => $user->getLastLoginAt(),
                     'createdAt' => $user->getCreatedAt(),
                     'updatedAt' => $user->getUpdatedAt(),

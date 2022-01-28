@@ -33,7 +33,7 @@ class ApiLoginController extends AbstractController
                     'facebook_id' => $user->getFacebookId(),
                     'email' => $user->getEmail(),
                     'lastName' => $user->getLastName(),
-                    'firstName' => $user->getLastName(),
+                    'firstName' => $user->getFirstName(),
                     'lastLoginAt' => $user->getLastLoginAt(),
                     'createdAt' => $user->getCreatedAt(),
                     'updatedAt' => $user->getUpdatedAt(),
