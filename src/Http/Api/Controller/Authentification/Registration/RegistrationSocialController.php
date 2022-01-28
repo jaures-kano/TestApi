@@ -14,17 +14,18 @@ use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * @Route("api/authentification")
- * Class RegistrationsApiController
- * @package App\Http\Api\Controller\AuthRegistration
+ * Class RegistrationSocialController
+ * @package App\Http\Api\Controller\Authentification\Registration
  * @author jaures kano <ruddyjaures@mail.com>
  */
-class RegistrationsApiController extends AbstractController
+class RegistrationSocialController extends AbstractController
 {
 
     /**
-     * @Route("/registration", name="api_auth_registration")
+     * @Route("/registration/social/{service}", name="api_auth_registration")
      */
     public function indexFistRegistration(Request                  $request,
+                                          string                   $servce,
                                           ParamatersCheckerService $checkerService,
                                           RegistrationCommand      $command): JsonResponse
     {
@@ -34,8 +35,7 @@ class RegistrationsApiController extends AbstractController
         }
 
         $requireData = [
-            'first_name', 'last_name', 'email', 'phone', 'api_key',
-            'country', 'password', 'confirm_password', 'confirmation_mode'
+            'first_name', 'last_name', 'email', 'api_key'
         ];
 
         /// verify if data require
@@ -52,13 +52,12 @@ class RegistrationsApiController extends AbstractController
             $data['first_name'],
             $data['last_name'],
             $data['email'],
-            $data['api_key'],
-            $data['password'],
-            $data['confirm_password']);
+            $data['api_key']);
 
         // send action to application
         $commandReponse = $command->registration($registrationDto);
         return $this->json($commandReponse->data, $commandReponse->status);
     }
+
 
 }

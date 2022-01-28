@@ -35,49 +35,29 @@ class RegistrationDto
      */
     public string $phone;
 
-    /**
-     * @Assert\NotBlank
-     */
-    public string $password;
+    public ?string $password;
 
-    /**
-     * @Assert\NotBlank
-     */
-    public string $passwordConfirm;
 
-    /**
-     * @Assert\NotBlank
-     */
-    public string $country;
-
-    /**
-     * @Assert\NotBlank
-     */
-    public bool $confirmationMode;
+    public ?string $passwordConfirm;
 
     /**
      * @Assert\NotBlank
      */
     public string $apiKey;
 
-    public function __construct(string $firstName,
-                                string $lastName,
-                                string $email,
-                                string $phone,
-                                string $password,
-                                string $passwordConfirm,
-                                bool   $confirmationMode,
-                                string $country,
-                                string $apiKey)
+    public function __construct(string  $firstName,
+                                string  $lastName,
+                                string  $email,
+                                string  $apiKey,
+                                ?string $password = null,
+                                ?string $passwordConfirm = null
+    )
     {
         $this->firstName = $firstName;
         $this->lastName = $lastName;
         $this->email = $email;
-        $this->phone = $phone;
         $this->password = $password;
         $this->passwordConfirm = $passwordConfirm;
-        $this->country = $country;
-        $this->confirmationMode = $confirmationMode;
         $this->apiKey = $apiKey;
     }
 
