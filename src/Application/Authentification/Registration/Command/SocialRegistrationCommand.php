@@ -69,11 +69,12 @@ class SocialRegistrationCommand extends AbstractCase
 
         $user = $foundUser ?? new User();
         $foundUser === null ? $user->setEmail($registrationDto->email) : null;
-        $foundUser === null ? $user->setFirstName($registrationDto->firstName);
+        $foundUser === null ? $user->setFirstName($registrationDto->firstName) : null;
         $user->setIsActived(true);
         $service === self::SERVICE[0] ? $user->setFacebookId($registrationDto->accountId) : null;
         $service === self::SERVICE[1] ? $user->setGoogleId($registrationDto->accountId) : null;
-        $user->setCreatedAt(new DateTime());
+        foundUser === null ? $user->setCreatedAt(new DateTime()) : null;
+        foundUser === null ? $user->setLastLoginAt(new DateTime()) : null;
         $this->em()->persist($user);
         $this->em()->flush();
 
