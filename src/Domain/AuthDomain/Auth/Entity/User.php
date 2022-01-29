@@ -62,7 +62,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, Seriali
     /**
      * @ORM\Column(type="string", nullable=true)
      */
-    private ?string $password;
+    private ?string $password = null;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Domain\EnabledCountry\Entity\EnabledCountry",
