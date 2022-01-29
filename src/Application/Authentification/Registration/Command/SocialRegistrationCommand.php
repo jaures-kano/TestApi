@@ -52,14 +52,6 @@ class SocialRegistrationCommand extends AbstractCase
                 ], HttpStatus::BADREQUEST);
         }
 
-        $foundUser = $this->userRepository->findOneBy(['email' => $registrationDto->email]);
-        if ($foundUser !== null) {
-            return $this->errorResponse(
-                [
-                    'message' => CaseMessage::MAIL_USED
-                ], HttpStatus::BADREQUEST);
-        }
-
         if (in_array($service, self::SERVICE, true) === false) {
             return $this->errorResponse(
                 [
@@ -67,9 +59,17 @@ class SocialRegistrationCommand extends AbstractCase
                 ], HttpStatus::BADREQUEST);
         }
 
-        $user = new User();
-        $user->setEmail($registrationDto->email);
-        $user->setFirstName($registrationDto->firstName);
+        $foundUser = $this->userRepository->findOneBy(['email' => $registrationDto->email]);
+//        if ($foundUser !== null) {
+//            return $this->errorResponse(
+//                [
+//                    'message' => CaseMessage::MAIL_USED
+//                ], HttpStatus::BADREQUEST);
+//        }
+
+        $user = $foundUser ?? new User();
+        $foundUser === null ? $user->setEmail($registrationDto->email) : null;
+        $foundUser === null ? $user->setFirstName($registrationDto->firstName);
         $user->setIsActived(true);
         $service === self::SERVICE[0] ? $user->setFacebookId($registrationDto->accountId) : null;
         $service === self::SERVICE[1] ? $user->setGoogleId($registrationDto->accountId) : null;
