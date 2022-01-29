@@ -60,12 +60,6 @@ class SocialRegistrationCommand extends AbstractCase
         }
 
         $foundUser = $this->userRepository->findOneBy(['email' => $registrationDto->email]);
-//        if ($foundUser !== null) {
-//            return $this->errorResponse(
-//                [
-//                    'message' => CaseMessage::MAIL_USED
-//                ], HttpStatus::BADREQUEST);
-//        }
 
         $user = $foundUser ?? new User();
         $foundUser === null ? $user->setEmail($registrationDto->email) : null;
@@ -73,8 +67,8 @@ class SocialRegistrationCommand extends AbstractCase
         $user->setIsActived(true);
         $service === self::SERVICE[0] ? $user->setFacebookId($registrationDto->accountId) : null;
         $service === self::SERVICE[1] ? $user->setGoogleId($registrationDto->accountId) : null;
-        foundUser === null ? $user->setCreatedAt(new DateTime()) : null;
-        foundUser === null ? $user->setLastLoginAt(new DateTime()) : null;
+        $foundUser === null ? $user->setCreatedAt(new DateTime()) : null;
+        $foundUser === null ? $user->setLastLoginAt(new DateTime()) : null;
         $this->em()->persist($user);
         $this->em()->flush();
 
