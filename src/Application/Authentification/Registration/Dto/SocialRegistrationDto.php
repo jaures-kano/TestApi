@@ -28,8 +28,8 @@ class SocialRegistrationDto
 
     public function __construct(string $firstName,
                                 string $email,
-                                string $apiKey,
-                                string $accountId
+                                string $accountId,
+                                string $apiKey
     )
     {
         $this->firstName = $firstName;

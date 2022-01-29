@@ -60,10 +60,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, Seriali
     private array $roles = [];
 
     /**
-     * @var string The hashed password
      * @ORM\Column(type="string", nullable=true)
      */
-    private string $password;
+    private ?string $password;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Domain\EnabledCountry\Entity\EnabledCountry",
