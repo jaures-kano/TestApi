@@ -34,8 +34,7 @@ class RegistrationsApiController extends AbstractController
         }
 
         $requireData = [
-            'first_name', 'last_name', 'email', 'phone', 'api_key',
-            'country', 'password', 'confirm_password', 'confirmation_mode'
+            'first_name', 'last_name', 'email', 'api_key', 'password', 'confirm_password',
         ];
 
         /// verify if data require
